@@ -193,6 +193,44 @@
       background-color: rgba(118,203,237,0.12);
       color: var(--dlai-blue);
     }
+    
+    /* ===== SOME NUMBERS ===== */
+    .stats {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+     gap: 2rem;
+     padding: 3rem 0;
+     text-align: center;
+    }
+
+    .stat-card {
+     transform: translateY(10px);
+     transition: transform 0.4s ease, box-shadow 0.4s ease;
+     padding: 1.2rem 1rem;
+     border-radius: 1rem;
+     background: #ffffff;
+     border: 1px solid rgba(5,4,5,0.08);
+     box-shadow: 0 8px 18px rgba(0,0,0,0.04);
+    }
+
+    .stat-card:hover {
+     transform: translateY(-4px);
+     box-shadow: 0 14px 30px rgba(0,0,0,0.08);
+    }
+
+    .stat-number {
+     font-family: "Cormorant Garamond", serif;
+     font-size: 2.6rem;
+     color: #1D4C90; /* DLAI blue */
+    }
+
+    .stat-label {
+     margin-top: 0.4rem;
+     font-size: 0.85rem;
+     letter-spacing: 0.14em;
+     text-transform: uppercase;
+     color: #CF5F35; /* DLAI orange */
+    }
 
     /* ===== TEAM ===== */
 
@@ -481,6 +519,27 @@
     </div>
   </section>
 
+  <!--Here we add the numbers! Like EPFL ROCKET TEAM-->
+  <section id="dlai-stats" class="stats">
+  <div class="stat-card">
+    <div class="stat-number" data-target="40">40</div>
+    <div class="stat-label">Active members</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number" data-target="15">15</div>
+    <div class="stat-label">Projects</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number" data-target="16">16</div>
+    <div class="stat-label">Partner labs</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-number" data-target="9">9</div>
+    <div class="stat-label">Publications</div>
+  </div>
+</section>
+
+
   <!--Team-->
 <section id="team">
   <div class="section-label">Team</div>
@@ -688,6 +747,45 @@
     © DLAI – Designing Life with AI 2026 · All Rights Reserved· EPFL MAKE student association · Ecublens, Switzerland.
   </div>
 </footer>
+
+<!-- This is the java script to make the numbers look cool-->
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const counters = document.querySelectorAll(".stat-number");
+    const duration = 1200; // ms
+
+    function animateCounter(el) {
+      const target = parseInt(el.getAttribute("data-target"), 10);
+      const startTime = performance.now();
+
+      function update(now) {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const value = Math.floor(progress * target);
+        el.textContent = value + (target >= 10 ? "+" : ""); // optional +
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            if (!el.dataset.animated) {
+              animateCounter(el);
+              el.dataset.animated = "true";
+            }
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    counters.forEach(c => observer.observe(c));
+  });
+</script>
 
 </body>
 </html>
