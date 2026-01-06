@@ -217,6 +217,83 @@
       color: var(--dlai-blue);
     }
 
+    .team-grid {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+     gap: 1.6rem;
+     margin-top: 1.5rem;
+    }
+
+    /* Flip cards */
+    .team-card {
+     position: relative;
+     perspective: 1200px;
+     height: 380px;
+    }
+
+    .team-card-inner {
+     position: relative;
+     width: 100%;
+     height: 100%;
+     transform-style: preserve-3d;
+     transition: transform 0.7s cubic-bezier(0.22,0.61,0.36,1);
+    }
+
+    .team-card:hover .team-card-inner {
+     transform: rotateY(180deg);
+    }
+
+    .team-card-front,
+    .team-card-back {
+     position: absolute;
+     inset: 0;
+     border-radius: 1rem;
+     padding: 1.4rem;
+     backface-visibility: hidden;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     background: #ffffff;
+     border: 1px solid rgba(5,4,5,0.15);       /* DLAI black */
+     box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+    }
+
+    .team-card-back {
+     transform: rotateY(180deg);
+    }
+
+    .team-role {
+     font-size: 0.8rem;
+     text-transform: uppercase;
+     letter-spacing: 0.16em;
+     color: #1D4C90;                            /* DLAI blue */
+     margin-bottom: 0.4rem;
+    }
+
+    .team-card h3 {
+     margin: 0 0 0.4rem;
+    }
+
+    .team-card p {
+     font-size: 0.9rem;
+     text-align: center;
+    }
+
+    /* Optional: subtle top border accent in DLAI gradient */
+    .team-card-front::before,
+    .team-card-back::before {
+     content: "";
+     position: absolute;
+     top: 0;
+     left: 12%;
+     right: 12%;
+     height: 4px;
+     border-radius: 999px;
+     background: linear-gradient(to right, #1D4C90, #76CBED, #DEC012, #CF5F35);
+    }
+
+
     /* ===== PROJECTS ===== */
 
     .projects-split {
@@ -353,8 +430,8 @@
         <li><a href="#about">About</a></li>
         <li><a href="#team">Team</a></li>
         <li><a href="#projects">Projects</a></li>
-        <li><a href="#partners">Partners</a></li>
         <li><a href="#protein design week">Protein Design Week</a></li>
+        <li><a href="#partners">Partners</a></li>
         <li><a href="#media">Media</a></li>
       </ul>
     </nav>
@@ -368,7 +445,7 @@
     <div class="hero-inner">
       <div class="hero-logo">
         <!-- Full-width DLAI picture/helix banner -->
-        <img src="LOGO-Carré.png" alt="Designing Life with AI" />
+        <img src="DLAI_logo - 24.png" alt="Designing Life with AI" />
       </div>
       <h1 class="hero-title">Designing Life with AI</h1>
       <div class="hero-subtitle">EPFL MAKE – Protein Design Association</div>
@@ -404,55 +481,120 @@
     </div>
   </section>
 
-  <!-- TEAM -->
-  <section id="team">
-    <div class="section-label">Team</div>
-    <h2>Meet the DLAI Team</h2>
-    <p>
-      We are engineering, life‑science and computer‑science students with a shared interest in protein design, synthetic biology and AI. Below are some of the roles; you can adapt and fill them with your own names and bios.
-    </p>
+<section id="team">
+  <div class="section-label">Team</div>
+  <h2>The people behind DLAI</h2>
+  <p>
+    We are engineering, life‑science and computer‑science students with a shared interest in protein design, synthetic biology and AI.
+  </p>
 
-    <div class="team-grid">
-      <div class="team-card">
-        <div class="team-role">President</div>
-        <h3>Cris Darbellay</h3>
-        <p>Leads the association, coordinates partners and keeps DLAI aligned with the MAKE and EPFL communities.</p>
-      </div>
-      <div class="team-grid">
-      <div class="team-card">
-        <div class="team-role">Vice President</div>
-        <h3>Rémy Mühlethaler</h3>
-        <p>Organises the team, represents the associations in official events, and manages internal communications.</p>
-      </div>
-      <div class="team-card">
-        <div class="team-role">Research&Education Lead</div>
-        <h3>Alexia Océane Möller</h3>
-        <p>Oversees project pipelines from AI design to wet‑lab validation, and interfaces with partner labs.</p>
-      </div>
-      <div class="team-card">
-        <div class="team-role">Events Coordinator&Web Master</div>
-        <h3>Emma S. Castelli</h3>
-        <p>Organises workshops, events and the Protein Design Week, and manages WebDev for DLAI.</p>
-      </div>
-      <div class="team-card">
-        <div class="team-role">Treasurer</div>
-        <h3>Nicolas Pafumi</h3>
-        <p>Manages the association's finances and ensures proper budget allocation for projects and events.</p>
-      </div>
-    </div>
+  <div class="team-grid">
+    <!-- President -->
     <div class="team-card">
-        <div class="team-role">Communications&Social Media manager</div>
-        <h3>Elsa Sànchez Fernàndez</h3>
-        <p>Manages communications and social media for DLAI, ensuring consistent messaging and engagement with the community.</p>
+      <div class="team-card-inner">
+        <div class="team-card-front">
+          <div class="team-role">President</div>
+          <h3>Cris Darbellay</h3>
+        </div>
+        <div class="team-card-back">
+          <div class="team-role">President</div>
+          <h3>Cris Darbellay</h3>
+          <p>Leads the association, coordinates partners and keeps DLAI aligned with the MAKE and EPFL communities.</p>
+        </div>
       </div>
     </div>
-     <div class="team-card">
-        <div class="team-role">Communications&Social Media manager</div>
-        <h3>Tolga Semiz</h3>
-        <p>Team lead of "Cultivated Meat project"</p>
+
+    <!-- Vice President -->
+    <div class="team-card">
+      <div class="team-card-inner">
+        <div class="team-card-front">
+          <div class="team-role">Vice President</div>
+          <h3>Rémy Mühlethaler</h3>
+        </div>
+        <div class="team-card-back">
+          <div class="team-role">Vice President</div>
+          <h3>Rémy Mühlethaler</h3>
+          <p>Organises the team, represents the association in official events, and manages internal communications.</p>
+        </div>
       </div>
     </div>
-  </section>
+
+    <!-- Research & Education Lead -->
+    <div class="team-card">
+      <div class="team-card-inner">
+        <div class="team-card-front">
+          <div class="team-role">Research &amp; Education Lead</div>
+          <h3>Alexia Océane Möller</h3>
+        </div>
+        <div class="team-card-back">
+          <div class="team-role">Research &amp; Education Lead</div>
+          <h3>Alexia Océane Möller</h3>
+          <p>Oversees project pipelines from AI design to wet‑lab validation, and interfaces with partner labs.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Events Coordinator & Web Master -->
+    <div class="team-card">
+      <div class="team-card-inner">
+        <div class="team-card-front">
+          <div class="team-role">Events Coordinator &amp; Web Master</div>
+          <h3>Emma S. Castelli</h3>
+        </div>
+        <div class="team-card-back">
+          <div class="team-role">Events Coordinator &amp; Web Master</div>
+          <h3>Emma S. Castelli</h3>
+          <p>Organises workshops, events and the Protein Design Week, and manages web development for DLAI.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Treasurer -->
+    <div class="team-card">
+      <div class="team-card-inner">
+        <div class="team-card-front">
+          <div class="team-role">Treasurer</div>
+          <h3>Nicolas Pafumi</h3>
+        </div>
+        <div class="team-card-back">
+          <div class="team-role">Treasurer</div>
+          <h3>Nicolas Pafumi</h3>
+          <p>Manages the association's finances and ensures proper budget allocation for projects and events.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Communications & Social Media – Elsa -->
+    <div class="team-card">
+      <div class="team-card-inner">
+        <div class="team-card-front">
+          <div class="team-role">Comms &amp; Social Media</div>
+          <h3>Elsa Sànchez Fernàndez</h3>
+        </div>
+        <div class="team-card-back">
+          <div class="team-role">Comms &amp; Social Media</div>
+          <h3>Elsa Sànchez Fernàndez</h3>
+          <p>Manages communications and social media for DLAI, ensuring consistent messaging and engagement with the community.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project Lead – Tolga -->
+    <div class="team-card">
+      <div class="team-card-inner">
+        <div class="team-card-front">
+          <div class="team-role">Project Lead</div>
+          <h3>Tolga Semiz</h3>
+        </div>
+        <div class="team-card-back">
+          <div class="team-role">Project Lead</div>
+          <h3>Tolga Semiz</h3>
+          <p>Team lead of the Cultivated Meat project, coordinating design, experiments and collaboration with partner labs.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
   <!-- PROJECTS -->
   <section id="projects">
@@ -531,7 +673,7 @@
       <!-- Replace href with real URLs -->
       <a class="media-pill" href="https://instagram.com/your_dlai" target="_blank" rel="noopener">Instagram</a>
       <a class="media-pill" href="https://www.epfl.ch/education/make" target="_blank" rel="noopener">EPFL MAKE</a>
-      <a class="media-pill" href="mailto:your.email@epfl.ch">Email newsletter</a>
+      <a class="media-pill" href="mailto:dlai@epfl.ch">Email DLAI</a>
       <a class="media-pill" href="https://github.com/your_dlai" target="_blank" rel="noopener">GitHub</a>
     </div>
   </section>
@@ -542,7 +684,7 @@
 
 <footer>
   <div>
-    DLAI – Designing Life with AI · MAKE student association at EPFL · Lausanne, Switzerland.
+    © DLAI – Designing Life with AI 2026 · All Rights Reserved· EPFL MAKE student association · Ecublens, Switzerland.
   </div>
 </footer>
 
