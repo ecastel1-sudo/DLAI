@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DLAI – Designing Life with AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Optional: Google fonts similar to EPFL look -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --dlai-blue:   #1D4C90;
+      --dlai-orange: #CF5F35;
+      --dlai-yellow: #DEC012;
+      --dlai-light:  #76CBED;
+      --dlai-black:  #050405;
+      --dlai-bg:     #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--dlai-bg);
+      color: var(--dlai-black);
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: "Cormorant Garamond", "Palatino Linotype", "Book Antiqua", serif;
+      margin-top: 0;
+      letter-spacing: 0.03em;
+    }
+
+    a {
+      color: var(--dlai-blue);
+      text-decoration: none;
+    }
+    a:hover { color: var(--dlai-orange); }
+
+    /* ===== HEADER & NAV ===== */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background-color: rgba(5,4,5,0.92);
+      backdrop-filter: blur(12px);
+      color: #fff;
+    }
+
+    .nav-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0.6rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .brand img {
+      height: 38px;
+      width: auto;
+    }
+
+    .brand-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.4rem;
+      margin: 0;
+      padding: 0;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    nav a {
+      color: #ffffff;
+    }
+    nav a:hover {
+      color: var(--dlai-yellow);
+    }
+
+    /* ===== GLOBAL LAYOUT ===== */
+
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    section {
+      padding: 4rem 0 3rem;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--dlai-blue);
+      margin-bottom: 0.4rem;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+      gap: 2.5rem;
+      align-items: flex-start;
+    }
+
+    /* ===== HERO / HOME ===== */
+
+    .hero {
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 5rem 1.5rem 4rem;
+    }
+
+    .hero-inner {
+      max-width: 780px;
+    }
+
+    .hero-logo {
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-logo img {
+      max-width: 540px;
+      width: 100%;
+      height: auto;
+    }
+
+    .hero-title {
+      font-size: 3rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      text-transform: uppercase;
+      letter-spacing: 0.26em;
+      color: var(--dlai-blue);
+    }
+
+    .hero-gradient-bar {
+      margin: 2.2rem auto 0;
+      height: 6px;
+      width: 220px;
+      border-radius: 999px;
+      background: linear-gradient(to right, #1D4C90, #76CBED, #DEC012, #CF5F35);
+    }
+
+    /* ===== ABOUT ===== */
+
+    #about p {
+      margin-top: 0.3rem;
+    }
+
+    .highlight {
+      font-weight: 600;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 0.18rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      background-color: rgba(118,203,237,0.12);
+      color: var(--dlai-blue);
+    }
+
+    /* ===== TEAM ===== */
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.6rem;
+      margin-top: 1.5rem;
+    }
+
+    .team-card {
+      padding: 1.1rem 1rem;
+      border-radius: 14px;
+      border: 1px solid rgba(0,0,0,0.05);
+      background: linear-gradient(145deg, #ffffff, #f8fafc);
+    }
+
+    .team-role {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--dlai-blue);
+    }
+
+    /* ===== PROJECTS ===== */
+
+    .projects-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .projects-column h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .proj-tag {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--dlai-orange);
+    }
+
+    .project-card {
+      border-radius: 14px;
+      padding: 1rem 1rem 0.9rem;
+      border: 1px solid rgba(0,0,0,0.06);
+      margin-bottom: 1rem;
+    }
+
+    .project-card h4 {
+      font-size: 1.02rem;
+      margin-bottom: 0.2rem;
+    }
+
+    /* ===== PARTNERS & MEDIA ===== */
+
+    .logo-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem;
+      align-items: center;
+    }
+
+    .logo-row img {
+      max-height: 56px;
+      width: auto;
+    }
+
+    .media-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.3rem;
+      margin-top: 1.2rem;
+    }
+
+    .media-pill {
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.12);
+      font-size: 0.85rem;
+    }
+
+    /* ===== STICKY JOIN BUTTON ===== */
+
+    .join-us-btn {
+      position: fixed;
+      right: 1.4rem;
+      bottom: 1.6rem;
+      z-index: 30;
+      background-color: var(--dlai-orange);
+      color: #ffffff;
+      padding: 0.75rem 1.1rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+    }
+
+    .join-us-btn:hover {
+      background-color: var(--dlai-blue);
+      color: #ffffff;
+    }
+
+    /* ===== FOOTER ===== */
+
+    footer {
+      border-top: 1px solid rgba(0,0,0,0.06);
+      padding: 1.5rem 1.5rem 2rem;
+      font-size: 0.8rem;
+      color: rgba(5,4,5,0.7);
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    /* ===== RESPONSIVE ===== */
+
+    @media (max-width: 800px) {
+      .nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
+      }
+      nav ul {
+        flex-wrap: wrap;
+        gap: 0.9rem;
+      }
+      .hero {
+        padding-top: 4rem;
+        min-height: 60vh;
+      }
+      .hero-title {
+        font-size: 2.4rem;
+      }
+      .two-col,
+      .projects-split {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav-inner">
+    <div class="brand">
+      <!-- Replace with your logo path -->
+      <img src="YOUR_LOGO_PATH" alt="DLAI logo" />
+      <div class="brand-title">DLAI</div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#partners">Partners</a></li>
+        <li><a href="#media">Media</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- HOME / HERO -->
+  <section id="home" class="hero">
+    <div class="hero-inner">
+      <div class="hero-logo">
+        <!-- Full-width DLAI picture/helix banner -->
+        <img src="YOUR_LOGO_PATH" alt="Designing Life with AI" />
+      </div>
+      <h1 class="hero-title">Designing Life with AI</h1>
+      <div class="hero-subtitle">EPFL MAKE – Protein Design Association</div>
+      <div class="hero-gradient-bar"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">About</div>
+    <div class="two-col">
+      <div>
+        <h2>Bringing AI protein design to students</h2>
+        <p>
+          <span class="pill">MAKE Association · EPFL</span>
+        </p>
+        <p>
+          DLAI is a student association at EPFL dedicated to <span class="highlight">designing proteins with AI and computational tools</span>, then testing them in the lab to see if the engineering really works.
+        </p>
+        <p>
+          We create new binders, metal‑binding proteins and immune‑targeted designs in collaboration with research labs across campus, turning cutting‑edge methods in protein engineering into hands‑on projects for students.
+        </p>
+      </div>
+      <div>
+        <h3>Our mission</h3>
+        <p>
+          We aim to <span class="highlight">bridge academia and student experience</span> by connecting undergraduates and graduate students with EPFL labs that support our projects, offer guidance and propose real design challenges.
+        </p>
+        <p>
+          Through workshops, design sprints and MAKE projects, we explore how AI‑based models and physical experiments can work together to build useful, creative and responsible new proteins.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section id="team">
+    <div class="section-label">Team</div>
+    <h2>The people behind DLAI</h2>
+    <p>
+      We are engineering, life‑science and computer‑science students with a shared interest in protein design, synthetic biology and AI. Below are some of the roles; you can adapt and fill them with your own names and bios.
+    </p>
+
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-role">President</div>
+        <h3>[Name]</h3>
+        <p>Leads the association, coordinates partners and keeps DLAI aligned with the MAKE and EPFL communities.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-role">Scientific Lead</div>
+        <h3>[Name]</h3>
+        <p>Oversees project pipelines from AI design to wet‑lab validation, and interfaces with partner labs.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-role">Events & Outreach</div>
+        <h3>[Name]</h3>
+        <p>Organises workshops, talks and the Protein Design Week, and manages communication with students.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-role">Tech & Tools</div>
+        <h3>[Name]</h3>
+        <p>Maintains the computational stack, from sequence design models to analysis scripts and infrastructure.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-label">Projects</div>
+    <h2>Designing, building and testing proteins</h2>
+    <p>
+      Our projects span AI‑driven sequence design, structure prediction, and experimental validation in collaboration with EPFL labs. Here you can keep track of ongoing and concluded work.
+    </p>
+
+    <div class="projects-split">
+      <div class="projects-column">
+        <h3>Ongoing</h3>
+        <div class="proj-tag">In progress</div>
+
+        <!-- Duplicate / edit these cards as you wish -->
+        <div class="project-card">
+          <h4>[Project title]</h4>
+          <p>Short description of the ongoing project: goals, partner lab, and which AI or computational methods are used.</p>
+        </div>
+
+        <div class="project-card">
+          <h4>[Project title]</h4>
+          <p>Another project – for example, metal‑binding proteins, immune‑targeted binders, or new scaffolds.</p>
+        </div>
+      </div>
+
+      <div class="projects-column">
+        <h3>Concluded</h3>
+        <div class="proj-tag">Completed work</div>
+
+        <div class="project-card">
+          <h4>[Concluded project]</h4>
+          <p>Summary of what was designed, how it was tested in the lab, and what students learned from the process.</p>
+        </div>
+
+        <div class="project-card">
+          <h4>[Concluded project]</h4>
+          <p>Another finished project – you can link to reports, posters or publications if available.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section id="partners">
+    <div class="section-label">Partners</div>
+    <div class="two-col">
+      <div>
+        <h2>Partner labs & supporters</h2>
+        <p>
+          DLAI works closely with EPFL research groups and external partners who provide scientific guidance, lab space and design challenges. This page can list the labs and institutes that support your projects.
+        </p>
+        <p>
+          Add logos and links for each partner, and briefly describe how they contribute to student projects in protein engineering and AI.
+        </p>
+      </div>
+      <div>
+        <div class="logo-row">
+          <!-- Replace with partner lab logos -->
+          <img src="YOUR_PARTNER_LOGO_1" alt="Partner 1" />
+          <img src="YOUR_PARTNER_LOGO_2" alt="Partner 2" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEDIA -->
+  <section id="media">
+    <div class="section-label">Media</div>
+    <h2>Stay connected</h2>
+    <p>
+      Follow our activities, events and project updates on social media and EPFL channels.
+    </p>
+
+    <div class="media-links">
+      <!-- Replace href with real URLs -->
+      <a class="media-pill" href="https://instagram.com/your_dlai" target="_blank" rel="noopener">Instagram</a>
+      <a class="media-pill" href="https://www.epfl.ch/education/make" target="_blank" rel="noopener">EPFL MAKE</a>
+      <a class="media-pill" href="mailto:your.email@epfl.ch">Email newsletter</a>
+      <a class="media-pill" href="https://github.com/your_dlai" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </section>
+
+</main>
+
+<a href="#media" class="join-us-btn">Join&nbsp;Us!</a>
+
+<footer>
+  <div>
+    DLAI – Designing Life with AI · MAKE student association at EPFL · Lausanne, Switzerland.
+  </div>
+</footer>
+
+</body>
+</html>
