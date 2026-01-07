@@ -155,6 +155,45 @@
       height: auto;
     }
 
+    .hero-logo {
+  margin-bottom: 1.8rem;
+}
+
+    /* New: two logos with an X between them */
+    .hero-logo-duo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.8rem;
+    }
+
+    .hero-logo-img {
+      max-width: 220px;
+      width: 40vw;
+      max-height: 140px;
+      height: auto;
+    }
+
+    .hero-logo-x {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 3rem;
+      line-height: 1;
+      color: var(--dlai-blue);
+    }
+
+  /* Make it stack nicely on small screens */
+    @media (max-width: 600px) {
+      .hero-logo-duo {
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+
+      .hero-logo-x {
+        font-size: 2.2rem;
+      }
+    }
+
+
     .hero-sv {
       margin-bottom: 1.5rem;
     }
@@ -493,11 +532,16 @@
   <!-- HOME / HERO -->
   <section id="home" class="hero">
     <div class="hero-inner">
-      <div class="hero-logo">
-        <!-- Full-width DLAI picture/helix banner -->
-         <img src="logo_sv_industry-1024x1024.png" alt="EPFL Protein Design Week" />
-        <img src="Illustration_sans_titre.png" alt="EPFL Protein Design Week" />
+      <div class="hero-logo hero-logo-duo">
+
+        <!-- Left: SV Industry logo -->
+        <img src="logo_sv_industry-1024x1024.png" alt="SV Industry" class="hero-logo-img" />
+        <!-- X in the middle -->
+        <span class="hero-logo-x">×</span>
+        <!-- Right: DLAI / Protein Design Week logo -->
+        <img src="Illustration_sans_titre.png" alt="DLAI – Designing Life with AI" class="hero-logo-img" />
       </div>
+
       <h1 class="hero-title">Protein Design Week</h1>
       <div class="hero-subtitle">From algorithms to atoms: a week of AI‑powered protein design</div>
       <div class="hero-gradient-bar"></div>
