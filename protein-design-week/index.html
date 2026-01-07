@@ -569,3 +569,71 @@
     <div class="stat-label"><a href="#partners">Industry Partners</a></div>
    </div>
   </section>
+  <!-- MEDIA -->
+  <section id="media">
+    <div class="section-label">Media</div>
+    <h2>Stay connected</h2>
+    <p>
+      Follow our activities, events and project updates on social media and EPFL channels.
+    </p>
+
+    <div class="media-links">
+      <!-- Replace href with real URLs -->
+      <a class="media-pill" href="https://www.instagram.com/designinglifewithai/" target="_blank" rel="noopener">Instagram</a>
+      <a class="media-pill" href="https://www.epfl.ch/labs/lpbs/make-designing-life-with-ai/" target="_blank" rel="noopener">EPFL MAKE</a>
+      <a class="media-pill" href="mailto:dlai@epfl.ch">Email DLAI</a>
+      <a class="media-pill" href="https://github.com/your_dlai" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </section>
+
+</main>
+
+<a href="#media" class="join-us-btn">Join&nbsp;Us!</a>
+
+<footer>
+  <div>
+    © DLAI – Designing Life with AI 2026 · All Rights Reserved  · EPFL MAKE student association · Ecublens, Switzerland.
+  </div>
+</footer>
+  
+ <!-- This is the java script to make the numbers look cool-->
+
+ <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const counters = document.querySelectorAll(".stat-number");
+    const duration = 1200; // ms
+
+    function animateCounter(el) {
+      const target = parseInt(el.getAttribute("data-target"), 10);
+      const startTime = performance.now();
+
+      function update(now) {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const value = Math.floor(progress * target);
+        el.textContent = value + (target >= 10 ? "+" : ""); // optional +
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            if (!el.dataset.animated) {
+              animateCounter(el);
+              el.dataset.animated = "true";
+            }
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    counters.forEach(c => observer.observe(c));
+  });
+ </script>
+
+</body>
+</html>
