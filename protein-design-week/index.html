@@ -173,6 +173,44 @@
       background: linear-gradient(to right, #1D4C90, #76CBED, #DEC012, #CF5F35);
     }
 
+    /* ===== SOME NUMBERS ===== */
+    .stats {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+     gap: 2rem;
+     padding: 3rem 0;
+     text-align: center;
+    }
+
+    .stat-card {
+     transform: translateY(10px);
+     transition: transform 0.4s ease, box-shadow 0.4s ease;
+     padding: 1.2rem 1rem;
+     border-radius: 1rem;
+     background: #ffffff;
+     border: 1px solid rgba(5,4,5,0.08);
+     box-shadow: 0 8px 18px rgba(0,0,0,0.04);
+    }
+
+    .stat-card:hover {
+     transform: translateY(-4px);
+     box-shadow: 0 14px 30px rgba(0,0,0,0.08);
+    }
+
+    .stat-number {
+     font-family: "Cormorant Garamond", serif;
+     font-size: 2.6rem;
+     color: #1D4C90; /* DLAI blue */
+    }
+
+    .stat-label {
+     margin-top: 0.4rem;
+     font-size: 0.85rem;
+     letter-spacing: 0.14em;
+     text-transform: uppercase;
+     color: #CF5F35; /* DLAI orange */
+    }
+
     /* ===== ABOUT ===== */
 
     #about p {
