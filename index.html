@@ -532,6 +532,14 @@
     </div>
   </section>
 
+  <!-- PROTEIN MODEL -->
+   <section id="protein-viewer">
+  <h2>Explore our protein model</h2>
+  <div id="ngl-container"
+       style="width: 100%; max-width: 600px; height: 400px; margin: 0 auto;">
+  </div>
+</section>
+
   <!-- ABOUT -->
   <section id="about">
     <div class="section-label">About</div>
@@ -925,6 +933,31 @@
     );
 
     counters.forEach(c => observer.observe(c));
+  });
+</script>
+<!-- NGL Viewer from unpkg CDN -->
+<script src="https://unpkg.com/ngl@latest/dist/ngl.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Create the stage in the container
+    var stage = new NGL.Stage("ngl-container");
+
+    // Make it responsive
+    window.addEventListener("resize", function () {
+      stage.handleResize();
+    }, false);
+
+    // OPTION A: load directly from RCSB PDB by ID (e.g. 1crn)
+    stage.loadFile("rcsb://1crn").then(function (o) {
+      o.addRepresentation("cartoon", {
+        colorScheme: "sstruc",   // secondary-structure colors
+        smoothSheet: true
+      });
+      stage.autoView();
+    });
+
+    // If you prefer your own PDB file instead:
+    // stage.loadFile("path/to/your.pdb").then(function (o) { ... });
   });
 </script>
 
