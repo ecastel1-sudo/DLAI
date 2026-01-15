@@ -941,6 +941,9 @@
   document.addEventListener("DOMContentLoaded", function () {
     // Create the stage in the container
     var stage = new NGL.Stage("ngl-container");
+      stage.setParameters({
+      backgroundColor: "white"   // or "#ffffff"
+    });
 
     // Make it responsive
     window.addEventListener("resize", function () {
