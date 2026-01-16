@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DLAI – Designing Life with AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Optional: Google fonts similar to EPFL look -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --dlai-blue:   #1D4C90;
+      --dlai-orange: #CF5F35;
+      --dlai-yellow: #DEC012;
+      --dlai-light:  #76CBED;
+      --dlai-black:  #050405;
+      --dlai-bg:     #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--dlai-bg);
+      color: var(--dlai-black);
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: "Cormorant Garamond", "Palatino Linotype", "Book Antiqua", serif;
+      margin-top: 0;
+      letter-spacing: 0.03em;
+    }
+
+    a {
+      color: var(--dlai-blue);
+      text-decoration: none;
+    }
+    a:hover { color: var(--dlai-orange); }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ===== HEADER & NAV ===== */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background-color: rgba(5,4,5,0.92);
+      backdrop-filter: blur(12px);
+      color: #fff;
+    }
+
+    .nav-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0.6rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .brand img {
+      height: 38px;
+      width: auto;
+    }
+
+    .brand-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.4rem;
+      margin: 0;
+      padding: 0;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    nav a {
+      color: #ffffff;
+    }
+    nav a:hover {
+      color: var(--dlai-yellow);
+    }
+
+    /* ===== GLOBAL LAYOUT ===== */
+
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    section {
+      padding: 4rem 0 3rem;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--dlai-blue);
+      margin-bottom: 0.4rem;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+      gap: 2.5rem;
+      align-items: flex-start;
+    }
+
+    .cta-wrapper {
+     text-align: center;
+     margin: 3rem 0 1rem;
+    }
+
+    .cta-button {
+     display: inline-block;
+     padding: 0.9rem 2.4rem;
+     border-radius: 999px;
+     background: linear-gradient(to right, #1D4C90, #76CBED, #DEC012, #CF5F35);
+     color: #ffffff;
+     font-size: 0.9rem;
+     font-weight: 600;
+     text-transform: uppercase;
+     letter-spacing: 0.18em;
+     box-shadow: 0 12px 26px rgba(0,0,0,0.18);
+    }
+
+    .cta-button:hover {
+     transform: translateY(-2px);
+     box-shadow: 0 16px 34px rgba(0,0,0,0.24);
+    }
+
+    /* ===== HERO / HOME ===== */
+
+    .hero {
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 5rem 1.5rem 4rem;
+    }
+
+    .hero-inner {
+      max-width: 780px;
+    }
+
+    .hero-logo {
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-logo img {
+      max-width: 540px;
+      width: 100%;
+      height: auto;
+    }
+
+    .hero-title {
+      font-size: 3rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      text-transform: uppercase;
+      letter-spacing: 0.26em;
+      color: var(--dlai-blue);
+    }
+
+    .hero-gradient-bar {
+      margin: 2.2rem auto 0;
+      height: 6px;
+      width: 220px;
+      border-radius: 999px;
+      background: linear-gradient(to right, #1D4C90, #76CBED, #DEC012, #CF5F35);
+    }
+
+    /* ===== ABOUT ===== */
+
+    #about p {
+      margin-top: 0.3rem;
+    }
+
+    .highlight {
+      font-weight: 600;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 0.18rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      background-color: rgba(118,203,237,0.12);
+      color: var(--dlai-blue);
+    }
+    
+    /* ===== SOME NUMBERS ===== */
+    .stats {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+     gap: 2rem;
+     padding: 3rem 0;
+     text-align: center;
+    }
+
+    .stat-card {
+     transform: translateY(10px);
+     transition: transform 0.4s ease, box-shadow 0.4s ease;
+     padding: 1.2rem 1rem;
+     border-radius: 1rem;
+     background: #ffffff;
+     border: 1px solid rgba(5,4,5,0.08);
+     box-shadow: 0 8px 18px rgba(0,0,0,0.04);
+    }
+
+    .stat-card:hover {
+     transform: translateY(-4px);
+     box-shadow: 0 14px 30px rgba(0,0,0,0.08);
+    }
+
+    .stat-number {
+     font-family: "Cormorant Garamond", serif;
+     font-size: 2.6rem;
+     color: #1D4C90; /* DLAI blue */
+    }
+
+    .stat-label {
+     margin-top: 0.4rem;
+     font-size: 0.85rem;
+     letter-spacing: 0.14em;
+     text-transform: uppercase;
+     color: #CF5F35; /* DLAI orange */
+    }
+
+    /* ===== TEAM ===== */
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.6rem;
+      margin-top: 1.5rem;
+    }
+
+    .team-card {
+      padding: 1.1rem 1rem;
+      border-radius: 14px;
+      border: 1px solid rgba(0,0,0,0.05);
+      background: linear-gradient(145deg, #ffffff, #f8fafc);
+    }
+
+    .team-role {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--dlai-blue);
+    }
+
+    .team-grid {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+     gap: 1.6rem;
+     margin-top: 1.5rem;
+    }
+
+    /* Flip cards */
+    .team-card {
+     position: relative;
+     perspective: 1200px;
+     height: 380px;
+    }
+
+    .team-card-inner {
+     position: relative;
+     width: 100%;
+     height: 100%;
+     transform-style: preserve-3d;
+     transition: transform 0.7s cubic-bezier(0.22,0.61,0.36,1);
+    }
+
+    .team-card:hover .team-card-inner {
+     transform: rotateY(180deg);
+    }
+
+    .team-card-front,
+    .team-card-back {
+     position: absolute;
+     inset: 0;
+     border-radius: 1rem;
+     padding: 1.4rem;
+     backface-visibility: hidden;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     background: #ffffff;
+     border: 1px solid rgba(5,4,5,0.15);       /* DLAI black */
+     box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+    }
+
+    .team-card-back {
+     transform: rotateY(180deg);
+    }
+
+    .team-role {
+     font-size: 0.8rem;
+     text-transform: uppercase;
+     letter-spacing: 0.16em;
+     color: #1D4C90;                            /* DLAI blue */
+     margin-bottom: 0.4rem;
+    }
+
+    .team-card h3 {
+     margin: 0 0 0.4rem;
+    }
+
+    .team-card p {
+     font-size: 0.9rem;
+     text-align: center;
+    }
+
+    /* Optional: subtle top border accent in DLAI gradient */
+    .team-card-front::before,
+    .team-card-back::before {
+     content: "";
+     position: absolute;
+     top: 0;
+     left: 12%;
+     right: 12%;
+     height: 4px;
+     border-radius: 999px;
+     background: linear-gradient(to right, #1D4C90, #76CBED, #DEC012, #CF5F35);
+    }
+
+
+    /* ===== PROJECTS ===== */
+
+    .projects-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .projects-column h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .proj-tag {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--dlai-orange);
+    }
+
+    .project-card {
+      border-radius: 14px;
+      padding: 1rem 1rem 0.9rem;
+      border: 1px solid rgba(0,0,0,0.06);
+      margin-bottom: 1rem;
+    }
+
+    .project-card h4 {
+      font-size: 1.02rem;
+      margin-bottom: 0.2rem;
+    }
+
+    /* ===== PARTNERS & MEDIA ===== */
+
+    .logo-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem;
+      align-items: center;
+    }
+
+    .logo-row img {
+      max-height: 56px;
+      width: auto;
+    }
+
+    .media-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.3rem;
+      margin-top: 1.2rem;
+    }
+
+    .media-pill {
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.12);
+      font-size: 0.85rem;
+    }
+    
+    /* videos */
+    .hero-video,
+    .section-media {
+     width: 100%;
+     max-width: 700px; /* was 500px; increase for larger visuals */
+     border-radius: 1.4rem;
+     border: 1px solid rgba(255,255,255,0.35);
+     box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+     display: block;
+     margin-left: auto;
+    }
+
+    /* ===== STICKY JOIN BUTTON ===== */
+
+    .join-us-btn {
+      position: fixed;
+      right: 1.4rem;
+      bottom: 1.6rem;
+      z-index: 30;
+      background-color: var(--dlai-orange);
+      color: #ffffff;
+      padding: 0.75rem 1.1rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+    }
+
+    .join-us-btn:hover {
+      background-color: var(--dlai-blue);
+      color: #ffffff;
+    }
+
+    /* ===== FOOTER ===== */
+
+    footer {
+      border-top: 1px solid rgba(0,0,0,0.06);
+      padding: 1.5rem 1.5rem 2rem;
+      font-size: 0.8rem;
+      color: rgba(5,4,5,0.7);
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    /* ===== RESPONSIVE ===== */
+
+    @media (max-width: 800px) {
+      .nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
+      }
+      nav ul {
+        flex-wrap: wrap;
+        gap: 0.9rem;
+      }
+      .hero {
+        padding-top: 4rem;
+        min-height: 60vh;
+      }
+      .hero-title {
+        font-size: 2.4rem;
+      }
+      .two-col,
+      .projects-split {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <div class="brand">
+      <!-- Replace with your logo path -->
+      <a href="#home"><img src="LOGO-Carré.png" alt="DLAI logo" /></a>
+      <div class="brand-title">DLAI</div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="../#home">Home</a></li>
+        <li><a href="../#about">About</a></li>
+        <li><a href="../#team">Team</a></li>
+        <li><a href="../#projects">All Projects</a></li>
+        <li><a href="#top">Open Projects</a></li>
+        <li><a href="/DLAI/protein-design-week">Protein Design Week</a></li>
+        <li><a href="../#partners">Partners</a></li>
+        <li><a href="../#media">Media</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+    <!-- Open Projects -->
+  <section id="top">
+    <div class="section-label">Explore our Open Projects</div>
+    <div class="two-col">
+      <div>
+        <h2>Pick a semester project with DLAI</h2>
+        <p>
+          <span class="pill"><a href="https://sti.epfl.ch/smt/smt-guidelines-for-validating-an-out-of-the-lab-semester-project-related-to-a-make-projects/">All of our project can be credited (ECTS)</a></span>
+        </p>
+        <p>
+            Our open projects proposed by professors or industry partners.These ideas can serve as a starting point for deeper reflection, and we encourage students to draw inspiration from them to shape their own personal projects.
+        <p>
+          Of course, new ideas are always welcome, and we are here to help you find the right supervisor for your project. If you're interested in any of these projects, want to know more details, or wish to propose your own,<span class="highlight">​<a href="mailto:dlai@epfl.ch">Please contact us</a></span>, and we’ll guide you through the next steps! 
+        </p>
+      </div>
+
+      <div>
+        <h2> Project philosophy </h2>
+        <p>
+          Projects are developed during the semester, laying the essential groundwork for discovery. To achieve the most significant breakthroughs, we highly recommend continuing your work as a summer lab internship. This is the best way to push your project forward.
+        </p>
+        <p>
+          For those getting started, we suggest focusing on a binder design project first. This will provide you with the essential skills needed to confidently tackle more complex or "out-of-the-box" protein engineering ideas later on.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROTEIN MODEL -->
+   <section id="protein-viewer">
+        <h2>Explore our protein model - can you guess the protein?</h2> <!-- it's pumpkin seed globulin!-->
+        <div id="ngl-container"
+            style="width: 100%; max-width: 600px; height: 400px; margin: 0 auto;">
+        </div>
+    </section>
+</main>
+<a href="#media" class="join-us-btn">Join&nbsp;Us!</a>
+
+<footer>
+  <div>
+    © DLAI – Designing Life with AI 2026 · All Rights Reserved  · EPFL MAKE student association · Ecublens, Switzerland.
+  </div>
+</footer>
+
+<!-- This is the java script to make the numbers look cool-->
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const counters = document.querySelectorAll(".stat-number");
+    const duration = 1200; // ms
+
+    function animateCounter(el) {
+      const target = parseInt(el.getAttribute("data-target"), 10);
+      const startTime = performance.now();
+
+      function update(now) {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const value = Math.floor(progress * target);
+        el.textContent = value + (target >= 10 ? "+" : ""); // optional +
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            if (!el.dataset.animated) {
+              animateCounter(el);
+              el.dataset.animated = "true";
+            }
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    counters.forEach(c => observer.observe(c));
+  });
+</script>
+<!-- NGL Viewer from unpkg CDN -->
+<script src="https://unpkg.com/ngl@latest/dist/ngl.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Create the stage in the container
+    var stage = new NGL.Stage("ngl-container");
+      stage.setParameters({
+      backgroundColor: "white"   // or "#ffffff"
+    });
+
+    // Make it responsive
+    window.addEventListener("resize", function () {
+      stage.handleResize();
+    }, false);
+
+    // OPTION A: load directly from RCSB PDB by ID (e.g. 1crn)
+    stage.loadFile("rcsb://8fnr").then(function (o) {
+      o.addRepresentation("cartoon", {
+        colorScheme: "sstruc",   // secondary-structure colors
+        smoothSheet: true
+      });
+      stage.autoView();
+    });
+
+    // If you prefer your own PDB file instead:
+    // stage.loadFile("path/to/your.pdb").then(function (o) { ... });
+  });
+</script>
+
+</body>
+</html>   
