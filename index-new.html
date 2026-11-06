@@ -183,26 +183,6 @@ p:last-child{margin-bottom:0}
 .field-black .btn--ghost:hover{color:var(--ink)}
 
 /* ============================================================
-   PROTEIN VIEWER
-   ============================================================ */
-.viewer{
-  position:relative;border:2px solid rgba(255,255,255,.16);border-radius:20px;
-  overflow:hidden;background:#05070f;width:100%;aspect-ratio:16/9;min-height:260px;
-}
-@media (max-width:700px){.viewer{aspect-ratio:4/3}}
-.viewer__stage{position:absolute;inset:0}
-.viewer__stage canvas{width:100%!important;height:100%!important}
-.viewer__hint{
-  position:absolute;left:0;right:0;bottom:0;display:flex;gap:12px;flex-wrap:wrap;
-  align-items:center;justify-content:space-between;
-  padding:14px 18px;background:linear-gradient(transparent,rgba(0,0,0,.85) 45%);
-  font-size:.9rem;color:rgba(255,255,255,.82);
-}
-.viewer__answer{font-family:var(--display);font-weight:600;color:var(--cyan)}
-.viewer__answer[hidden]{display:none}
-.btn--tiny{padding:9px 18px;font-size:.9rem}
-
-/* ============================================================
    STATS
    ============================================================ */
 .stats{
@@ -406,33 +386,13 @@ img.member__art{filter:grayscale(1) contrast(1.06)}
   <div class="hero__in">
     <div class="mark">
       <span class="mark__word">DLAI</span>
-      <canvas class="mark__ribbon" id="markRibbon" role="img" aria-label="Animated protein helix ribbon"></canvas>
+      <canvas class="mark__ribbon" id="markRibbon" role="img" aria-label="Protein helix ribbon"></canvas>
     </div>
     <p class="hero__sub">Designing Life with AI</p>
     <p class="hero__tag">EPFL MAKE — Protein Design Association</p>
     <div class="hero__cta">
       <a class="btn btn--fill" href="https://designinglifewithai.ch/protein-design-week">Discover the Protein Design Week</a>
       <a class="btn btn--ghost" href="#projects">See what we build</a>
-    </div>
-  </div>
-</section>
-
-<!-- ============================ PROTEIN VIEWER ============================ -->
-<canvas class="frieze" data-frieze="cyan" aria-hidden="true"></canvas>
-<section class="band field-cyan">
-  <div class="wrap">
-    <h2 class="poster" data-echo="guess the&#10;protein"><span>guess the<br>protein</span></h2>
-    <p class="lede" style="margin-bottom:clamp(24px,3vw,38px)">Spin it, zoom it, look at the fold. One of our designs is loaded below — take a guess before you reveal it.</p>
-
-    <div class="viewer">
-      <div class="viewer__stage" id="molStage"></div>
-      <div class="viewer__hint">
-        <span id="molStatus">Drag to rotate · scroll to zoom</span>
-        <span style="display:flex;gap:12px;align-items:center">
-          <span class="viewer__answer" id="molAnswer" hidden>Ubiquitin (PDB 1UBQ)</span>
-          <button class="btn btn--fill btn--tiny" id="molReveal">Reveal</button>
-        </span>
-      </div>
     </div>
   </div>
 </section>
@@ -555,13 +515,13 @@ img.member__art{filter:grayscale(1) contrast(1.06)}
             <img class="member__art" src="assets/team/tolga-semiz.jpg" alt="" data-art>
             <span class="member__scrim" aria-hidden="true"></span>
             <span class="member__meta">
-              <span class="member__role">Head of Projects, APP lead</span>
+              <span class="member__role">Head of Projects</span>
               <h3 class="member__name">Tolga Semiz</h3>
             </span>
             <span class="member__hint">tap</span>
           </div>
           <div class="member__face member__face--back">
-            <p class="member__bio">Team lead of the Cultivated Meat project, coordinating design, experiments and collaboration with partner labs.</p>
+            <p class="member__bio">Former team lead of the Cultivated Meat project, coordinating design, experiments and collaboration with partner labs.</p>
           </div>
         </div>
       </button>
@@ -573,12 +533,12 @@ img.member__art{filter:grayscale(1) contrast(1.06)}
             <span class="member__scrim" aria-hidden="true"></span>
             <span class="member__meta">
               <span class="member__role">Treasurer</span>
-              <h3 class="member__name">Open position</h3>
+              <h3 class="member__name">Marton Moar</h3>
             </span>
             <span class="member__hint">tap</span>
           </div>
           <div class="member__face member__face--back">
-            <p class="member__bio">Manages the association's finances and ensures proper budget allocation for projects and events. Write to <a href="mailto:dlai@epfl.ch">dlai@epfl.ch</a> to apply.</p>
+            <p class="member__bio">Manages the association's finances and ensures proper budget allocation for projects and events. He also makes sure we never run out of pizzas at our friday pizza lunches.</p>
           </div>
         </div>
       </button>
@@ -590,18 +550,106 @@ img.member__art{filter:grayscale(1) contrast(1.06)}
             <span class="member__scrim" aria-hidden="true"></span>
             <span class="member__meta">
               <span class="member__role">Comms &amp; Social Media</span>
-              <h3 class="member__name">Open position</h3>
+              <h3 class="member__name">Juliette Meyer</h3>
             </span>
             <span class="member__hint">tap</span>
           </div>
           <div class="member__face member__face--back">
-            <p class="member__bio">Manages communications and social media for DLAI, ensuring consistent messaging and engagement with the community. Manages aesthetics, posters and graphic design. Write to <a href="mailto:dlai@epfl.ch">dlai@epfl.ch</a> to apply.</p>
+            <p class="member__bio">Manages communications and social media for DLAI, ensuring consistent messaging and engagement with the community. Manages aesthetics, posters and graphic design.</p>
           </div>
         </div>
       </button>
+
+      <button class="member member--open">
+        <div class="member__in">
+          <div class="member__face member__face--front">
+            <canvas class="member__art" data-art-helix aria-hidden="true"></canvas>
+            <span class="member__scrim" aria-hidden="true"></span>
+            <span class="member__meta">
+              <span class="member__role">Lead of Alternative Protein Project (APP)</span>
+              <h3 class="member__name">Atakan Aygun</h3>
+            </span>
+            <span class="member__hint">tap</span>
+          </div>
+          <div class="member__face member__face--back">
+            <p class="member__bio">Project lead of the Alternative Protein Project (APP) Commission. Runs project management and makes sure everyone has what they need in the lab.</p>
+          </div>
+        </div>
+      </button>
+
+      <button class="member member--open">
+        <div class="member__in">
+          <div class="member__face member__face--front">
+            <canvas class="member__art" data-art-helix aria-hidden="true"></canvas>
+            <span class="member__scrim" aria-hidden="true"></span>
+            <span class="member__meta">
+              <span class="member__role">Head of sponsorship</span>
+              <h3 class="member__name">Ruby Vuelhard</h3>
+            </span>
+            <span class="member__hint">tap</span>
+          </div>
+          <div class="member__face member__face--back">
+            <p class="member__bio">Manages partner engagement and sponsors relations, helping DLAI to get splendid partnership with biotech stakeholders.</p>
+          </div>
+        </div>
+      </button>
+
+      <button class="member member--open">
+        <div class="member__in">
+          <div class="member__face member__face--front">
+            <canvas class="member__art" data-art-helix aria-hidden="true"></canvas>
+            <span class="member__scrim" aria-hidden="true"></span>
+            <span class="member__meta">
+              <span class="member__role">WetLab Co-lead</span>
+              <h3 class="member__name">Alen Manukian</h3>
+            </span>
+            <span class="member__hint">tap</span>
+          </div>
+          <div class="member__face member__face--back">
+            <p class="member__bio">Takes care of wet-lab spaces, organises and mentors on biology to make sure everyone can test their proteins. </p>
+          </div>
+        </div>
+      </button>
+
+      <button class="member member--open">
+        <div class="member__in">
+          <div class="member__face member__face--front">
+            <canvas class="member__art" data-art-helix aria-hidden="true"></canvas>
+            <span class="member__scrim" aria-hidden="true"></span>
+            <span class="member__meta">
+              <span class="member__role">WetLab Co-lead</span>
+              <h3 class="member__name">Alen Manukian</h3>
+            </span>
+            <span class="member__hint">tap</span>
+          </div>
+          <div class="member__face member__face--back">
+            <p class="member__bio">Takes care of wet-lab spaces, Helps with cell culture and molecular biology techniques, including plasmid engineering.</p>
+          </div>
+        </div>
+      </button>
+
+            <button class="member member--open">
+        <div class="member__in">
+          <div class="member__face member__face--front">
+            <canvas class="member__art" data-art-helix aria-hidden="true"></canvas>
+            <span class="member__scrim" aria-hidden="true"></span>
+            <span class="member__meta">
+              <span class="member__role">Lead of AixBioweek Commission</span>
+              <h3 class="member__name">Richard Zhu</h3>
+            </span>
+            <span class="member__hint">tap</span>
+          </div>
+          <div class="member__face member__face--back">
+            <p class="member__bio">Represents DLAI on the Ai x Bioweek organisation committee, managing logistics, stakeholder engagement, and planning.</p>
+          </div>
+        </div>
+      </button>
+
     </div>
   </div>
 </section>
+
+<!-- need to add a butoon -> wanna be on the committee next year? Apply to be member, with hyperlink on google form -->
 
 <!-- ============================ PROJECTS ============================ -->
 <canvas class="frieze" data-frieze="yellow" aria-hidden="true"></canvas>
@@ -903,12 +951,11 @@ function fitCanvas(cv){
   return {ctx, w:r.width, h:r.height};
 }
 
-const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ---------- hero: the ribbon that finishes the DLAI wordmark ---------- */
 const ribbon = document.getElementById('markRibbon');
 const heroBg = document.getElementById('heroBg');
-let phase = 0;
+const phase = 0;   // static: the hero helix no longer animates
 
 function paintRibbon(){
   const f = fitCanvas(ribbon); if (!f) return;
@@ -942,13 +989,6 @@ function paintHeroBg(){
       highlight:false
     });
   }
-}
-
-function tick(){
-  phase += 0.011;
-  paintRibbon();
-  paintHeroBg();
-  requestAnimationFrame(tick);
 }
 
 /* ---------- section friezes: static black protein bands ---------- */
@@ -1123,67 +1163,7 @@ document.querySelectorAll('.project').forEach(card => {
 });
 
 /* ============================================================
-   5. PROTEIN VIEWER (3Dmol.js, loaded lazily, degrades gracefully)
-   ============================================================ */
-(function(){
-  const stage  = document.getElementById('molStage');
-  const status = document.getElementById('molStatus');
-  const answer = document.getElementById('molAnswer');
-  const reveal = document.getElementById('molReveal');
-
-  reveal.addEventListener('click', () => {
-    answer.hidden = !answer.hidden;
-    reveal.textContent = answer.hidden ? 'Reveal' : 'Hide';
-  });
-
-  function fallback(){
-    status.textContent = 'Structure viewer unavailable — showing our helix instead.';
-    reveal.hidden = true;
-    const cv = document.createElement('canvas');
-    cv.style.cssText = 'width:100%;height:100%';
-    stage.appendChild(cv);
-    let p = 0;
-    (function loop(){
-      const f = fitCanvas(cv);
-      if (f){
-        const {ctx, w, h} = f;
-        ctx.fillStyle = '#05070f'; ctx.fillRect(0,0,w,h);
-        const keys = ['cyan','yellow','pink','blue'];
-        const cols = Math.max(3, Math.round(w/190));
-        for (let i = 0; i < cols; i++){
-          drawHelix(ctx, {axis:'y', ox:(i+0.5)*(w/cols), oy:h*0.10,
-            len:h*0.80, R:h*0.055, w:h*0.10, pitch:h*0.072,
-            phase:p + i*1.6, colors:PAL[keys[i%keys.length]]});
-        }
-      }
-      p += REDUCED ? 0 : 0.009;
-      if (!REDUCED) requestAnimationFrame(loop);
-    })();
-  }
-
-  const s = document.createElement('script');
-  s.src = 'https://3Dmol.org/build/3Dmol-min.js';
-  s.async = true;
-  s.onerror = fallback;
-  s.onload = () => {
-    if (!window.$3Dmol) return fallback();
-    try {
-      const v = $3Dmol.createViewer(stage, {backgroundColor:'#05070f'});
-      $3Dmol.download('pdb:1UBQ', v, {}, () => {
-        v.setStyle({}, {cartoon:{colorfunc: (atom) =>
-          ['#2B5CFF','#12D6E0','#FBC02D','#FB2E93'][atom.resi % 4]}});
-        v.zoomTo();
-        v.render();
-        if (!REDUCED) v.spin('y', 0.4);
-        status.textContent = 'Drag to rotate · scroll to zoom';
-      });
-    } catch(e){ fallback(); }
-  };
-  document.head.appendChild(s);
-})();
-
-/* ============================================================
-   6. BOOT
+   5. BOOT
    ============================================================ */
 function boot(){
   paintAllFriezes();
@@ -1198,7 +1178,6 @@ window.addEventListener('resize', () => {
 
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(boot);
 boot();
-if (!REDUCED) requestAnimationFrame(tick);
 </script>
 </body>
 </html>

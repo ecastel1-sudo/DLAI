@@ -1,889 +1,616 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>DLAI – Designing Life with AI</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Life Encoded – European AI × Bio Week 2027</title>
+<meta name="description" content="Life Encoded is a European AI × Bio Week at EPFL, Lausanne, 3–7 March 2027: roundtables, an innovation summit and a 48-hour hackathon where machine learning meets bioengineering.">
+<meta property="og:title" content="Life Encoded – European AI × Bio Week">
+<meta property="og:description" content="Rewriting the limits of biology and intelligence across Europe. EPFL Campus, Lausanne, 3–7 March 2027.">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/LOGO-Carre.png">
 
-  <!-- Optional: Google fonts similar to EPFL look -->
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --dlai-blue:   #53177d;
-      --dlai-orange: #571e80;
-      --dlai-yellow: #826499;
-      --dlai-light:  #96bfad;
-      --dlai-black:  #92b5a9;
-      --dlai-bg:     #ffffff;
-      --sv-vert:     ⁠#B6DDDA;
-      --sv-petrol:   #01877e;
-      --sv-text:     #F5F5E8;
-    }
+<style>
+/* ============================================================
+   LIFE ENCODED — tokens
+   Colour fields sampled directly from the sponsorship dossier,
+   section by section, so the site and the PDF read as one thing.
+   ============================================================ */
+:root{
+  --ink:#000000;
+  --paper:#FFFFFF;
 
-    * {
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
+  --sky:#37BDF7;    --blue:#1F8FD0;      /* cover + who we are   */
+  --amber:#F1C14E;  --gold:#D9A22E;      /* project presentation */
+  --orchid:#BF86C2; --lilac:#B0ACD5;     /* last year's edition  */
+  --powder:#94C2DA; --blush:#FBBFEF;     /* week overview        */
+  --violet:#7700F2; --magenta:#C200DA;   /* our goals            */
+  --pink:#EA4580;   --rose:#FF9AE8;      /* mission / closing    */
+  --teal:#0ED5C7;   --teal-dk:#0097AD;   /* sponsor benefits     */
+  --yellow:#FAD95E;
 
-    body {
-      margin: 0;
-      background-color: var(--dlai-bg);
-      color: var(--dlai-black);
-      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.6;
-    }
+  --field:var(--ink);
+  --on-field:var(--paper);
+  --accent:var(--sky);
 
-    h1, h2, h3, h4 {
-      font-family: "Cormorant Garamond", "Palatino Linotype", "Book Antiqua", serif;
-      margin-top: 0;
-      letter-spacing: 0.03em;
-    }
+  --display:"Bricolage Grotesque",-apple-system,system-ui,sans-serif;
+  --body:"Instrument Sans",-apple-system,system-ui,sans-serif;
 
-    a {
-      color: var(--dlai-blue);
-      text-decoration: none;
-    }
-    a:hover { color: var(--dlai-orange); }
-
-    /* ===== HEADER & NAV ===== */
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background-color: rgba(5,4,5,0.92);
-      backdrop-filter: blur(12px);
-      color: #fff;
-    }
-
-    .nav-inner {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 0.6rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-    }
-
-    .brand img {
-      height: 38px;
-      width: auto;
-    }
-
-    .brand-title {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 1.4rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 1.4rem;
-      margin: 0;
-      padding: 0;
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-    }
-
-    nav a {
-      color: #ffffff;
-    }
-    nav a:hover {
-      color: var(--dlai-yellow);
-    }
-
-    /* ===== GLOBAL LAYOUT ===== */
-
-    main {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 0 1.5rem 4rem;
-    }
-
-    section {
-      padding: 4rem 0 3rem;
-      border-bottom: 1px solid rgba(0,0,0,0.05);
-    }
-
-    .section-label {
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.22em;
-      color: var(--dlai-blue);
-      margin-bottom: 0.4rem;
-    }
-
-    .two-col {
-      display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
-      gap: 2.5rem;
-      align-items: flex-start;
-    }
-
-    /* ===== HERO / HOME ===== */
-
-    .hero {
-      min-height: 70vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 5rem 1.5rem 4rem;
-    }
-
-    .hero-inner {
-      max-width: 780px;
-    }
-
-    .hero-logo {
-      margin-bottom: 1.8rem;
-    }
-
-    .hero-logo img {
-      max-width: 540px;
-      width: 100%;
-      height: auto;
-    }
-
-    .hero-logo {
-  margin-bottom: 1.8rem;
+  --gut:clamp(20px,5vw,72px);
+  --max:1240px;
 }
 
-    /* New: two logos with an X between them */
-    .hero-logo-duo {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1.8rem;
-    }
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--ink);color:var(--paper);
+  font-family:var(--body);font-size:clamp(16px,1.03vw,18px);line-height:1.55;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img,svg,canvas,video{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--rose);outline-offset:3px;border-radius:2px}
+::selection{background:var(--magenta);color:#fff}
 
-    .hero-logo-img {
-      max-width: 300px;
-      width: auto;
-      height: auto;
-    }
+h1,h2,h3,h4{font-family:var(--display);font-weight:800;margin:0;line-height:.92;letter-spacing:-.03em}
+p{margin:0 0 1em}
+p:last-child{margin-bottom:0}
 
-    .hero-logo-x {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 3rem;
-      line-height: 1;
-      color: var(--dlai-blue);
-    }
+/* ---------- layout ---------- */
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--gut)}
+.band{position:relative;background:var(--field);color:var(--on-field);padding-block:clamp(56px,7vw,104px)}
+.band--tight{padding-block:clamp(36px,4.5vw,64px)}
 
-  /* Make it stack nicely on small screens */
-    @media (max-width: 600px) {
-      .hero-logo-duo {
-        flex-direction: column;
-        gap: 0.8rem;
-      }
+.field-amber {--field:var(--amber); --on-field:var(--blue);  --accent:var(--blue);
+              --p1:var(--sky);--p2:var(--blue);--p3:var(--amber);--p4:var(--gold)}
+.field-powder{--field:var(--powder);--on-field:var(--ink);   --accent:var(--pink);
+              --p1:var(--blush);--p2:var(--orchid);--p3:var(--powder);--p4:var(--lilac)}
+.field-violet{--field:var(--violet);--on-field:var(--paper); --accent:var(--rose);
+              --p1:var(--magenta);--p2:var(--violet);--p3:var(--pink);--p4:var(--magenta)}
+.field-orchid{--field:var(--orchid);--on-field:var(--ink);   --accent:var(--powder);
+              --p1:var(--lilac);--p2:var(--orchid);--p3:var(--powder);--p4:var(--lilac)}
+.field-teal  {--field:var(--teal);  --on-field:var(--ink);   --accent:var(--magenta);
+              --p1:var(--rose);--p2:var(--magenta);--p3:var(--teal);--p4:var(--teal-dk)}
+.field-black {--field:var(--ink);   --on-field:var(--paper); --accent:var(--sky);
+              --p1:var(--sky);--p2:var(--blue);--p3:var(--amber);--p4:var(--gold)}
 
-      .hero-logo-x {
-        font-size: 2.2rem;
-      }
-    }
+/* ---------- the poster headline ----------
+   Solid word with a hollow outline copy offset behind it —
+   the same display move the dossier uses on every section opener. */
+.poster{
+  position:relative;display:block;
+  font-family:var(--display);font-weight:800;
+  font-size:clamp(2.15rem,6.6vw,4.9rem);line-height:.88;
+  letter-spacing:-.042em;text-transform:lowercase;
+  margin:0 0 .5em;
+}
+.poster span{position:relative;z-index:2;display:block}
+.poster::before{
+  content:attr(data-echo);position:absolute;inset:0;z-index:1;
+  transform:translate(.085em,.085em);
+  -webkit-text-stroke:2.5px var(--accent);color:transparent;
+  white-space:pre-line;pointer-events:none;
+}
+@media (max-width:600px){.poster::before{-webkit-text-stroke-width:1.6px}}
 
+.lede{font-size:clamp(1.05rem,1.5vw,1.32rem);max-width:58ch;line-height:1.5}
+.kicker{
+  font-family:var(--display);font-weight:600;font-size:.95rem;
+  letter-spacing:.02em;opacity:.75;margin-bottom:1.2em;
+}
 
-    .hero-sv {
-      margin-bottom: 1.5rem;
-    }
-    .hero-sv img {
-      max-width: 250px;
-      width: 100%;
-      height: auto;
-    }
+/* ============================================================
+   PROTEIN FRIEZE
+   The original duotone plate, recoloured per section through
+   --p1..--p4 and run as a slow band between fields.
+   ============================================================ */
+.frieze{position:relative;height:clamp(76px,10vw,150px);background:var(--ink);overflow:hidden}
+.frieze__track{display:flex;width:max-content;height:100%;animation:pan 110s linear infinite}
+.frieze--rev .frieze__track{animation-direction:reverse}
+.frieze__unit{
+  flex:0 0 auto;
+  width:calc(clamp(76px,10vw,150px) * 2.3);
+  height:calc(clamp(76px,10vw,150px) * 2.3);
+  margin-top:calc(clamp(76px,10vw,150px) * -0.62);
+  margin-inline:calc(clamp(76px,10vw,150px) * -0.42);
+}
+/* break the tile grid on a period of 8 so the loop still meets itself */
+.frieze__unit:nth-child(2n){transform:scaleX(-1) translateY(7%)}
+.frieze__unit:nth-child(4n){transform:translateY(-9%) rotate(7deg) scale(1.08)}
+.frieze__unit:nth-child(8n){transform:scaleX(-1) rotate(-5deg) translateY(4%)}
+@keyframes pan{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
 
-    .hero-title {
-      font-size: 3rem;
-      margin-bottom: 0.4rem;
-    }
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav{position:sticky;top:0;z-index:60;background:rgba(0,0,0,.92);backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.16)}
+.nav__in{max-width:var(--max);margin:0 auto;padding:.6rem var(--gut);
+  display:flex;align-items:center;gap:1rem}
+.nav__logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex:0 0 auto}
+.nav__logo b{font-family:var(--display);font-weight:800;font-size:1.02rem;letter-spacing:-.03em;
+  text-transform:uppercase;color:var(--paper)}
+.nav__logo i{display:block;width:12px;height:12px;background:var(--sky);border-radius:50%;flex:0 0 auto}
+.nav__links{display:flex;gap:clamp(8px,1.4vw,22px);margin-left:auto;align-items:center}
+.nav__links a{position:relative;color:var(--paper);text-decoration:none;font-size:.86rem;
+  font-weight:500;padding:.3rem 0;white-space:nowrap}
+.nav__links a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:2px;
+  background:var(--sky);transition:right .22s ease}
+.nav__links a:hover::after,.nav__links a:focus-visible::after{right:0}
+.nav__links a.is-cta{background:var(--sky);color:var(--ink);border-radius:999px;
+  padding:.45rem 1rem;font-weight:700}
+.nav__links a.is-cta::after{display:none}
+.nav__links a.is-cta:hover{background:var(--paper)}
+.nav__burger{display:none;margin-left:auto;background:none;border:1.5px solid rgba(255,255,255,.45);
+  color:var(--paper);border-radius:999px;padding:.4rem .9rem;font:inherit;font-size:.82rem;cursor:pointer}
 
-    .hero-subtitle {
-      font-size: 1.05rem;
-      text-transform: uppercase;
-      letter-spacing: 0.26em;
-      color: var(--dlai-blue);
-    }
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{position:relative;background:var(--ink);overflow:hidden;
+  padding:clamp(40px,7vw,86px) 0 clamp(34px,5vw,64px)}
+.hero__art{position:absolute;inset:-12% -10% auto;opacity:.17;pointer-events:none;
+  display:flex;width:120%;gap:2%}
+.hero__art svg{flex:1 1 0;height:auto}
+.hero__in{position:relative;z-index:2;max-width:var(--max);margin:0 auto;padding-inline:var(--gut)}
+.hero__eyebrow{font-family:var(--display);font-weight:600;font-size:clamp(.95rem,2.2vw,1.3rem);
+  letter-spacing:.06em;text-transform:uppercase;color:var(--sky);margin-bottom:.9em}
+.hero .poster{font-size:clamp(3rem,13vw,9rem)}
+.hero__tag{margin-top:.2em;font-size:clamp(1.1rem,2vw,1.5rem);font-weight:500;
+  color:var(--paper);max-width:30ch;font-style:italic}
+.meta{display:flex;flex-wrap:wrap;gap:.6rem 1.6rem;margin-top:clamp(20px,3vw,30px);
+  font-family:var(--display);font-weight:600;font-size:clamp(1rem,2vw,1.25rem);color:var(--rose)}
+.meta span{display:flex;align-items:center;gap:.55rem}
+.meta span::before{content:"";width:9px;height:9px;background:currentColor;
+  clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);flex:0 0 auto}
 
-    .hero-gradient-bar {
-      margin: 2.2rem auto 0;
-      height: 6px;
-      width: 220px;
-      border-radius: 999px;
-      background: linear-gradient(to right, #53177d, #571e80, #826499, #96bfad, #92b5a9, #a2dbb6, #ade6bc);
-    }
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn{display:inline-block;border:2px solid currentColor;border-radius:999px;
+  padding:.85rem 1.7rem;font-family:var(--display);font-weight:700;font-size:.96rem;
+  letter-spacing:-.01em;text-decoration:none;cursor:pointer;
+  transition:transform .18s ease,background-color .2s ease,color .2s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn--fill{background:var(--rose);border-color:var(--rose);color:var(--ink)}
+.btn--fill:hover{background:var(--paper);border-color:var(--paper);color:var(--ink)}
+.btn--ghost{color:inherit}
+.btn--ghost:hover{background:currentColor;color:var(--field)}
+.field-black .btn--ghost:hover{color:var(--ink)}
+.btn--big{padding:1.05rem 2.2rem;font-size:clamp(1rem,1.8vw,1.18rem)}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:clamp(24px,3.4vw,40px)}
 
-    /* ===== SOME NUMBERS ===== */
-    .stats {
-     display: grid;
-     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-     gap: 2rem;
-     padding: 3rem 0;
-     text-align: center;
-    }
+/* ============================================================
+   CARDS & GRIDS
+   ============================================================ */
+.grid{display:grid;gap:clamp(14px,1.9vw,22px);margin-top:clamp(30px,4vw,48px);align-items:start}
+.grid--2{grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}
+.grid--3{grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+.grid--4{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
 
-    .stat-card {
-     transform: translateY(10px);
-     transition: transform 0.4s ease, box-shadow 0.4s ease;
-     padding: 1.2rem 1rem;
-     border-radius: 1rem;
-     background: linear-gradient(135deg, #B6DDDA, #01877e);
-     border: 1px solid rgba(5,4,5,0.08);
-     box-shadow: 0 8px 18px rgba(0,0,0,0.04);
-    }
+.card{border:2px solid currentColor;padding:clamp(18px,2.2vw,28px);display:flex;
+  flex-direction:column;gap:12px;height:100%}
+.card h3{font-size:clamp(1.18rem,2vw,1.5rem);line-height:1.04}
+.card p{font-size:.93rem;line-height:1.5;margin:0}
 
-    .stat-card:hover {
-     transform: translateY(-4px);
-     box-shadow: 0 14px 30px rgba(0,0,0,0.08);
-    }
+/* day cards for the week */
+.day{border:2px solid currentColor;padding:clamp(18px,2.2vw,28px);display:flex;
+  flex-direction:column;gap:12px;background:transparent}
+.day__when{font-family:var(--display);font-weight:800;font-size:clamp(1rem,1.8vw,1.22rem);
+  color:var(--accent);letter-spacing:-.02em}
+.day__title{font-family:var(--display);font-weight:800;text-transform:uppercase;
+  font-size:clamp(1.25rem,2.4vw,1.75rem);line-height:.98;letter-spacing:-.03em}
+.day__who{align-self:flex-start;font-size:.74rem;font-weight:700;border:2px solid currentColor;
+  border-radius:999px;padding:3px 12px;font-family:var(--display)}
+.day--hack{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.day--hack .day__when{color:var(--rose)}
 
-    .stat-number {
-     font-family: "Cormorant Garamond", serif;
-     font-size: 2.6rem;
-     color: #1D4C90; /* DLAI blue */
-    }
+/* numbers */
+.figures{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:1px;background:currentColor;border:2px solid currentColor;margin-top:clamp(30px,4vw,48px)}
+.figure{background:var(--field);padding:clamp(16px,2.4vw,26px) 1rem;text-align:center}
+.figure b{display:block;font-family:var(--display);font-weight:800;
+  font-size:clamp(2.1rem,5.4vw,3.4rem);line-height:.86;letter-spacing:-.04em;color:var(--accent)}
+.figure span{display:block;margin-top:.55em;font-size:.86rem;font-weight:500;line-height:1.3}
 
-    .stat-label {
-     margin-top: 0.4rem;
-     font-size: 0.85rem;
-     letter-spacing: 0.14em;
-     text-transform: uppercase;
-     color: #CF5F35; /* DLAI orange */
-    }
+/* org cards (DLAI / SV Industry / BEAM) */
+.org{border:2px solid currentColor;padding:clamp(18px,2.2vw,28px);display:flex;
+  flex-direction:column;gap:14px}
+.org__name{font-family:var(--display);font-weight:800;font-size:clamp(1.3rem,2.4vw,1.7rem);
+  letter-spacing:-.03em;color:var(--accent)}
+.org__nums{display:flex;flex-wrap:wrap;gap:1.2rem;padding-block:.3rem}
+.org__nums div{line-height:1.1}
+.org__nums b{display:block;font-family:var(--display);font-weight:800;font-size:1.5rem;letter-spacing:-.03em}
+.org__nums span{font-size:.76rem;opacity:.85}
+.org p{font-size:.92rem;line-height:1.5;margin:0;font-style:italic}
 
-    /* ===== ABOUT ===== */
+/* sponsor tiers — named only; the dossier carries the detail */
+.tiers{display:flex;flex-wrap:wrap;gap:10px;margin-top:clamp(22px,3vw,32px)}
+.tier{border:2px solid currentColor;border-radius:999px;padding:.55rem 1.4rem;
+  font-family:var(--display);font-weight:800;font-size:.95rem;letter-spacing:-.01em}
 
-    #about p {
-      margin-top: 0.3rem;
-    }
+.quote{font-family:var(--display);font-weight:800;text-transform:uppercase;
+  font-size:clamp(1.9rem,6vw,4.2rem);line-height:.95;letter-spacing:-.035em;
+  color:var(--rose);max-width:18ch}
 
-    .highlight {
-      font-weight: 600;
-    }
+.contacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:clamp(16px,2.4vw,32px);margin-top:clamp(30px,4vw,48px)}
+.contacts h3{font-size:1.1rem;margin-bottom:.6em;color:var(--accent)}
+.contacts ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:.94rem}
+.contacts a{text-decoration:none;background-image:linear-gradient(currentColor,currentColor);
+  background-size:0 1.5px;background-repeat:no-repeat;background-position:0 100%;transition:background-size .25s ease}
+.contacts a:hover{background-size:100% 1.5px}
 
-    .pill {
-      display: inline-block;
-      padding: 0.18rem 0.7rem;
-      border-radius: 999px;
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      background: linear-gradient(135deg, #B6DDDA, #01877e);
-      color: var(--dlai-blue);
-    }
+.foot{background:var(--ink);color:rgba(255,255,255,.62);padding:clamp(28px,4vw,48px) 0;font-size:.86rem}
+.foot__in{max-width:var(--max);margin:0 auto;padding-inline:var(--gut);
+  display:flex;gap:16px;justify-content:space-between;flex-wrap:wrap}
 
-    /* ===== TEAM ===== */
+.fab{position:fixed;right:clamp(14px,2vw,26px);bottom:clamp(14px,2vw,26px);z-index:70;
+  background:var(--rose);color:var(--ink);text-decoration:none;font-family:var(--display);
+  font-weight:800;font-size:.92rem;padding:13px 22px;border-radius:999px;border:2px solid var(--ink);
+  box-shadow:0 8px 24px rgba(0,0,0,.4);transition:transform .18s ease,background-color .18s ease}
+.fab:hover{transform:translateY(-2px);background:var(--paper)}
 
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.6rem;
-      margin-top: 1.5rem;
-    }
-
-    .team-card {
-      padding: 1.1rem 1rem;
-      border-radius: 14px;
-      border: 1px solid rgba(0,0,0,0.05);
-      background: linear-gradient(145deg, #ffffff, #f8fafc);
-    }
-
-    .team-role {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--dlai-blue);
-    }
-
-    .team-grid {
-     display: grid;
-     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-     gap: 1.6rem;
-     margin-top: 1.5rem;
-    }
-
-    /* Flip cards */
-    .team-card {
-     position: relative;
-     perspective: 1200px;
-     height: 380px;
-    }
-
-    .team-card-inner {
-     position: relative;
-     width: 100%;
-     height: 100%;
-     transform-style: preserve-3d;
-     transition: transform 0.7s cubic-bezier(0.22,0.61,0.36,1);
-    }
-
-    .team-card:hover .team-card-inner {
-     transform: rotateY(180deg);
-    }
-
-    .team-card-front,
-    .team-card-back {
-     position: absolute;
-     inset: 0;
-     border-radius: 1rem;
-     padding: 1.4rem;
-     backface-visibility: hidden;
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-     align-items: center;
-     background: #ffffff;
-     border: 1px solid rgba(5,4,5,0.15);       /* DLAI black */
-     box-shadow: 0 10px 20px rgba(0,0,0,0.06);
-    }
-
-    .team-card-back {
-     transform: rotateY(180deg);
-    }
-
-    .team-role {
-     font-size: 0.8rem;
-     text-transform: uppercase;
-     letter-spacing: 0.16em;
-     color: #1D4C90;                            /* DLAI blue */
-     margin-bottom: 0.4rem;
-    }
-
-    .team-card h3 {
-     margin: 0 0 0.4rem;
-    }
-
-    .team-card p {
-     font-size: 0.9rem;
-     text-align: center;
-    }
-
-    /* Optional: subtle top border accent in DLAI gradient */
-    .team-card-front::before,
-    .team-card-back::before {
-     content: "";
-     position: absolute;
-     top: 0;
-     left: 12%;
-     right: 12%;
-     height: 4px;
-     border-radius: 999px;
-     background: linear-gradient(to right, #53177d, #571e80, #826499, #96bfad, #92b5a9, #a2dbb6, #ade6bc);
-    }
-
-
-    /* ===== PROJECTS ===== */
-
-    .projects-split {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      margin-top: 1.5rem;
-    }
-
-    .projects-column h3 {
-      font-size: 1.2rem;
-      margin-bottom: 0.4rem;
-    }
-
-    .proj-tag {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--dlai-orange);
-    }
-
-    .project-card {
-      border-radius: 14px;
-      padding: 1rem 1rem 0.9rem;
-      border: 1px solid rgba(0,0,0,0.06);
-      margin-bottom: 1rem;
-    }
-
-    .project-card h4 {
-      font-size: 1.02rem;
-      margin-bottom: 0.2rem;
-    }
-
-    /* ===== PARTNERS & MEDIA ===== */
-
-    .logo-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.8rem;
-      align-items: center;
-    }
-
-    .logo-row img {
-      max-height: 56px;
-      width: auto;
-    }
-
-    .media-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.3rem;
-      margin-top: 1.2rem;
-    }
-
-    .media-pill {
-      padding: 0.45rem 0.9rem;
-      border-radius: 999px;
-      border: 1px solid rgba(0,0,0,0.12);
-      font-size: 0.85rem;
-    }
-
-    /* ===== STICKY JOIN BUTTON ===== */
-
-    .join-us-btn {
-      position: fixed;
-      right: 1.4rem;
-      bottom: 1.6rem;
-      z-index: 30;
-      background-color: var(--dlai-orange);
-      color: #ffffff;
-      padding: 0.75rem 1.1rem;
-      border-radius: 2000px;
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.18);
-    }
-
-    .join-us-btn:hover {
-      background-color: var(--dlai-blue);
-      color: #ffffff;
-    }
-
-    .cta-wrapper {
-     text-align: center;
-     margin: 3rem 0 1rem;
-    }
-
-    .cta-button {
-     display: inline-block;
-     padding: 0.9rem 2.4rem;
-     border-radius: 999px;
-     background: linear-gradient(to right, #53177d, #571e80, #826499, #96bfad, #92b5a9, #a2dbb6, #ade6bc);
-     color: #ffffff;
-     font-size: 0.9rem;
-     font-weight: 600;
-     text-transform: uppercase;
-     letter-spacing: 0.18em;
-     box-shadow: 0 12px 26px rgba(0,0,0,0.18);
-    }
-
-    .cta-button:hover {
-     transform: translateY(-2px);
-     box-shadow: 0 16px 34px rgba(0,0,0,0.24);
-    }
-
-    /* ===== FOOTER ===== */
-
-    footer {
-      border-top: 1px solid rgba(0,0,0,0.06);
-      padding: 1.5rem 1.5rem 2rem;
-      font-size: 0.8rem;
-      color: rgba(5,4,5,0.7);
-      max-width: 1080px;
-      margin: 0 auto;
-    }
-
-    /* ===== RESPONSIVE ===== */
-
-    @media (max-width: 800px) {
-      .nav-inner {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.4rem;
-      }
-      nav ul {
-        flex-wrap: wrap;
-        gap: 0.9rem;
-      }
-      .hero {
-        padding-top: 4rem;
-        min-height: 60vh;
-      }
-      .hero-title {
-        font-size: 2.4rem;
-      }
-      .two-col,
-      .projects-split {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+@media (max-width:900px){
+  .nav__links{position:absolute;top:100%;left:0;right:0;background:#000;flex-direction:column;
+    gap:0;align-items:stretch;padding:.4rem var(--gut) 1rem;
+    border-bottom:1px solid rgba(255,255,255,.18);display:none}
+  .nav__links.is-open{display:flex}
+  .nav__links a{padding:.7rem 0;font-size:1rem}
+  .nav__links a.is-cta{text-align:center;margin-top:.5rem}
+  .nav__burger{display:block}
+}
+@media (max-width:600px){
+  .hero__art{opacity:.12}
+  .fab{padding:11px 18px;font-size:.86rem}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important}
+}
+</style>
 </head>
+
 
 <body>
 
-<header>
-  <div class="nav-inner">
-    <div class="brand">
-      <!-- Replace with your logo path -->
-      <img src="PDW-just-proteins-black-bg.png" alt="Protein Design Week LOGO" />
-      <div class="brand-title">EPFL PDW</div>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#program">Program</a></li>
-        <li><a href="#hackathon">Hackathon</a></li>
-        <li><a href="#ai-panel">Ai Panel</a></li-->
-        <li><a href="#media">Media</a></li>
-        <li><a href="#team">Team</a></li>
-        <li><a href="#partners">Partners</a></li>
-        <li><a href="/previous-editions/PDW-2026">PDW 2026</a></li>
+<!-- the duotone protein plate, defined once, recoloured per section -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+<symbol id="protein" viewBox="0 0 1024 1024"><path d="M0 0C1 0 2 0 2 0C9 1 16 3 21 8C29 29 21 57 13 76C10 83 13 89 14 96C14 97 15 98 15 99C17 109 21 118 26 127C27 128 27 128 27 129C30 133 32 135 36 137C42 137 46 134 50 131C51 131 52 131 52 130C60 125 67 118 74 112C74 111 75 111 75 110C91 94 91 94 91 86C91 84 91 83 91 81C90 34 90 34 102 22C107 18 112 18 118 18C131 20 153 24 162 35C166 41 164 52 163 60C161 70 157 79 153 88C152 88 152 89 152 90C151 90 151 91 151 92C150 95 150 97 150 100C150 101 151 102 151 103C151 103 151 103 151 106C151 106 151 106 152 109C152 112 152 114 153 117C154 116 154 116 155 116C173 111 191 111 208 111C209 111 209 111 211 111C214 111 217 111 219 111C220 111 221 111 222 111C225 111 228 111 232 112C232 111 232 110 232 110C233 110 233 110 234 110C236 107 236 104 236 101C237 100 237 99 237 98C237 97 237 96 237 95C237 93 237 91 237 89C237 88 238 87 238 86C240 63 240 63 248 56C257 50 269 52 278 54C299 59 299 59 307 64C310 68 311 72 310 78C308 88 304 98 299 108C298 110 297 113 297 116C298 116 298 116 299 116C308 116 316 118 325 119C327 119 328 119 330 119C348 122 367 125 385 128C385 127 385 126 386 125C387 118 389 111 392 105C393 104 393 103 394 102C397 97 400 94 405 93C422 91 445 97 460 106C464 114 460 128 458 137C458 137 457 138 457 139C458 139 458 139 459 139C465 139 470 140 476 140C491 142 506 143 522 144C523 144 524 144 525 144C530 144 535 144 541 145C542 145 544 145 545 145C547 145 549 145 550 145C551 145 552 145 553 145C557 144 559 143 562 140C566 137 570 137 574 136C580 137 584 139 588 143C589 145 589 145 589 147C590 147 590 147 591 147C625 146 663 153 690 175C691 179 691 181 690 186C688 204 691 221 697 238C699 245 700 251 700 258C700 259 700 259 700 261C700 262 700 264 700 266C700 268 700 271 700 273C700 286 700 300 693 312C693 313 692 313 692 314C689 319 686 324 682 328C682 328 682 328 680 329C670 338 656 343 643 344C643 346 643 346 644 348C645 348 646 348 647 349C648 350 648 350 650 352C651 353 651 354 652 354C653 356 654 357 656 359C658 362 660 364 665 365C673 365 681 364 689 363C735 356 735 356 753 366C762 373 765 381 766 391C770 423 758 455 741 481C740 483 739 484 738 486C735 491 731 496 727 501C727 502 726 503 726 504C725 505 723 507 722 508C718 513 717 517 716 524C716 526 715 528 715 529C715 532 714 534 714 536C712 551 709 565 704 580C704 581 703 581 703 582C701 588 699 593 697 599C695 604 694 608 692 613C692 613 692 613 694 613C717 618 748 628 762 648C768 660 766 674 764 687C764 688 764 688 764 691C761 707 759 723 756 740C756 740 756 741 756 742C744 805 744 805 725 818C713 826 701 826 688 823C686 822 684 822 683 822C680 821 676 820 673 819C671 819 668 818 666 818C656 815 645 814 635 813C634 813 633 813 631 813C631 813 630 813 629 813C629 813 630 814 630 815C631 818 631 820 630 824C627 825 627 825 625 827C625 828 625 829 626 830C626 832 626 834 627 835C627 836 627 837 627 838C628 838 628 839 628 840C628 841 628 842 628 842C632 860 632 880 626 897C625 898 625 899 625 900C619 917 619 917 611 921C593 923 575 918 560 908C556 904 554 900 552 896C552 895 551 894 551 894C549 873 555 852 565 834C571 824 571 818 567 807C564 794 560 781 550 773C547 771 547 771 543 772C536 775 530 780 524 786C522 788 522 788 519 790C517 791 515 793 514 795C513 796 512 797 512 797C507 803 503 808 499 813C497 815 496 817 494 819C493 819 493 819 492 819C492 820 492 821 492 822C494 841 493 864 482 881C479 884 478 885 473 885C457 885 434 883 421 871C418 867 418 863 418 857C420 845 424 834 429 824C437 805 431 787 424 769C414 742 414 742 404 736C397 735 390 742 385 746C378 752 373 758 369 766C369 767 368 768 368 769C363 777 360 785 356 793C354 799 352 803 349 808C345 815 345 821 345 829C345 834 345 841 342 846C338 848 335 848 331 848C330 848 329 848 328 848C327 848 325 848 324 848C323 848 322 848 321 848C289 848 289 848 277 841C274 836 277 829 278 824C285 789 275 747 256 718C255 717 254 716 253 715C253 714 253 713 253 713C251 712 251 712 249 712C240 716 234 722 229 730C227 733 227 733 224 734C219 735 216 733 212 731C210 730 207 729 205 728C198 735 195 742 191 751C190 753 189 755 188 757C179 777 180 791 185 813C188 829 188 829 186 834C169 840 147 834 132 827C126 824 122 821 120 814C120 813 119 812 119 811C119 809 118 808 118 807C118 806 118 806 117 804C114 790 110 777 104 764C102 760 101 757 99 753C96 746 93 739 90 733C89 732 89 731 89 730C78 707 78 707 71 701C63 700 59 705 54 709C49 714 46 718 43 723C43 723 42 724 42 725C41 725 41 725 40 725C40 725 39 726 39 727C38 729 37 732 35 734C35 735 34 736 34 736C33 737 33 738 32 739C31 741 30 743 29 745C28 746 27 747 27 748C24 751 22 755 20 759C-11 809-11 809-22 812C-27 811-29 808-32 805C-31 800-29 798-26 795C-14 784-6 771 2 758C3 756 4 754 5 752C8 749 10 745 12 741C20 728 28 716 38 705C39 704 39 703 40 702C42 699 45 697 48 695C50 693 50 693 50 689C51 686 51 686 53 684C57 682 61 682 66 682C67 682 68 682 69 682C77 682 85 684 93 686C93 686 93 686 95 686C122 693 144 708 159 732C161 736 164 741 166 745C168 749 170 752 172 756C172 755 172 755 173 752C178 741 184 729 191 719C190 718 189 718 188 717C188 717 188 717 185 716C184 716 184 716 182 714C179 713 179 713 178 711C178 707 180 706 182 704C182 703 183 702 184 701C188 698 192 695 197 692C196 691 194 691 193 691C147 679 147 679 126 673C125 672 125 672 124 672C103 665 83 658 63 650C62 649 61 649 60 648C39 640 19 629 0 617C-10 610-20 605-30 600C-48 591-63 581-78 567C-80 565-82 563-84 561C-92 554-99 546-105 538C-106 536-108 535-109 533C-118 523-123 509-127 496C-140 460-140 460-152 448C-153 447-153 446-154 446C-166 434-185 433-201 432C-203 433-203 433-206 434C-212 434-212 434-215 433C-216 431-218 430-219 429C-219 425-218 424-215 421C-211 418-208 416-202 416C-205 412-209 410-213 407C-228 396-243 382-247 363C-248 353-248 345-242 338C-229 327-217 324-201 326C-199 326-197 326-196 327C-195 327-194 327-193 327C-181 329-170 332-158 335C-157 335-156 335-156 335C-154 336-153 336-151 336C-147 337-143 338-139 338C-137 336-135 334-133 332C-132 331-131 330-129 329C-129 328-128 328-128 327C-125 325-123 323-120 321C-116 317-111 313-107 309C-104 307-104 307-102 306C-100 304-99 303-98 301C-98 300-98 299-97 299C-97 298-97 297-96 296C-96 295-95 293-94 291C-94 290-93 290-93 289C-87 275-78 263-67 252C-66 251-65 250-65 249C-58 243-52 237-45 232C-43 230-40 228-38 226C-38 225-38 225-39 224C-43 213-40 201-35 192C-26 174-9 165 9 159C14 157 18 156 23 155C22 154 21 154 20 154C3 148-12 141-23 127C-23 126-23 125-23 125C-27 126-30 128-34 130C-39 133-44 136-50 135C-54 134-58 133-61 131C-64 130-67 130-70 130C-93 130-111 117-129 104C-136 99-143 95-152 96C-162 100-165 111-169 120C-171 125-173 130-174 135C-175 137-176 139-177 142C-178 145-179 148-180 151C-185 169-192 186-198 204C-199 205-199 206-200 207C-201 209-202 212-203 215C-203 216-203 216-204 217C-209 230-209 230-212 233C-217 233-220 231-223 228C-224 225-224 224-223 222C-223 221-223 220-222 219C-222 219-222 218-221 217C-221 216-220 215-220 214C-207 189-199 162-191 136C-177 94-177 94-160 84C-153 80-144 81-137 82C-127 86-119 92-111 98C-86 116-86 116-74 115C-64 110-57 99-51 90C-51 89-50 88-50 87C-46 81-45 76-47 68C-49 52-49 35-46 18C-46 18-46 17-46 16C-45 9-42 4-36 0C-25-5-12-2 0 0ZM61 163C60 163 60 163 59 163C57 163 56 163 54 164C52 164 49 164 47 165C5 170 5 170-12 183C-13 183-13 183-14 184C-22 190-26 199-28 209C-28 211-28 213-28 215C-26 216-26 216-23 215C-22 214-21 214-20 214C-6 210 6 211 20 216C21 216 21 216 22 216C37 221 52 227 63 239C66 239 69 239 72 238C73 238 74 238 75 238C80 238 85 238 90 237C130 234 171 234 211 239C214 240 216 240 219 240C245 243 271 248 298 252C319 256 341 259 363 262C364 263 365 263 367 263C370 263 374 264 377 264C378 264 379 265 380 265C385 265 389 266 394 266C393 258 392 250 391 242C391 241 391 240 390 239C389 231 389 231 388 228C384 228 380 230 376 232C361 237 348 238 333 234C332 234 330 234 329 233C303 227 272 217 256 193C255 191 254 189 253 187C253 186 253 186 251 183C250 181 248 178 247 176C246 176 245 177 244 177C236 181 228 185 220 188C219 188 219 188 217 189C196 197 172 192 152 184C145 180 145 180 142 179C137 176 133 175 127 176C126 176 126 176 124 176C121 177 119 177 117 180C115 186 115 191 115 197C114 197 113 197 112 197C112 196 112 195 112 195C110 193 110 193 108 191C108 191 107 190 106 190C103 187 100 185 97 182C94 180 92 178 90 176C88 174 86 172 84 171C84 170 83 169 82 168C74 162 70 161 61 163ZM172 166C172 169 173 170 175 172C178 174 178 174 181 173C184 172 186 170 189 169C186 166 183 166 179 166C179 166 178 166 177 166C175 166 174 166 172 166ZM304 174C306 187 314 200 322 210C326 212 328 212 331 211C344 206 355 195 362 184C362 183 362 182 362 182C356 181 350 180 345 179C343 179 341 179 339 178C327 177 316 175 304 174ZM447 195C446 221 449 248 456 274C461 274 466 274 471 275C473 272 474 269 476 267C477 265 478 263 480 261C484 254 488 248 492 241C495 237 497 233 500 229C505 231 509 234 514 238C516 239 516 239 518 238C525 235 531 226 536 220C538 217 538 217 540 214C542 211 542 209 542 205C541 205 540 204 538 204C508 202 477 200 447 195ZM561 208C557 215 559 223 561 230C561 231 561 231 562 233C565 247 568 262 577 274C577 274 577 274 578 276C589 290 609 292 625 295C632 296 639 297 644 304C646 307 647 310 647 314C647 314 647 314 647 317C647 317 647 317 647 319C647 320 647 321 647 322C647 324 647 326 647 329C658 327 669 324 676 315C677 313 678 312 679 311C679 310 679 310 680 309C686 297 686 285 686 272C686 272 686 272 686 269C686 259 685 249 678 241C677 241 677 241 676 240C675 239 674 238 673 237C670 235 667 233 664 232C660 230 656 227 652 224C643 216 635 213 624 209C624 209 624 209 622 209C609 205 596 204 584 204C582 204 581 204 579 204C565 204 565 204 561 208ZM-20 234C-18 237-14 239-10 241C-9 241-9 241-8 242C3 248 14 250 26 251C25 243 22 237 16 233C4 226-8 228-20 234ZM545 232C543 233 542 235 540 237C536 242 536 242 534 244C533 246 533 246 533 249C549 258 549 258 552 258C550 249 548 240 546 232C546 232 545 232 545 232ZM-51 256C-57 262-62 268-66 275C-67 276-67 277-68 278C-77 291-83 305-85 321C-85 322-84 323-84 324C-84 324-83 324-82 324C-66 325-49 327-32 328C-29 329-25 329-21 329C3 332 3 332 14 333C17 334 21 334 25 334C32 312 37 286 31 264C29 262 26 262 24 262C4 261-13 255-28 242C-35 237-47 252-51 256ZM552 260C552 260 552 260 551 262C548 268 544 274 540 280C537 284 537 284 537 287C538 287 539 287 540 287C551 289 563 291 574 294C574 293 574 293 573 292C566 284 560 276 556 266C554 261 554 261 552 260ZM86 286C86 296 87 306 87 317C99 315 99 315 103 314C122 311 138 315 154 326C157 329 160 331 163 334C165 336 166 337 168 338C175 344 175 344 176 347C177 347 177 347 178 347C178 347 178 348 179 348C180 351 181 352 183 354C187 357 190 361 192 366C194 368 196 369 199 369C201 369 202 370 204 370C212 371 221 373 230 375C230 375 231 375 232 375C237 376 243 377 248 378C284 386 319 391 355 395C370 397 386 399 401 401C438 405 474 409 512 412C520 412 529 413 538 414C542 414 546 415 550 415C549 412 547 409 546 406C540 393 539 377 543 363C544 358 547 352 552 350C552 349 552 348 552 348C551 348 551 348 548 347C536 345 523 343 511 340C510 340 509 340 509 340C501 338 494 337 486 335C472 332 457 330 442 329C432 328 421 327 410 325C409 325 408 325 408 325C395 323 383 321 371 319C364 318 358 317 351 317C330 314 310 310 289 307C287 307 286 306 284 306C283 306 283 306 282 306C278 305 274 304 270 304C270 304 269 303 268 303C246 299 225 296 203 293C202 293 201 292 201 292C182 290 164 288 146 287C143 287 140 286 137 286C120 285 103 286 86 286ZM595 305C598 307 601 308 604 310C614 314 623 320 630 328C631 325 631 323 631 321C631 320 631 319 631 318C631 315 631 314 629 312C619 307 606 304 595 305ZM-231 346C-234 351-234 354-233 360C-230 369-225 377-218 385C-217 385-215 386-214 387C-213 388-213 389-212 391C-206 396-199 400-192 404C-191 405-190 405-190 405C-183 408-178 408-172 406C-169 405-167 404-165 404C-164 403-163 403-162 402C-146 396-127 388-116 375C-116 374-116 373-116 372C-118 370-118 370-121 368C-125 365-128 363-131 360C-140 352-152 349-163 346C-165 346-166 346-168 345C-172 344-176 344-180 343C-181 342-182 342-183 342C-192 340-200 339-209 339C-210 339-211 339-212 339C-219 339-226 341-231 346ZM124 354C125 356 125 356 127 356C128 356 128 357 129 357C130 357 131 357 132 358C133 358 134 358 135 358C136 358 137 359 138 359C143 360 147 361 152 362C152 360 151 358 151 356C151 355 151 353 150 352C150 350 150 350 149 349C140 348 132 351 124 354ZM558 364C553 372 553 382 555 391C557 398 559 403 564 408C569 411 573 411 578 410C589 405 598 391 605 381C605 380 605 379 605 378C603 376 603 376 600 375C599 374 598 373 597 373C597 372 596 372 596 372C594 371 592 369 590 368C589 368 588 367 588 367C586 366 585 365 584 364C574 358 566 354 558 364ZM691 374C689 374 687 375 685 375C673 376 664 376 655 385C646 395 629 399 616 401C608 402 604 404 599 411C594 416 588 420 581 423C577 426 575 429 573 434C573 434 573 435 572 436C570 441 570 441 570 444C571 444 571 444 572 444C587 450 601 457 614 465C624 471 634 476 644 481C644 481 644 481 647 482C662 489 679 494 695 498C696 498 697 499 698 499C707 501 707 501 711 501C713 498 714 496 716 494C717 493 717 492 718 491C719 489 720 487 722 485C723 483 724 482 724 481C742 454 758 422 752 389C750 383 747 379 742 376C736 373 729 372 722 372C722 372 721 372 720 372C710 373 701 373 691 374ZM-88 375C-88 377-89 380-89 383C-89 383-89 383-89 385C-89 387-89 389-89 391C-95 392-95 392-98 391C-99 389-99 388-100 387C-102 385-102 385-104 385C-105 385-105 386-106 386C-117 397-130 404-144 411C-146 412-148 413-150 414C-151 414-152 414-152 415C-154 416-154 416-155 418C-149 421-142 424-135 426C-134 426-134 426-133 427C-130 428-127 429-124 429C-124 427-124 426-124 425C-124 424-124 422-124 421C-124 420-124 419-124 418C-124 416-124 415-124 413C-124 412-123 412-123 412C-88 414-51 427-17 439C-14 440-12 440-9 441C-2 444 5 446 12 448C19 451 27 453 35 456C37 457 39 457 41 458C48 460 55 463 62 465C65 466 69 467 72 468C73 469 75 469 76 470C78 470 80 471 83 472C83 472 84 472 85 473C88 474 92 475 96 476C96 477 97 477 98 477C99 478 101 478 102 479C105 480 107 481 110 481C113 479 113 478 114 476C114 475 115 474 115 473C115 472 116 471 116 470C122 457 130 447 140 437C144 433 144 433 144 431C144 430 145 430 146 430C148 428 149 427 151 425C152 421 152 421 152 419C146 417 140 416 133 415C132 414 131 414 130 414C127 413 123 413 120 412C117 412 115 411 113 411C109 410 106 410 102 409C96 408 89 407 83 406C82 406 80 405 79 405C77 405 75 404 73 404C70 403 69 403 67 405C64 408 62 412 60 416C57 422 52 428 46 431C35 434 22 424 13 419C9 416 5 414 2 411C-1 409-1 409-4 407C-8 404-11 402-12 397C-13 392-11 387-10 383C-26 380-43 377-59 375C-60 375-61 375-61 375C-86 372-86 372-88 375ZM-139 437C-138 440-136 443-134 445C-124 461-118 479-112 497C-111 498-111 499-111 500C-110 503-109 505-108 508C-106 515-103 521-97 525C-93 527-90 528-86 528C-85 528-85 528-84 528C-82 529-81 529-79 529C-75 530-71 530-66 531C-66 531-65 531-64 532C-44 535-26 539-8 548C-6 549-4 550-1 551C8 555 17 559 25 564C31 567 37 570 43 573C45 574 47 574 49 575C72 586 95 596 119 605C122 606 125 607 128 608C155 618 183 628 212 635C213 635 214 635 215 635C246 643 278 647 309 652C320 653 330 655 341 657C354 659 366 661 379 662C380 662 380 662 383 663C390 664 398 665 406 666C407 666 407 666 408 666C416 667 425 668 433 669C434 669 435 669 436 669C454 671 472 671 490 671C562 672 562 672 592 681C595 682 597 682 601 681C603 679 603 679 604 676C607 672 609 669 613 666C613 666 613 667 614 668C615 671 617 675 619 679C619 679 619 679 620 681C620 682 621 682 621 683C621 684 622 684 622 685C623 687 623 687 626 689C645 681 658 657 665 639C668 633 670 628 672 623C669 619 664 619 660 617C659 617 658 617 657 617C647 614 641 616 632 619C631 619 630 620 629 620C618 624 607 629 598 636C596 638 594 638 592 639C592 638 592 637 593 635C593 634 594 633 594 631C594 631 594 631 594 629C595 626 596 624 596 621C587 618 577 617 568 615C568 615 568 615 566 615C550 612 534 610 519 607C516 607 513 606 510 606C506 605 502 605 498 604C497 604 496 604 495 604C494 604 493 603 491 603C491 603 490 603 489 603C484 603 482 603 478 605C478 606 477 607 476 608C475 608 474 609 474 610C472 612 472 612 472 614C471 614 471 614 470 614C471 617 471 617 473 619C476 621 477 621 477 625C472 628 465 627 459 626C437 621 407 614 393 594C386 585 364 586 354 584C352 584 350 584 348 583C345 583 342 582 339 582C334 581 329 581 324 580C323 580 322 579 322 579C320 579 318 579 317 579C309 577 302 577 295 577C294 577 293 577 292 578C288 578 284 578 280 578C280 578 279 578 278 578C274 578 271 578 267 578C266 578 264 578 263 579C262 579 261 579 259 579C256 579 253 578 250 578C250 575 251 572 251 570C246 568 241 567 235 566C233 566 231 566 230 565C228 565 227 565 226 565C165 557 106 540 48 519C33 513 18 508 2 503C1 502 0 502-1 502C-16 497-31 492-46 487C-57 484-69 480-80 477C-85 475-89 474-94 472C-94 472-94 472-97 471C-99 470-101 470-103 469C-104 469-105 469-106 468C-107 468-107 468-109 467C-110 467-110 467-111 467C-112 466-113 466-114 466C-116 465-116 465-117 461C-118 459-118 458-118 456C-121 445-121 445-122 443C-125 441-127 441-130 440C-131 439-132 439-134 439C-134 438-134 438-137 438C-138 437-138 437-139 437ZM224 445C222 446 220 446 218 446C216 447 215 447 214 447C212 448 211 448 210 448C207 450 207 450 205 453C205 454 204 455 204 457C203 458 203 459 202 461C202 463 201 464 201 466C197 477 192 488 188 499C191 502 195 502 199 503C200 503 200 503 201 503C204 504 207 504 210 505C212 505 214 506 216 506C229 509 242 511 255 513C256 513 256 514 257 514C259 514 261 514 263 515C265 515 266 515 267 515C270 516 271 516 274 515C275 513 275 513 277 512C277 511 278 510 278 510C279 509 279 509 280 508C280 507 281 507 281 506C291 493 304 476 302 459C297 452 289 449 281 447C281 447 280 447 279 446C261 442 242 441 224 445ZM315 446C316 449 317 452 318 456C323 466 326 477 328 488C328 489 328 490 329 491C331 503 330 516 330 529C331 529 331 529 332 529C341 516 348 500 355 486C355 485 356 485 356 484C357 483 357 481 358 480C362 473 362 473 364 471C380 466 404 479 418 487C424 490 425 494 426 500C426 500 426 500 427 503C429 510 430 517 431 525C432 525 432 526 432 527C432 528 432 529 432 529C432 530 433 531 433 532C433 532 433 532 434 535C437 540 443 540 449 541C450 541 451 541 453 541C456 542 460 542 463 543C466 544 470 544 473 545C494 549 494 549 502 550C505 545 508 540 511 536C517 528 523 520 529 513C529 512 529 512 531 510C539 500 551 492 564 490C571 490 577 491 584 494C590 496 592 496 598 493C607 490 607 490 613 491C621 494 627 500 633 506C633 506 634 507 635 507C640 512 644 518 649 524C649 524 649 524 650 525C656 532 661 540 667 547C670 552 670 552 673 553C673 552 674 551 674 551C679 542 685 535 691 527C694 524 696 521 698 518C698 517 698 517 700 515C702 513 702 513 703 510C702 510 701 509 701 509C667 504 636 493 607 474C601 470 594 467 587 464C584 462 580 460 577 459C574 457 570 456 566 455C565 462 563 469 562 477C559 476 555 475 552 474C541 472 529 471 518 469C517 469 516 469 516 469C507 468 498 468 490 467C475 466 461 464 447 463C446 463 445 462 443 462C400 457 358 451 315 446ZM539 521C518 546 518 546 518 552C527 554 537 555 546 557C560 559 575 561 589 564C590 564 590 564 593 564C594 565 595 565 596 565C599 566 599 566 602 566C601 560 599 555 595 550C595 550 594 549 594 548C586 536 577 526 567 517C568 513 570 511 572 508C573 507 573 507 574 506C574 506 574 505 575 505C574 504 574 504 570 503C557 504 547 511 539 521ZM701 535C699 537 698 538 696 540C696 541 695 542 695 542C684 557 684 557 684 559C685 559 687 560 688 560C689 560 690 561 691 561C693 562 693 562 697 562C699 553 701 544 703 535C702 535 702 535 701 535ZM673 603C672 603 671 603 670 604C669 604 669 604 668 605C668 606 668 607 668 608C671 608 674 608 678 609C681 604 681 604 681 601C678 601 676 602 673 603ZM685 625C682 629 680 634 678 639C672 653 665 666 656 679C655 680 654 681 654 682C642 697 626 705 609 714C607 715 605 717 602 718C602 718 601 719 600 719C594 722 589 726 584 730C580 732 576 735 572 737C572 732 573 728 573 724C545 720 518 720 490 724C482 725 474 726 466 727C465 727 464 727 463 727C455 728 448 728 441 728C444 730 446 732 450 734C462 742 472 753 479 766C482 764 485 763 488 762C488 762 488 762 490 761C491 760 493 760 494 759C505 755 515 754 526 754C527 754 528 754 528 754C539 754 549 755 559 758C560 758 561 758 562 758C572 761 582 766 590 772C593 775 593 775 595 775C595 775 595 776 595 777C596 778 597 779 598 780C605 787 610 794 615 803C616 803 616 802 617 802C641 800 662 803 686 809C696 812 706 814 716 809C732 798 735 773 739 756C739 756 739 756 739 754C742 740 745 726 747 712C747 711 748 710 748 709C749 699 751 689 752 679C752 679 752 678 752 677C753 668 754 660 749 653C735 637 705 628 685 625ZM307 708C307 708 308 709 308 709C315 719 321 729 327 740C327 739 327 739 330 737C331 736 332 735 334 734C335 733 335 732 336 732C343 726 351 721 360 717C360 716 360 716 359 715C356 714 356 714 353 714C352 714 351 713 349 713C348 713 347 713 346 713C343 712 340 712 338 712C336 711 335 711 334 711C328 710 322 709 317 708C313 708 310 708 307 708Z" fill="var(--p1,#37BDF7)" transform="translate(247.125,76.375)"/><path d="M0 0C1 0 3 1 4 1C5 2 6 2 7 2C9 3 10 4 12 6C12 9 12 11 12 13C12 14 12 15 12 16C12 23 11 30 8 37C9 37 10 37 10 37C16 38 22 38 27 39C42 40 58 42 73 42C74 42 75 42 76 42C81 43 86 43 92 43C93 43 95 43 96 43C98 43 100 43 102 43C103 43 103 43 104 43C108 43 110 41 113 38C117 35 121 35 125 35C131 35 135 37 139 41C140 43 140 43 140 45C141 45 142 45 142 45C176 44 214 51 241 73C243 77 242 80 241 84C240 103 242 119 248 136C250 143 251 149 251 157C251 157 251 157 251 159C251 161 251 162 251 164C251 166 251 169 251 171C251 185 251 199 244 210C244 211 244 212 243 213C240 218 237 222 233 226C233 226 233 226 231 228C221 237 207 241 194 242C194 244 194 244 195 246C196 246 197 247 198 247C200 249 200 249 201 251C202 251 202 252 203 253C204 254 206 256 207 257C209 261 212 263 216 263C224 263 232 262 241 261C286 254 286 254 304 265C313 271 316 279 318 290C321 321 309 353 292 379C291 381 290 383 289 384C286 390 282 395 279 400C278 400 277 401 277 402C276 403 275 405 273 407C270 412 268 416 267 422C267 424 266 426 266 428C266 430 265 432 265 435C263 449 260 464 255 478C255 479 254 480 254 481C252 486 250 492 248 497C246 502 245 506 243 511C243 511 243 511 245 511C268 516 299 527 313 546C319 559 317 572 315 585C315 586 315 586 315 589C313 606 310 622 307 638C307 639 307 639 307 640C295 703 295 703 277 717C264 725 252 724 239 721C237 721 236 720 234 720C231 719 227 718 224 718C222 717 219 717 217 716C207 714 197 712 186 711C185 711 184 711 183 711C182 711 181 711 180 711C180 712 181 713 181 713C182 717 182 719 181 722C178 724 178 724 176 725C176 726 177 727 177 729C177 730 178 732 178 734C178 734 178 735 178 736C179 737 179 738 179 738C179 739 179 740 180 741C183 758 183 778 177 795C177 796 176 797 176 799C170 815 170 815 162 819C145 821 126 816 111 806C107 803 105 799 103 794C103 793 102 793 102 792C100 771 107 751 116 733C122 723 122 716 119 705C115 693 111 680 101 671C98 670 98 670 94 670C87 673 81 679 75 684C73 686 73 686 70 688C68 690 67 691 65 694C64 694 64 695 63 696C59 701 54 706 50 712C48 714 47 715 45 717C44 717 44 717 43 717C43 718 43 719 44 720C46 740 44 763 33 779C30 783 29 783 24 783C8 783-15 781-28 770C-31 765-31 761-31 755C-29 744-25 733-20 722C-12 703-18 685-25 667C-35 641-35 641-45 634C-52 633-59 640-64 644C-71 650-75 657-80 664C-80 665-81 666-81 667C-86 675-89 683-93 692C-95 697-97 702-100 707C-104 713-104 720-104 727C-104 733-104 739-107 744C-110 746-114 746-118 746C-119 746-120 746-121 746C-121 746-121 746-123 746C-120 744-118 742-114 741C-110 740-110 740-109 739C-109 737-109 736-109 734C-109 733-109 732-109 731C-109 730-109 728-109 727C-109 726-109 725-109 724C-109 721-109 719-109 716C-109 712-109 709-109 705C-109 702-109 700-109 697C-109 697-109 697-109 694C-109 688-109 684-112 679C-112 676-112 676-112 674C-113 670-114 667-116 663C-116 662-117 660-117 659C-118 655-118 655-119 653C-120 650-121 648-121 645C-122 643-122 643-123 641C-124 638-124 637-124 634C-123 635-122 636-121 637C-121 637-120 636-120 636C-111 627-101 620-90 614C-107 612-124 609-141 607C-141 607-141 607-139 610C-145 608-145 608-147 607C-147 607-147 607-146 605C-147 602-147 602-148 601C-154 598-159 595-165 592C-165 592-165 592-168 590C-173 588-177 586-183 585C-189 583-193 580-197 575C-198 574-198 574-199 573C-201 570-201 566-200 562C-200 562-200 561-200 560C-200 552-198 547-193 542C-191 542-191 542-188 542C-187 542-186 542-184 543C-179 543-173 544-167 545C-166 545-165 545-163 545C-161 546-158 546-155 547C-152 547-149 548-145 548C-133 550-120 552-108 554C-95 556-82 558-70 560C-69 560-67 560-66 560C-58 561-51 562-43 563C-42 563-41 563-41 563C-32 564-24 565-16 566C-15 566-15 566-13 566C5 568 23 568 42 568C113 569 113 569 143 578C146 579 148 579 152 578C154 575 154 575 156 572C160 566 160 566 164 564C164 564 165 565 165 565C166 568 167 570 168 572C169 573 169 574 170 575C172 578 174 582 176 586C193 580 203 562 211 547C215 539 219 530 222 521C217 519 212 517 207 516C206 515 205 515 203 515C196 513 190 516 183 518C182 519 181 519 180 519C169 523 158 528 149 536C147 537 147 537 143 537C143 533 144 529 146 524C146 523 146 522 146 521C146 521 146 521 147 519C132 516 117 514 102 512C101 512 101 511 100 511C94 510 88 510 82 509C79 508 76 508 73 508C71 507 68 507 66 506C65 506 63 506 62 506C61 506 60 506 59 506C59 505 58 505 57 505C55 502 56 498 56 494C56 494 56 493 56 492C55 486 57 482 61 478C63 476 63 476 65 474C66 474 67 473 67 472C71 470 74 470 78 470C80 470 81 470 83 470C85 470 88 470 90 470C92 470 95 470 97 469C98 469 98 469 99 469C103 469 105 469 108 468C112 465 116 466 120 466C121 466 122 466 123 466C125 465 127 465 129 465C132 466 135 465 138 465C140 465 141 465 143 465C144 465 145 465 146 465C152 465 156 467 161 471C163 474 163 474 164 476C166 481 169 485 172 489C173 491 174 492 175 494C177 497 179 499 182 502C185 504 187 506 189 508C193 510 197 510 201 509C205 507 208 506 212 504C215 502 217 501 221 501C226 499 230 497 234 494C235 494 236 494 237 493C245 489 245 489 247 487C247 485 247 485 247 482C247 482 247 482 247 479C247 477 247 477 245 475C243 475 243 475 240 475C235 474 235 474 233 472C233 472 233 472 231 469C230 467 229 466 228 464C225 460 222 456 220 451C220 450 221 450 221 449C222 450 223 450 224 451C224 451 224 451 225 449C226 446 227 444 229 442C229 441 230 440 231 440C231 439 232 438 232 437C233 436 234 436 234 435C236 432 238 430 240 427C241 425 242 424 244 422C245 420 247 418 248 416C250 413 252 411 254 408C253 408 253 408 252 408C219 405 186 392 158 373C152 369 145 366 138 363C135 362 133 361 130 359C126 357 122 355 117 353C117 354 117 354 117 355C116 362 115 368 113 375C107 375 102 374 96 373C88 371 80 370 72 369C70 369 67 369 65 368C57 368 49 367 41 366C26 365 12 364-2 362C-4 362-5 362-6 362C-11 361-17 360-22 360C-30 359-39 358-48 357C-55 356-62 355-69 354C-73 353-77 353-82 352C-86 352-90 352-94 351C-96 351-97 351-99 350C-108 349-114 347-121 340C-122 339-123 339-124 338C-127 336-128 335-130 332C-133 326-138 323-144 320C-146 319-147 318-149 317C-153 314-158 311-163 310C-166 309-168 308-171 307C-173 306-175 306-177 306C-179 305-179 305-181 304C-184 303-187 303-190 303C-198 302-198 302-201 300C-204 296-204 294-204 290C-204 289-204 288-204 287C-204 285-204 285-203 283C-199 280-192 281-187 282C-187 282-186 282-185 282C-172 282-160 283-148 286C-130 289-112 291-94 293C-79 294-63 296-48 298C-15 302 18 305 51 308C54 308 57 308 60 309C61 309 61 309 62 309C75 310 88 311 101 313C101 312 100 312 100 311C99 310 99 309 98 308C98 307 97 306 96 306C90 294 89 278 92 265C93 259 96 253 101 248C102 248 102 248 103 248C103 247 103 247 103 246C102 246 102 246 101 246C92 245 84 244 76 242C73 242 71 241 69 241C61 239 53 238 45 236C26 232 8 230-12 228C-21 227-30 226-39 225C-40 224-41 224-41 224C-54 223-66 221-78 219C-85 218-91 217-98 216C-118 213-139 210-160 206C-162 206-163 206-165 205C-165 205-166 205-167 205C-171 204-175 204-178 203C-179 203-179 203-181 203C-202 199-224 195-246 192C-246 192-246 192-248 192C-266 189-284 187-303 186C-306 186-309 186-312 186C-328 185-345 185-362 185C-362 195-362 205-362 215C-358 214-355 213-351 212C-329 208-312 212-294 224C-292 226-290 227-288 229C-288 229-288 230-288 230C-288 230-288 230-290 230C-291 230-292 230-292 230C-293 230-293 230-295 231C-297 231-297 231-299 233C-299 235-299 235-299 238C-299 238-299 238-299 240C-299 243-299 243-298 245C-295 251-296 256-296 262C-296 263-296 265-296 266C-296 269-296 271-296 274C-296 278-296 281-296 284C-296 288-296 291-296 294C-296 295-296 297-296 298C-296 299-296 299-296 301C-296 302-296 303-296 304C-296 307-296 307-297 309C-300 311-302 310-305 310C-305 310-305 310-308 309C-311 307-313 307-316 307C-323 306-327 302-332 297C-334 294-337 290-339 287C-340 285-340 285-343 283C-346 283-346 283-349 283C-350 283-351 283-352 283C-355 283-357 283-360 283C-361 282-362 282-363 282C-364 282-365 282-366 282C-369 282-369 282-371 281C-372 279-372 277-372 275C-372 274-372 273-372 273C-372 272-372 271-372 270C-372 269-372 269-372 268C-372 263-371 260-369 255C-369 252-369 252-368 248C-368 242-368 242-366 239C-364 233-365 228-365 223C-365 222-365 220-365 219C-365 217-365 214-365 212C-365 208-365 204-365 200C-365 198-365 196-365 193C-365 193-365 193-365 190C-365 184-365 180-368 175C-369 173-369 173-369 171C-370 167-370 167-371 165C-372 163-372 163-373 159C-374 155-376 152-378 149C-380 146-382 144-384 141C-385 139-385 139-388 137C-388 137-388 137-387 135C-387 135-386 136-386 136C-383 136-380 136-377 136C-376 136-375 136-374 136C-369 135-364 135-359 134C-319 131-278 132-238 137C-235 137-233 137-230 138C-204 141-177 145-151 150C-124 154-96 158-69 162C-64 163-60 163-55 164C-55 161-56 158-56 155C-53 159-52 161-52 166C-51 170-50 173-48 177C-48 178-48 179-47 180C-46 186-43 192-40 197C-40 198-39 199-39 200C-36 206-34 210-29 214C-28 215-28 215-27 216C-24 218-22 217-18 218C-13 218-10 219-5 221C0 222 3 221 7 218C8 218 9 217 10 217C13 215 15 213 16 209C16 202 13 196 10 190C8 186 7 183 6 179C6 179 6 179 5 177C4 174 4 171 4 167C4 167 4 166 4 165C4 163 4 162 4 160C6 164 7 167 7 172C12 173 17 174 22 172C26 168 28 163 31 158C33 154 35 150 38 147C41 141 45 135 48 130C49 128 49 128 52 126C53 127 54 127 55 128C57 129 58 130 59 131C60 132 61 132 61 133C62 133 63 133 63 134C64 134 65 135 65 135C68 136 69 136 71 135C77 131 81 124 86 118C88 115 88 115 90 113C92 109 93 107 93 103C93 103 93 103 90 103C80 103 70 103 60 102C59 102 58 102 57 102C45 101 33 99 21 97C20 97 19 97 18 97C11 96 5 95-2 93C-2 97-2 101-2 105C-4 103-4 102-4 98C-4 97-4 96-4 95C-4 95-4 95-4 92C-4 91-4 90-4 89C-4 86-4 84-4 82C-4 78-4 75-4 71C-4 69-4 67-4 64C-4 63-4 62-4 61C-4 56-4 52-1 47C-1 45-1 45-1 43C-1 42-1 42-1 40C-1 40-1 39 0 38C0 30 0 30 2 26C4 22 3 18 3 14C3 14 3 14 3 12C3 7 3 4 0 0ZM112 106C108 113 110 121 112 129C112 129 112 129 113 132C116 145 119 161 128 172C128 172 128 172 129 174C140 188 160 190 176 193C183 194 190 196 195 202C197 206 198 208 198 212C198 213 198 213 198 215C198 215 198 215 198 218C198 219 198 219 198 220C198 223 198 225 198 227C209 225 220 222 228 213C228 212 229 210 230 209C230 209 230 209 231 207C237 196 237 183 237 171C237 170 237 170 237 167C237 157 236 147 229 140C229 139 229 139 227 138C226 137 225 136 224 135C222 133 219 132 215 130C211 128 207 125 203 122C195 115 186 111 175 108C175 108 175 108 173 107C160 103 148 103 135 102C133 102 132 102 130 102C116 102 116 102 112 106ZM96 130C95 132 93 134 92 135C87 141 87 141 85 143C84 144 84 144 84 147C100 156 100 156 103 156C102 147 99 139 97 130C97 130 96 130 96 130ZM103 158C103 158 103 158 102 160C99 167 95 173 91 179C88 183 88 183 88 185C89 185 90 185 91 186C103 187 114 190 125 192C125 192 125 192 124 191C117 182 111 174 107 164C105 159 105 159 103 158ZM146 203C149 205 152 207 156 208C165 213 174 218 181 226C182 224 182 222 182 219C182 218 182 217 182 217C182 214 182 212 180 210C170 205 157 203 146 203ZM-325 252C-324 254-324 254-322 255C-321 255-320 255-320 255C-319 255-318 256-317 256C-316 256-315 256-314 257C-313 257-312 257-311 257C-306 258-302 259-297 260C-297 258-298 256-298 254C-298 253-298 252-298 251C-299 248-299 248-300 247C-309 246-317 249-325 252ZM109 262C104 270 104 280 106 289C108 296 110 301 115 306C120 309 124 309 129 308C140 303 150 289 156 279C156 278 156 277 156 276C154 275 154 275 152 273C151 272 150 272 148 271C148 271 147 270 147 270C145 269 143 268 141 266C140 266 140 266 139 265C137 264 136 263 135 262C125 257 117 252 109 262ZM242 273C240 273 238 273 236 273C224 274 215 275 206 284C197 293 181 297 168 299C159 300 155 302 150 309C145 314 139 318 132 322C128 324 127 328 125 332C124 333 124 334 124 334C121 340 121 340 121 342C122 342 122 342 123 343C138 348 152 355 166 363C175 369 185 374 195 379C196 379 196 379 198 381C214 387 230 392 246 396C247 397 248 397 249 397C258 399 258 399 262 399C264 397 266 395 267 392C268 391 268 391 269 390C270 388 272 385 273 383C274 382 275 380 276 379C293 352 309 320 303 287C301 281 299 277 293 274C287 271 280 271 274 271C273 271 272 271 271 271C261 271 252 272 242 273ZM252 433C250 435 249 437 247 439C247 439 246 440 246 441C235 455 235 455 235 457C236 458 238 458 239 458C240 459 241 459 242 459C244 460 244 460 248 460C250 451 253 442 254 433C253 433 253 433 252 433ZM224 501C223 501 222 502 221 502C221 502 220 503 219 503C219 504 219 505 219 506C222 506 226 507 229 507C232 502 232 502 232 499C229 499 227 500 224 501ZM236 523C233 528 231 532 229 537C223 551 216 565 207 577C206 578 206 579 205 580C193 595 177 603 161 612C158 614 156 615 154 616C153 617 152 617 151 617C145 621 140 624 135 628C131 631 127 633 123 635C123 631 124 626 124 622C96 619 69 618 41 622C33 624 25 625 17 625C16 625 15 625 14 625C6 626-1 626-8 626C-5 629-3 631 1 633C13 640 23 651 30 664C33 663 36 662 39 660C39 660 39 660 41 659C42 659 44 658 45 658C56 653 66 653 78 653C78 653 79 653 80 653C90 653 100 653 110 656C111 656 112 657 113 657C123 659 133 664 141 671C144 673 144 673 146 673C146 674 146 674 146 675C147 676 148 677 149 678C156 685 161 693 166 701C167 701 167 701 168 701C192 698 214 702 237 708C247 710 257 712 267 707C283 697 286 672 290 654C290 654 290 654 290 652C293 638 296 624 298 610C299 609 299 608 299 607C301 597 302 587 303 578C303 577 303 576 303 575C304 566 305 559 300 551C286 535 256 526 236 523Z" fill="var(--p1,#37BDF7)" transform="translate(696,178)"/><path d="M0 0C7 2 12 4 16 11C21 24 14 43 9 55C8 57 7 60 6 62C6 63 5 63 5 64C5 65 4 66 4 66C3 69 3 71 3 74C4 75 4 75 4 77C4 78 4 79 4 80C5 81 5 82 5 83C5 86 6 88 6 91C7 91 8 91 8 90C26 86 44 86 62 85C62 85 62 85 64 85C67 85 70 85 72 85C73 85 74 85 75 85C78 85 82 85 85 86C85 85 85 85 85 84C86 84 86 84 87 84C89 81 89 79 90 75C90 74 90 73 90 73C90 72 90 72 90 70C90 68 90 66 91 64C91 63 91 63 91 61C93 37 93 37 101 30C110 24 122 27 131 28C152 33 152 33 160 38C163 43 164 47 163 52C161 62 157 73 152 82C151 85 151 87 150 90C151 90 151 90 152 90C161 91 170 92 178 93C180 93 181 94 183 94C201 96 220 99 238 102C238 101 238 100 239 99C240 92 242 86 245 79C246 78 246 77 247 76C250 72 253 69 258 67C269 66 279 68 289 71C291 72 293 72 295 73C299 74 301 74 305 78C306 82 307 85 306 90C306 91 306 92 306 92C306 97 305 100 303 105C303 108 303 111 302 114C302 116 302 117 302 119C302 119 302 119 302 121C302 123 302 123 300 126C298 130 299 135 299 140C299 141 299 142 299 143C299 146 299 148 299 150C299 154 299 157 299 161C299 163 299 165 299 167C299 168 299 168 299 171C299 176 299 181 301 186C301 189 302 192 302 195C302 195 302 195 302 198C302 199 302 199 302 202C303 210 304 217 305 224C306 231 306 237 306 244C307 249 307 252 310 257C310 259 311 261 311 263C312 266 314 268 315 271C318 276 319 281 318 287C315 293 309 296 303 298C299 299 298 298 294 296C291 295 288 295 284 295C279 294 275 294 271 291C268 287 266 283 264 279C264 278 263 277 263 277C261 274 260 271 259 269C258 268 258 267 257 266C255 261 253 257 252 251C252 250 251 250 251 249C249 246 250 243 250 240C249 237 248 236 247 233C244 228 244 223 243 217C243 216 242 215 242 213C241 206 241 206 241 202C240 202 240 202 239 203C237 204 234 205 232 206C231 206 231 206 229 207C214 213 201 213 186 210C185 209 184 209 182 209C155 202 124 192 108 167C107 165 106 163 105 161C104 160 104 159 103 158C102 156 101 154 100 152C96 152 94 154 90 156C84 159 78 162 72 164C71 164 70 165 70 165C45 173 20 166-2 155C-3 155-4 154-5 154C-12 151-17 150-24 152C-26 152-27 152-28 152C-30 157-30 162-31 167C-31 169-31 169-32 171C-33 171-34 171-35 171C-35 170-35 170-35 169C-36 169-36 168-37 168C-39 167-41 166-42 164C-45 161-47 159-50 157C-51 156-52 156-53 155C-53 154-53 154-53 153C-54 153-54 153-55 152C-58 151-60 148-62 146C-72 137-72 137-77 137C-78 137-78 137-79 137C-82 137-82 137-84 137C-86 135-86 134-87 131C-86 124-83 118-80 112C-79 111-79 109-78 108C-74 101-71 95-65 90C-65 90-65 90-63 88C-60 86-57 86-53 86C-53 86-53 86-51 88C-51 86-51 85-51 83C-51 82-51 81-51 80C-51 77-51 77-52 74C-55 70-54 66-54 61C-54 60-54 59-54 58C-54 56-54 54-54 52C-54 49-54 46-54 42C-54 6-54 6-44-4C-33-13-12-4 0 0ZM25 140C26 143 26 144 28 146C31 148 31 148 34 147C37 146 39 145 42 143C39 140 36 141 32 140C32 140 31 140 30 140C28 140 27 140 25 140ZM157 148C159 161 167 175 175 185C179 186 181 186 185 185C197 180 208 169 215 158C215 157 215 157 215 156C209 155 204 154 198 154C196 153 194 153 192 153C180 151 169 149 157 148Z" fill="var(--p1,#37BDF7)" transform="translate(394,102)"/><path d="M0 0C9 1 19 2 28 3C30 4 32 4 35 4C53 8 70 13 87 21C89 22 91 23 93 24C102 28 111 32 119 36C125 40 131 42 137 45C139 46 141 47 143 48C166 58 189 68 213 77C216 78 219 79 222 80C264 96 306 108 350 116C349 118 348 120 347 122C344 127 343 131 344 137C343 138 343 139 343 139C343 145 344 148 348 152C350 154 350 154 353 155C354 156 355 156 356 157C356 157 357 158 358 158C359 158 359 159 360 159C362 160 362 160 365 161C371 162 377 165 382 168C383 168 384 169 386 170C395 174 395 174 397 177C397 180 397 180 396 182C397 182 397 182 400 183C407 185 410 192 414 198C415 199 415 200 416 201C418 205 420 209 421 214C421 216 422 218 423 220C423 221 424 223 424 224C425 226 425 228 426 230C427 233 428 235 428 238C429 240 429 240 430 242C431 245 431 248 432 251C432 254 432 254 434 256C436 262 435 267 435 272C435 273 435 275 435 276C435 278 435 281 435 283C435 287 435 291 435 295C435 297 435 300 435 302C435 303 435 304 435 306C435 307 435 308 435 309C435 310 435 311 435 312C435 314 434 315 432 317C430 318 430 318 428 318C426 319 424 319 422 320C410 325 387 320 375 316C371 314 371 314 370 312C370 307 371 302 372 297C379 262 369 221 350 191C349 190 348 189 347 188C347 187 347 187 347 186C345 185 345 185 343 185C334 189 328 195 323 203C321 206 321 206 318 208C313 208 311 207 306 204C304 203 302 202 299 201C293 208 289 215 285 224C284 226 283 228 283 230C273 250 274 265 279 286C282 302 282 302 280 307C264 313 242 308 226 301C220 298 216 294 214 288C214 287 213 285 213 284C213 283 212 281 212 280C212 279 212 278 212 278C208 264 204 250 198 237C196 234 195 230 193 226C190 220 187 213 184 206C184 205 183 204 183 203C172 180 172 180 165 174C158 174 153 178 148 183C144 187 140 191 137 196C137 197 136 197 136 198C135 198 135 198 134 198C134 199 133 199 133 200C132 203 131 205 129 207C129 208 128 209 128 210C127 211 127 212 126 212C125 214 124 216 123 218C122 219 121 220 121 221C119 225 116 228 114 232C83 283 83 283 72 286C67 285 65 281 62 278C63 274 65 272 68 268C80 257 88 244 96 231C97 229 98 227 99 226C102 222 104 218 106 215C114 202 122 190 132 178C133 177 133 176 134 176C136 173 139 170 142 168C144 166 144 166 144 162C145 159 145 159 147 157C151 155 156 156 160 156C161 156 162 156 163 156C172 156 179 157 187 159C188 159 188 159 189 160C216 166 238 181 253 205C255 209 258 214 260 219C262 222 264 226 266 229C266 228 267 227 267 226C272 214 278 203 285 192C284 192 283 191 282 191C282 191 282 191 279 189C278 189 277 188 276 188C273 186 273 186 272 184C272 181 274 180 276 177C277 176 277 176 278 175C282 171 287 168 291 165C290 165 290 165 287 164C241 153 241 153 220 146C219 146 219 146 218 145C197 139 177 132 157 123C156 123 155 122 154 122C133 113 113 103 94 90C84 84 74 78 64 73C51 66 38 59 27 50C27 50 27 49 27 49C28 49 29 48 30 48C33 47 33 47 34 46C34 42 34 40 32 37C30 34 28 32 25 30C22 27 20 25 18 22C17 21 16 20 15 19C8 14 3 8 0 0Z" fill="var(--p1,#37BDF7)" transform="translate(153,603)"/><path d="M0 0C1 0 2 0 2 0C9 1 16 3 21 8C29 29 21 57 13 76C10 83 13 89 14 96C14 97 15 98 15 99C17 109 21 118 26 127C27 128 27 128 27 129C30 133 32 135 36 137C42 137 46 134 50 131C51 131 52 131 52 130C60 125 67 118 74 112C74 111 75 111 75 110C84 101 91 94 91 81C91 73 91 65 92 58C92 58 93 58 93 58C93 58 93 58 93 61C93 65 93 70 93 74C93 76 93 78 93 80C93 82 93 85 93 88C93 88 93 88 93 90C94 95 94 98 97 103C97 106 97 106 97 109C97 110 97 111 97 112C97 113 97 114 97 115C96 114 95 113 94 113C90 112 88 112 85 114C77 121 72 128 68 138C67 139 67 140 66 141C63 148 61 153 62 161C62 162 62 163 62 164C61 164 61 164 59 164C55 165 51 165 47 166C46 166 44 166 42 166C22 169-5 172-19 190C-24 197-27 205-27 215C-27 214-27 214-24 214C-5 208 12 211 31 219C31 219 31 219 31 220C30 220 29 220 29 220C28 220 28 220 26 220C25 220 24 220 22 220C20 221 20 221 18 223C18 225 18 225 18 228C18 229 18 230 18 231C18 232 18 233 18 234C17 233 17 233 16 233C5 228-5 228-16 233C-18 234-18 234-19 235C-16 236-13 238-10 240C-9 240-9 240-8 241C3 247 14 249 26 251C25 250 25 248 24 247C23 244 23 244 24 241C27 247 29 252 31 259C31 259 32 260 32 260C33 263 33 266 33 269C33 271 33 272 33 273C33 273 33 273 33 276C33 276 32 276 32 276C31 272 31 268 30 264C29 264 27 263 26 263C6 262-13 257-28 243C-30 242-30 242-33 242C-46 249-57 262-65 275C-66 276-66 277-67 278C-76 291-82 305-84 321C-84 321-83 322-83 323C-81 323-81 323-79 323C-78 323-77 323-76 323C-75 323-74 323-73 324C-71 324-69 324-66 324C-66 324-66 324-63 324C-57 325-51 325-44 326C-43 326-42 326-41 326C-38 327-36 327-33 327C-29 328-25 328-21 328C-6 330 9 332 25 334C26 329 27 325 28 321C28 321 29 321 29 321C29 326 29 329 26 335C26 336 25 337 25 338C24 343 22 347 19 352C18 355 18 355 17 358C16 364 13 369 10 375C10 376 9 377 9 378C6 383 4 387 1 391C-2 394-3 396-3 400C-3 401-3 401-3 402C-2 405-1 407 1 409C1 409 0 410 0 411C-12 403-12 403-13 397C-14 392-12 387-10 383C-11 383-12 383-14 383C-18 383-23 382-28 381C-38 379-48 378-59 376C-60 376-60 376-61 376C-70 375-78 374-87 375C-87 376-87 377-87 378C-87 380-87 381-87 382C-87 383-87 383-88 385C-88 387-88 389-88 391C-91 393-91 393-93 392C-93 392-93 392-95 392C-96 391-97 391-98 391C-100 389-101 387-102 386C-106 387-108 389-111 392C-122 401-135 409-149 414C-151 415-153 416-155 417C-155 416-155 415-155 415C-155 414-155 414-156 412C-156 411-156 411-156 409C-156 407-156 407-158 405C-162 404-164 404-167 406C-171 408-173 408-177 408C-174 406-173 405-170 404C-151 398-131 390-117 375C-117 374-116 373-116 372C-117 371-118 371-118 371C-121 369-123 368-126 365C-143 350-164 347-185 343C-185 342-184 341-184 341C-184 335-185 333-188 329C-178 329-169 332-160 334C-157 335-155 335-153 336C-152 336-152 336-151 336C-147 337-143 338-139 338C-137 336-135 334-133 332C-132 331-131 330-129 329C-129 328-128 328-128 327C-125 325-123 323-120 321C-116 317-111 313-107 309C-104 307-104 307-102 306C-100 304-99 303-98 301C-98 300-98 299-97 299C-97 298-97 297-96 296C-96 295-95 293-94 291C-94 290-93 290-93 289C-87 275-78 263-67 252C-66 251-65 250-65 249C-58 243-52 237-45 232C-43 230-40 228-38 226C-38 225-38 225-39 224C-43 213-40 201-35 192C-26 174-9 165 9 159C14 157 18 156 23 155C22 154 21 154 20 154C3 148-12 141-23 127C-23 126-23 125-23 125C-27 126-30 128-34 130C-39 133-44 136-50 135C-54 134-58 133-61 131C-64 130-67 130-70 130C-93 130-111 117-129 104C-136 99-143 95-152 96C-162 100-165 111-169 120C-171 125-173 130-174 135C-175 137-176 139-177 142C-178 145-179 148-180 151C-185 169-192 186-198 204C-199 205-199 206-200 207C-201 209-202 212-203 215C-203 216-203 216-204 217C-209 230-209 230-212 233C-217 233-220 231-223 228C-224 225-224 224-223 222C-223 221-223 220-222 219C-222 219-222 218-221 217C-221 216-220 215-220 214C-207 189-199 162-191 136C-177 94-177 94-160 84C-153 80-144 81-137 82C-127 86-119 92-111 98C-86 116-86 116-74 115C-64 110-57 99-51 90C-51 89-50 88-50 87C-46 81-45 76-47 68C-49 52-49 35-46 18C-46 18-46 17-46 16C-45 9-42 4-36 0C-25-5-12-2 0 0Z" fill="var(--p1,#37BDF7)" transform="translate(247.125,76.375)"/><path d="M0 0C1 0 2 0 3 0C4 0 5 1 6 1C12 1 18 2 23 3C25 3 26 3 27 4C30 4 33 4 35 5C39 5 42 6 45 6C58 8 70 10 83 12C96 14 108 16 121 18C122 18 123 18 124 18C132 19 140 20 148 21C148 21 149 21 150 21C158 22 166 23 175 24C176 24 177 24 178 24C196 26 214 26 232 26C304 27 304 27 333 36C337 37 339 37 343 36C345 33 345 33 347 30C350 24 350 24 355 22C355 23 355 23 355 24C357 26 358 28 359 30C359 31 359 31 360 33C361 35 362 37 364 39C364 40 365 41 365 42C367 45 370 47 373 49C375 52 375 54 375 58C372 60 368 62 365 63C364 64 363 65 362 65C358 68 353 70 349 73C341 77 333 82 325 87C317 93 317 93 314 93C314 91 314 89 314 88C314 87 314 86 314 85C314 82 314 82 315 80C310 80 305 79 300 79C299 79 297 79 295 79C281 78 267 77 252 79C252 79 251 79 250 79C244 80 238 81 232 82C224 83 216 84 208 84C206 84 205 84 204 84C197 85 191 85 184 85C185 86 185 86 186 87C192 90 198 94 204 99C204 99 204 100 204 100C203 100 201 100 200 100C196 100 192 100 188 100C186 100 184 100 182 100C179 101 177 101 174 101C173 101 173 101 172 101C166 101 166 101 164 103C163 106 163 106 163 109C163 110 163 111 163 112C163 113 163 113 163 115C159 111 157 107 155 102C152 98 150 95 146 92C139 91 132 98 127 102C120 108 115 115 111 123C110 123 110 124 109 125C105 133 101 141 98 150C96 155 94 160 91 165C87 171 87 178 87 185C87 191 87 197 84 202C80 204 77 204 73 204C72 204 71 204 70 204C69 204 68 204 68 204C70 202 73 200 76 199C81 198 81 198 82 197C82 195 82 194 82 192C82 191 82 190 82 189C82 188 82 187 82 185C82 184 82 183 82 182C82 179 82 177 82 174C82 170 82 167 82 163C82 160 82 158 82 155C82 155 82 155 82 152C82 146 82 142 79 137C78 134 78 134 78 132C78 128 77 125 75 121C74 120 74 118 74 117C73 113 73 113 72 111C70 108 70 106 69 103C69 101 69 101 68 99C66 97 67 95 67 92C68 93 69 94 70 95C70 95 71 94 71 94C80 85 90 78 101 72C84 70 67 67 50 65C50 66 50 66 52 68C46 66 46 66 44 65C44 65 44 65 44 63C44 60 44 60 42 59C37 56 31 53 26 50C25 49 24 49 23 49C18 46 13 44 8 43C2 41-2 38-6 33C-7 33-7 32-8 31C-10 28-10 24-10 20C-10 20-10 19-10 18C-10 12-8 0 0 0Z" fill="var(--p2,#1F8FD0)" transform="translate(505.33966064453125,719.9557342529297)"/><path d="M0 0C3 0 5 1 8 1C34 4 60 9 86 13C114 18 141 22 169 25C173 26 178 27 183 27C182 24 182 21 182 18C184 22 186 24 186 29C186 33 187 36 190 40C190 41 190 43 190 44C192 50 195 55 197 60C198 62 198 63 199 64C203 72 203 72 206 75C209 78 209 79 210 82C210 83 210 84 210 84C210 86 210 86 208 88C197 89 187 86 176 85C173 84 169 84 165 83C164 83 163 83 162 83C156 82 150 81 144 80C118 77 93 72 68 68C65 67 62 67 59 66C58 66 57 66 57 66C35 62 13 59-8 55C-9 55-10 55-11 55C-29 52-47 50-65 49C-68 49-71 49-74 49C-91 48-108 48-124 48C-124 58-124 68-124 78C-121 77-117 76-113 75C-92 71-75 75-56 87C-54 89-52 91-50 92C-50 93-50 93-50 93C-51 93-51 93-52 93C-53 94-54 94-55 94C-55 94-55 94-57 94C-59 94-59 94-61 96C-62 98-62 98-62 101C-62 101-62 101-62 104C-61 106-61 106-60 109C-58 114-58 120-58 125C-58 127-58 128-58 129C-58 132-58 135-58 137C-58 141-58 144-58 148C-58 151-58 154-58 158C-58 159-58 160-58 161C-58 162-58 162-58 165C-58 166-58 167-58 168C-58 170-58 170-60 172C-62 174-64 174-67 173C-68 173-69 172-70 172C-73 170-75 170-78 170C-86 169-89 166-94 160C-97 157-99 154-101 150C-102 148-102 148-105 146C-108 146-108 146-111 146C-112 146-114 146-115 146C-117 146-120 146-122 146C-123 146-124 146-126 146C-127 146-128 146-129 146C-131 145-131 145-133 144C-135 142-135 141-135 138C-135 138-135 137-135 136C-135 135-135 134-135 133C-135 133-135 132-135 131C-135 126-134 123-131 118C-131 115-131 115-131 111C-131 105-131 105-129 102C-127 97-127 92-127 86C-127 85-127 84-127 83C-127 80-127 78-127 75C-127 71-127 68-127 64C-127 61-127 59-127 56C-127 55-127 54-127 53C-127 47-127 43-130 38C-131 36-131 36-131 34C-132 30-132 30-133 28C-134 26-134 26-135 23C-136 18-138 16-141 12C-143 10-145 7-146 4C-147 2-147 2-150 0C-150 0-150-1-149-2C-149-1-149-1-148-1C-146-1-143-1-140-1C-139-1-138-1-137-1C-132-1-127-2-122-2C-81-6-40-5 0 0ZM-87 115C-86 117-86 117-84 118C-84 118-83 118-82 119C-81 119-80 119-79 119C-78 119-77 120-76 120C-75 120-74 120-73 121C-69 122-64 123-59 123C-60 121-60 119-60 117C-61 116-61 115-61 114C-61 111-61 111-62 110C-71 110-79 112-87 115Z" fill="var(--p2,#1F8FD0)" transform="translate(458.43341064453125,314.6900634765625)"/><path d="M0 0C6 3 12 6 14 13C14 15 14 16 15 18C15 19 15 19 15 20C17 28 19 35 20 42C20 43 20 44 20 45C21 46 21 46 21 47C21 50 22 52 23 54C26 55 26 55 29 56C29 56 29 56 32 57C34 57 35 57 36 57C37 57 39 58 40 58C44 59 47 59 50 60C54 60 57 61 61 62C81 65 81 65 89 66C90 66 90 65 90 64C98 52 106 41 115 30C116 29 117 29 117 28C126 17 137 9 152 7C159 7 165 8 171 10C177 12 180 12 186 10C195 6 195 6 200 7C208 11 214 16 220 22C221 23 222 24 222 24C228 30 233 35 237 41C238 42 238 42 239 43C241 47 244 50 247 54C248 55 249 57 251 58C254 63 257 68 259 74C261 77 263 80 265 83C266 85 266 85 267 87C269 89 270 91 271 92C274 93 276 93 279 93C281 93 281 93 283 95C285 97 285 98 285 101C285 102 285 102 285 104C284 108 282 108 279 110C276 112 272 114 269 116C268 116 267 117 266 117C261 119 258 121 253 122C249 123 247 125 243 126C238 129 233 131 227 129C222 127 219 123 215 118C215 118 214 117 213 116C209 112 206 107 203 102C200 98 200 98 199 96C198 94 198 94 198 92C198 92 197 91 197 90C195 89 195 89 192 88C191 88 190 87 189 86C187 86 187 86 185 86C184 86 184 86 183 86C182 86 181 86 180 86C180 86 180 86 177 86C175 86 173 86 171 86C169 86 166 86 163 86C161 86 159 86 157 86C157 86 157 86 154 86C149 86 146 87 141 89C139 90 136 90 134 90C132 90 130 90 129 90C127 90 124 90 122 90C120 90 117 90 115 90C115 90 115 90 113 90C107 90 103 92 99 96C99 97 98 98 98 98C97 99 96 100 96 101C93 103 93 105 93 109C93 110 93 110 93 111C93 112 93 113 93 114C93 114 93 114 93 117C93 119 93 121 93 123C91 123 89 123 88 123C86 123 85 123 84 123C80 122 80 122 77 122C73 121 70 121 67 123C61 128 61 128 59 131C59 131 58 131 57 131C58 132 58 132 60 134C62 136 64 138 65 140C64 144 64 144 61 145C34 147 4 134-17 116C-17 116-18 115-19 115C-22 111-24 108-25 103C-26 101-28 98-29 96C-29 95-30 94-30 94C-31 92-32 91-33 89C-35 84-36 80-36 74C-37 72-37 72-38 69C-40 66-40 63-40 59C-41 56-41 56-42 53C-44 49-44 45-44 40C-45 36-45 36-46 34C-48 29-48 24-48 19C-48 18-48 17-48 16C-48 9-48 9-46 6C-45 5-44 5-43 4C-42 4-41 3-40 2C-28-5-13-6 0 0ZM126 38C105 64 105 64 105 69C115 71 124 73 134 74C148 76 162 79 176 81C177 82 177 82 180 82C181 82 182 83 184 83C186 83 186 83 189 83C189 77 186 73 183 68C182 67 182 66 181 65C173 54 164 44 154 34C156 31 157 28 159 26C160 25 161 24 161 24C161 23 162 23 162 22C161 21 161 21 158 21C145 21 135 29 126 38Z" fill="var(--p1,#37BDF7)" transform="translate(659.685791015625,558.681396484375)"/><path d="M0 0C7 2 13 9 17 14C17 15 17 15 17 16C18 16 18 16 19 16C20 17 20 17 22 19C22 20 22 20 24 22C27 25 30 28 32 32C33 32 33 32 34 34C34 34 35 35 35 36C38 38 41 38 45 38C54 39 62 41 71 43C72 43 73 43 74 44C78 44 81 45 84 46C88 46 91 47 94 48C101 49 107 51 114 52C114 52 114 53 114 53C114 53 114 53 112 53C108 53 105 53 102 53C100 53 99 53 98 53C98 53 98 53 95 54C94 54 93 54 92 54C89 54 89 54 87 56C86 61 86 65 89 69C93 73 98 72 103 72C107 73 110 74 113 76C115 77 115 77 117 77C120 78 122 79 125 80C126 80 126 80 129 81C136 83 143 87 149 92C150 92 152 93 153 94C157 97 159 99 161 103C164 107 167 110 172 113C174 114 176 116 177 118C170 117 163 117 156 115C156 116 157 117 157 118C167 140 172 162 173 186C173 187 173 188 173 189C173 196 172 200 168 206C167 208 167 210 166 212C165 217 162 220 159 224C159 225 158 226 157 227C155 229 153 230 149 230C148 230 148 230 146 230C146 230 146 230 144 230C142 230 140 230 139 230C136 229 133 229 131 229C129 229 127 229 126 229C125 229 124 229 123 229C118 229 118 229 115 228C114 225 114 224 114 221C114 220 113 220 113 219C113 218 113 217 113 216C113 215 113 214 113 213C113 211 113 208 113 206C112 206 112 205 111 205C108 204 107 203 105 200C101 194 96 192 90 189C84 186 78 184 73 179C77 178 80 178 84 179C84 179 84 179 86 180C89 180 93 181 96 181C98 182 101 182 103 183C104 183 105 183 105 183C112 184 112 184 115 183C117 181 119 179 120 177C121 176 121 175 122 175C132 162 144 145 142 128C138 121 127 118 119 116C97 111 76 112 53 118C51 119 51 119 48 119C48 119 48 119 48 121C46 128 43 135 41 141C40 142 40 144 40 145C33 163 33 163 26 170C24 173 23 175 22 178C20 182 18 183 15 185C11 186 8 186 4 186C4 186 4 186 1 186C-5 185-10 185-15 180C-18 177-23 175-27 173C-30 171-32 169-35 166C-35 166-35 166-37 164C-38 161-38 159-38 156C-36 152-33 149-31 147C-28 144-26 140-23 137C-22 134-20 131-18 128C-16 125-15 122-14 118C-13 116-13 114-12 112C-10 109-11 106-10 103C-10 100-10 100-8 97C-7 93-7 91-7 87C-7 86-7 85-7 84C-7 82-7 80-7 77C-7 76-7 74-7 72C-7 69-7 66-7 62C-7 58-7 53-7 49C-7 46-7 42-7 39C-7 37-7 36-7 34C-7 32-7 30-7 27C-7 26-7 25-7 23C-7 20-8 17-10 14C-10 11-10 11-10 9C-10 8-10 7-10 6C-9 1-5 0 0 0Z" fill="var(--p1,#37BDF7)" transform="translate(405.94921875,407.0390625)"/><path d="M0 0C1 0 2 0 3 0C4 0 6 0 8 0C11 0 13 0 16 0C29 0 29 0 33 2C35 4 36 5 37 8C38 8 39 9 40 10C40 11 41 12 41 13C42 14 42 14 43 15C44 17 45 19 46 22C49 20 52 19 55 18C56 18 57 17 57 17C59 16 60 16 62 15C72 11 83 10 94 10C95 10 95 10 96 10C107 10 116 11 126 14C128 14 129 14 130 14C141 17 154 23 162 32C162 32 162 33 162 34C163 34 164 34 164 34C172 39 178 50 182 58C182 58 182 59 182 60C183 60 184 60 184 60C184 60 184 60 185 62C185 69 185 69 187 73C189 76 189 79 189 83C189 86 189 86 191 87C200 96 198 115 198 126C198 136 196 144 193 154C193 155 193 156 192 157C186 174 186 174 178 178C161 180 142 174 128 165C124 161 122 157 119 153C119 152 119 151 118 151C117 130 123 109 133 91C138 81 138 74 135 64C131 51 127 38 117 30C114 28 114 28 110 29C103 32 97 37 92 42C89 45 89 45 87 47C85 48 83 50 81 52C81 53 80 53 79 54C75 59 71 65 66 70C65 72 63 74 61 76C61 76 60 76 59 76C60 77 60 78 60 79C62 98 61 121 50 138C47 141 45 141 41 142C24 142 2 140-11 128C-15 124-15 120-14 114C-12 102-9 91-4 81C4 62-1 45-8 28C-8 26-9 24-10 22C-12 16-12 10-12 4C-8 0-5 0 0 0Z" fill="var(--p3,#F1C14E)" transform="translate(679.578125,819.4609375)"/><path d="M0 0C1 0 1 0 4 0C11 0 18 1 25 3C25 3 26 3 27 3C30 4 32 6 34 8C36 12 36 16 36 21C36 21 36 22 36 23C36 28 35 31 33 36C32 39 32 42 32 45C32 46 32 48 32 49C32 50 32 51 32 51C32 54 32 54 30 56C28 61 28 65 28 71C28 72 28 73 28 74C28 76 28 79 28 81C28 84 28 88 28 91C28 94 28 96 28 98C28 99 28 100 28 101C28 106 29 111 30 117C31 119 31 122 31 125C32 127 32 128 32 129C32 130 32 131 32 133C33 140 34 147 35 155C36 161 36 168 36 175C36 180 37 183 40 188C40 189 41 191 41 193C42 196 43 199 45 201C48 207 49 211 48 218C44 224 39 226 33 229C29 229 27 229 24 227C20 225 18 225 14 225C9 225 5 225 1 221C-2 218-4 214-6 210C-7 209-7 208-8 207C-9 205-10 202-12 199C-12 199-12 198-13 197C-15 192-17 187-18 182C-19 181-19 180-19 179C-21 177-21 175-21 173C-21 169-21 167-23 164C-30 152-29 136-29 123C-29 122-29 121-29 121C-29 119-29 117-29 115C-29 112-29 112-31 109C-32 105-33 103-33 99C-33 98-33 96-33 95C-33 94-33 92-33 91C-33 89-33 88-33 86C-33 83-33 80-33 77C-33 73-33 69-33 66C-33 63-33 60-33 57C-33 55-33 54-33 52C-33 50-33 48-33 46C-33 45-33 44-33 43C-32 39-31 37-29 34C-29 31-29 31-29 29C-28 24-27 21-25 18C-25 16-25 15-24 14C-23 8-20 4-15 1C-11-1-5 0 0 0Z" fill="var(--p3,#F1C14E)" transform="translate(664.3125,171.4375)"/><path d="M0 0C1 0 2 0 2 0C9 1 16 3 21 8C29 29 21 57 13 76C10 83 13 89 14 96C14 97 15 98 15 99C17 107 19 115 24 122C26 126 25 128 25 133C24 134 24 134 22 136C19 136 17 136 14 136C14 136 13 136 12 136C11 136 9 136 8 136C5 136 3 136 1 136C-14 136-14 136-20 131C-23 127-23 127-23 125C-27 126-30 128-34 130C-39 133-44 136-50 135C-54 134-58 133-61 131C-64 130-67 130-70 130C-93 130-111 117-129 104C-136 99-143 95-152 96C-162 100-165 111-169 120C-171 125-173 130-174 135C-175 137-176 139-177 142C-178 145-179 148-180 151C-185 169-192 186-198 204C-199 205-199 206-200 207C-201 209-202 212-203 215C-203 216-203 216-204 217C-209 230-209 230-212 233C-217 233-220 231-223 228C-224 225-224 224-223 222C-223 221-223 220-222 219C-222 219-222 218-221 217C-221 216-220 215-220 214C-207 189-199 162-191 136C-177 94-177 94-160 84C-153 80-144 81-137 82C-127 86-119 92-111 98C-86 116-86 116-74 115C-64 110-57 99-51 90C-51 89-50 88-50 87C-46 81-45 76-47 68C-49 52-49 35-46 18C-46 18-46 17-46 16C-45 9-42 4-36 0C-25-5-12-2 0 0Z" fill="var(--p3,#F1C14E)" transform="translate(247.125,76.375)"/><path d="M0 0C0 0 0 0 2 0C16 0 30 2 44 5C49 6 53 6 58 7C59 7 60 7 60 7C66 8 72 9 78 9C80 10 81 10 83 10C86 10 89 11 92 11C94 11 95 11 97 11C98 12 99 12 101 12C104 13 107 14 110 16C112 16 112 16 114 16C115 16 116 16 117 16C117 16 117 16 119 16C127 16 127 16 131 18C135 20 138 20 142 19C156 19 164 22 176 28C186 34 196 38 208 36C209 35 210 34 211 34C216 32 221 32 227 32C229 32 231 32 233 32C241 32 246 32 251 38C253 39 255 41 256 44C257 44 258 45 259 46C264 51 264 55 264 62C264 63 264 64 264 65C264 73 264 73 261 77C258 79 257 80 253 81C248 82 248 82 246 84C230 91 197 82 179 80C177 79 175 79 172 79C151 76 130 74 109 71C108 71 107 71 107 71C106 71 106 71 104 70C104 70 104 70 102 70C100 70 98 70 97 69C93 69 90 68 86 68C85 68 84 68 84 68C82 68 80 67 78 67C73 66 70 62 66 58C65 58 64 57 63 57C60 54 59 53 58 50C54 44 49 42 43 38C42 37 40 36 38 35C34 32 29 30 24 28C21 28 19 27 16 26C14 25 12 25 10 24C8 24 8 24 6 22C3 21 1 21-3 21C-10 21-10 21-14 18C-17 15-17 13-17 9C-17 8-17 7-17 6C-17 4-17 4-16 2C-11-1-5 0 0 0Z" fill="var(--p2,#1F8FD0)" transform="translate(508.8125,459.5)"/><path d="M0 0C1 0 2 0 3 0C11 0 19 1 27 3C27 3 27 3 29 4C57 11 79 27 94 51C94 52 94 53 95 53C99 61 102 67 103 76C104 79 105 82 107 84C107 86 107 87 108 88C109 92 109 92 110 94C111 97 111 100 111 104C112 106 112 106 113 110C117 116 117 122 118 128C119 130 119 131 119 132C122 147 122 147 120 151C103 157 81 152 66 145C60 142 56 138 54 132C53 131 53 130 53 128C52 127 52 126 52 124C52 123 51 123 51 122C48 108 44 95 38 82C36 78 34 74 33 71C30 64 27 57 24 50C23 49 23 49 22 48C12 25 12 25 5 18C-3 18-7 23-12 27C-17 31-20 36-23 41C-24 41-24 42-24 42C-25 42-26 42-26 42C-27 43-27 43-27 45C-28 47-29 49-31 52C-31 53-32 53-33 54C-33 55-34 56-34 57C-35 59-37 61-38 63C-38 64-39 64-40 65C-42 69-44 73-46 76C-78 127-78 127-89 130C-93 129-95 126-98 122C-97 118-95 116-92 113C-81 102-73 89-64 75C-63 74-62 72-61 70C-59 66-57 63-54 59C-46 46-38 34-28 22C-28 22-27 21-26 20C-24 17-22 15-18 12C-16 10-16 10-16 7C-15 3-15 3-13 2C-9 0-5 0 0 0Z" fill="var(--p3,#F1C14E)" transform="translate(313.375,758.625)"/><path d="M0 0C8 3 23 9 27 17C27 18 28 18 28 19C28 19 28 19 30 21C34 24 36 28 38 32C40 35 40 35 42 37C43 39 44 41 44 43C45 45 45 47 46 49C47 52 48 54 48 57C49 59 49 59 50 61C51 63 51 65 51 68C51 69 51 70 51 72C51 73 51 74 51 75C51 76 51 77 51 79C51 81 51 84 51 86C51 90 51 94 51 97C51 100 51 102 51 105C51 106 51 107 51 108C51 114 51 118 48 123C48 126 48 126 48 130C47 135 46 138 44 143C44 146 44 146 44 150C43 155 42 158 40 163C40 165 39 167 39 169C38 172 36 174 35 177C33 181 32 184 31 188C30 196 23 205 16 210C12 212 9 213 4 213C-8 209-28 200-36 189C-37 184-38 180-37 175C-36 173-36 173-34 170C-30 165-27 159-24 153C-23 152-23 151-22 150C-19 144-17 139-16 133C-15 131-14 129-13 127C-11 122-9 118-8 113C-8 113-8 113-7 111C-6 109-6 106-6 104C-5 100-5 96-4 92C-2 80-2 69-2 58C-2 58-2 58-2 56C-2 54-2 52-2 50C-2 49-2 47-2 46C-2 43-3 40-5 37C-6 35-6 35-6 33C-7 29-8 26-10 23C-10 22-10 22-10 21C-11 21-11 21-12 21C-16 16-18 12-17 5C-16-3-6-1 0 0Z" fill="var(--p3,#F1C14E)" transform="translate(281,296)"/><path d="M0 0C13 0 25 4 37 10C37 10 37 10 37 11C36 11 35 11 33 11C21 11 12 14 1 21C-1 23 0 29 0 32C0 33 0 34 0 35C0 41 0 45 3 50C3 53 4 57 4 60C4 64 5 66 7 70C7 72 7 72 8 75C8 78 8 80 10 83C11 86 11 87 11 90C12 97 15 102 18 108C19 110 20 112 21 115C22 115 22 116 23 117C24 120 24 120 24 122C11 120-1 118-14 116C-17 116-19 115-22 115C-36 113-36 113-42 112C-56 109-69 109-83 110C-85 110-88 110-90 110C-93 110-96 110-99 110C-100 111-102 111-103 111C-104 111-104 111-107 111C-110 111-113 110-116 109C-116 106-116 103-116 101C-131 98-146 96-162 94C-162 93-162 92-162 92C-163 91-164 91-164 91C-171 88-177 86-181 80C-181 79-182 78-182 78C-184 75-185 73-187 71C-188 70-188 69-189 68C-192 63-194 58-194 52C-193 48-190 45-188 42C-185 39-183 35-181 31C-180 29-180 29-177 27C-177 28-176 29-176 31C-175 31-174 31-172 31C-168 32-164 33-159 34C-158 34-156 34-154 35C-135 38-135 38-128 44C-124 47-118 50-113 52C-108 54-104 57-101 62C-97 66-97 66-94 68C-93 70-93 71-93 74C-93 75-92 75-92 76C-92 77-92 78-92 79C-92 80-92 82-92 84C-92 84-92 84-92 86C-92 88-92 88-90 90C-85 90-79 90-74 91C-72 91-71 91-69 91C-55 92-55 92-50 88C-44 82-42 76-40 68C-39 65-39 65-37 63C-37 62-36 61-36 60C-34 58-33 55-31 53C-23 42-18 29-12 17C-11 17-11 16-11 15C-10 14-9 12-9 11C-4 1-4 1 0 0Z" fill="var(--p2,#1F8FD0)" transform="translate(612.98046875,545.37109375)"/><path d="M0 0C7 2 13 9 17 14C17 15 17 15 17 16C18 16 18 16 19 16C20 17 20 17 22 19C22 20 22 20 24 22C27 25 30 28 32 32C34 34 34 34 36 35C38 38 38 39 38 42C40 47 41 50 45 54C47 57 47 60 48 64C48 65 49 65 49 66C51 69 50 73 50 76C50 77 50 78 50 79C50 81 50 82 50 84C50 87 50 89 50 92C50 94 50 96 50 97C50 98 50 99 50 100C50 105 50 108 47 112C47 115 47 115 47 118C46 128 43 137 39 146C39 147 38 148 38 149C37 151 36 154 35 156C35 157 34 158 34 159C32 164 30 166 26 170C24 173 23 175 22 178C20 182 18 183 15 185C11 186 8 186 4 186C4 186 4 186 1 186C-5 185-10 185-15 180C-18 177-23 175-27 173C-30 171-32 169-35 166C-35 166-35 166-37 164C-38 161-38 159-38 156C-36 152-33 149-31 147C-28 144-26 140-23 137C-22 134-20 131-18 128C-16 125-15 122-14 118C-13 116-13 114-12 112C-10 109-11 106-10 103C-10 100-10 100-8 97C-7 93-7 91-7 87C-7 86-7 85-7 84C-7 82-7 80-7 77C-7 76-7 74-7 72C-7 69-7 66-7 62C-7 58-7 53-7 49C-7 46-7 42-7 39C-7 37-7 36-7 34C-7 32-7 30-7 27C-7 26-7 25-7 23C-7 20-8 17-10 14C-10 11-10 11-10 9C-10 8-10 7-10 6C-9 1-5 0 0 0Z" fill="var(--p3,#F1C14E)" transform="translate(405.94921875,407.0390625)"/><path d="M0 0C7 2 12 4 16 11C21 24 14 43 9 55C8 57 7 58 7 60C7 60 7 60 6 62C5 64 4 65 4 66C3 71 4 74 4 78C6 86 6 93 7 100C7 104 8 106 10 109C11 111 11 111 11 113C12 117 12 117 13 119C14 122 14 125 14 128C14 129 14 131 14 132C14 135 14 135 13 137C10 139 7 138 3 138C3 138 2 138 1 138C0 139-2 139-3 139C-6 138-8 139-11 139C-12 139-14 139-15 139C-16 139-16 139-17 139C-23 139-25 137-29 133C-31 131-31 131-32 128C-33 127-33 126-34 126C-34 125-34 125-35 123C-36 122-37 120-38 119C-42 111-46 104-48 95C-48 94-49 94-49 93C-51 89-50 85-51 81C-51 77-51 77-53 74C-55 70-54 66-54 61C-54 60-54 59-54 58C-54 56-54 54-54 52C-54 49-54 46-54 42C-54 6-54 6-44-4C-33-13-12-4 0 0Z" fill="var(--p3,#F1C14E)" transform="translate(394,102)"/><path d="M0 0C1 0 2 0 3 0C4 0 6 0 8 0C11 0 13 0 16 0C29 0 29 0 33 2C35 4 36 5 37 8C38 8 39 9 40 10C43 15 45 19 46 25C47 28 48 31 49 34C52 38 53 42 53 47C53 50 53 50 55 52C57 56 57 60 57 64C57 65 57 66 57 67C57 69 57 72 57 74C57 78 57 81 57 85C57 86 57 86 57 87C57 91 57 94 59 97C60 100 61 102 60 105C60 106 60 107 60 108C60 108 60 109 59 110C59 111 59 112 59 113C57 123 54 133 47 141C32 146 9 139-5 133C-9 131-11 129-14 125C-18 111-9 93-4 81C4 62-1 45-8 28C-8 26-9 24-10 22C-12 16-12 10-12 4C-8 0-5 0 0 0Z" fill="var(--p3,#F1C14E)" transform="translate(679.578125,819.4609375)"/><path d="M0 0C2 0 3 0 5 0C23-1 23-1 30 5C32 7 33 10 35 12C35 13 35 13 36 14C37 15 37 16 38 18C39 19 39 20 40 21C42 24 43 27 44 31C45 34 45 37 47 39C47 41 48 42 48 43C48 46 49 47 50 49C51 52 52 55 52 57C53 59 53 59 54 61C55 64 55 67 55 71C56 73 56 73 57 76C60 81 59 86 59 92C59 93 59 94 59 95C59 98 59 100 59 103C59 107 59 110 59 114C59 117 59 119 59 121C59 123 59 124 59 125C59 125 59 125 59 128C59 129 59 130 59 131C59 134 58 135 56 136C54 137 54 137 52 137C50 138 48 138 46 139C34 145 11 140-1 135C-5 134-5 134-6 131C-6 126-5 121-4 116C2 88-4 48-19 23C-22 18-22 13-21 7C-17-1-8 0 0 0Z" fill="var(--p3,#F1C14E)" transform="translate(529.1279296875,783.64990234375)"/><path d="M0 0C14 7 24 19 33 31C34 32 35 33 36 35C38 38 40 41 43 44C44 45 45 47 46 48C50 53 53 58 55 64C56 67 58 70 60 73C62 75 62 75 63 77C64 79 65 81 67 82C70 83 72 83 75 83C77 83 77 83 79 84C80 87 80 88 80 91C80 92 80 93 81 94C80 97 78 98 75 100C71 102 68 104 64 106C63 106 62 107 61 107C57 109 53 111 49 112C45 113 42 114 39 116C34 119 29 121 23 119C18 117 14 113 11 108C11 108 11 108 9 106C5 102 2 97-1 92C-2 91-3 89-4 88C-5 85-7 82-9 80C-10 77-11 75-14 73C-16 70-17 69-18 67C-20 62-23 58-26 53C-26 53-27 52-27 51C-32 44-37 38-43 33C-45 30-47 27-48 23C-47 20-46 19-43 16C-42 16-42 16-41 15C-41 15-40 14-39 14C-34 10-28 7-23 4C-22 3-21 3-20 2C-13-1-8-2 0 0Z" fill="var(--p3,#F1C14E)" transform="translate(864.07421875,568.78515625)"/><path d="M0 0C6 3 12 6 14 13C14 15 14 16 15 18C15 18 15 18 16 21C16 23 17 26 17 28C17 29 18 30 18 30C20 39 21 47 21 56C21 61 22 64 24 68C25 71 25 71 25 72C26 76 26 76 27 78C29 81 29 84 30 86C30 88 30 88 31 90C33 93 33 96 34 98C34 100 34 100 35 102C37 105 37 108 37 111C37 113 37 114 37 115C36 118 36 118 35 120C33 122 31 122 28 122C26 122 25 122 24 122C24 122 24 122 21 122C20 122 20 122 17 122C11 122 7 121 1 118C-2 118-2 118-5 118C-11 118-15 117-20 114C-24 109-26 104-28 98C-29 96-30 93-32 91C-35 85-36 81-37 74C-37 72-37 72-38 69C-40 66-40 63-40 59C-41 56-41 56-42 53C-44 49-44 45-44 40C-45 36-45 36-46 34C-48 29-48 24-48 19C-48 18-48 17-48 16C-48 9-48 9-46 6C-45 5-44 5-43 4C-42 4-41 3-40 2C-28-5-13-6 0 0Z" fill="var(--p3,#F1C14E)" transform="translate(659.685791015625,558.681396484375)"/><path d="M0 0C2 1 2 1 3 3C3 6 3 10 3 13C4 18 6 20 8 23C9 26 10 30 11 34C14 46 17 57 25 67C26 68 26 69 27 70C37 82 56 84 71 86C85 89 85 89 90 94C91 97 91 99 91 103C91 104 91 105 91 106C91 107 91 108 91 108C91 110 91 112 91 114C91 116 91 117 91 118C91 119 91 121 91 122C91 125 90 128 88 131C88 132 87 134 87 135C86 141 83 146 78 149C76 151 76 152 75 156C75 157 75 158 75 159C75 161 75 161 74 163C71 165 69 164 66 164C64 163 64 163 63 161C62 158 62 158 63 155C65 154 65 154 66 152C70 150 70 150 70 147C70 145 71 144 71 142C71 138 73 135 75 132C78 125 79 119 78 111C77 107 76 106 73 104C53 98 53 98 44 98C45 98 46 99 47 99C53 101 56 106 59 111C60 114 60 118 59 121C57 123 56 124 54 124C53 124 53 124 51 124C50 124 49 124 48 124C47 124 46 124 45 124C34 125 34 125 28 128C26 129 26 129 24 129C20 130 20 130 18 131C16 132 16 132 12 133C9 134 6 135 2 137C-7 142-16 139-26 136C-26 136-26 136-29 134C-32 133-33 133-36 132C-39 131-41 131-43 128C-45 125-45 123-45 119C-44 117-44 117-42 114C-39 111-37 107-35 103C-31 96-27 89-22 84C-19 84-17 84-14 84C-13 84-12 84-11 84C-9 84-6 84-4 84C-2 84 0 84 2 84C5 84 8 84 11 84C14 84 16 84 18 84C17 83 16 82 15 81C6 72-1 58-2 45C-2 43-2 41-3 39C-4 39-4 39-5 39C-5 38-5 38-5 36C-5 34-5 33-5 31C-5 31-5 31-5 29C-6 24-7 21-9 17C-9 13-9 13-9 10C-9 9-9 9-9 6C-9 3-9 3-8 1C-5-1-3 0 0 0Z" fill="var(--p2,#1F8FD0)" transform="translate(801,284)"/><path d="M0 0C1 0 1 0 2 0C4 0 6 0 8 0C9 0 10 0 11 0C21 0 31 1 41 6C43 9 42 14 42 18C42 19 42 20 42 21C42 27 42 31 39 36C39 39 39 39 39 43C38 49 38 49 37 52C35 56 35 58 35 63C35 64 35 65 35 66C35 67 35 68 35 69C35 71 35 73 35 75C35 75 35 75 35 79C35 80 35 81 35 82C35 86 36 88 38 92C39 96 39 100 39 105C39 107 39 109 39 111C39 112 39 112 39 115C39 116 39 117 39 118C38 122 38 122 36 124C30 128 25 129 18 129C18 129 18 129 16 129C11 129 8 128 3 126C1 125 1 125-1 125C-5 124-8 121-10 118C-10 117-11 116-11 116C-14 111-14 107-15 102C-15 100-15 100-16 97C-18 93-18 90-18 86C-18 85-18 84-18 84C-18 81-18 79-18 76C-18 75-18 73-18 71C-18 68-18 64-18 60C-18 56-19 51-19 47C-19 43-19 40-19 36C-19 34-19 33-19 31C-19 19-18 11-9 2C-6 0-4 0 0 0Z" fill="var(--p3,#F1C14E)" transform="translate(505.92578125,131.43359375)"/><path d="M0 0C1 0 2 0 3 0C5 0 7 0 8 0C11 0 14 0 17 0C19 0 21 0 23 0C23 0 23 0 25 0C32 0 36 1 41 5C42 8 42 8 44 11C46 15 48 19 51 23C52 25 53 27 54 29C57 32 59 34 62 36C66 40 66 40 67 43C67 43 67 44 67 45C67 46 67 47 67 47C68 49 68 49 67 51C64 52 62 53 60 54C48 57 38 63 28 70C27 71 27 71 23 71C23 67 24 63 25 59C25 58 26 57 26 56C26 55 26 55 27 53C11 51-4 48-19 46C-19 46-20 46-21 46C-27 45-33 44-39 43C-42 43-44 42-47 42C-50 42-52 41-55 41C-56 41-57 41-58 40C-59 40-60 40-61 40C-62 40-62 40-63 39C-65 36-65 32-65 29C-65 28-65 27-65 26C-65 20-64 17-59 12C-57 10-57 10-55 9C-55 8-55 8-53 7C-50 4-46 4-42 4C-41 4-39 4-38 4C-35 4-33 4-30 4C-28 4-26 4-23 4C-23 4-22 4-21 4C-18 4-16 4-13 2C-8 0-5 0 0 0Z" fill="var(--p2,#1F8FD0)" transform="translate(816.4921875,643.53125)"/><path d="M0 0C4 6 4 9 5 16C5 20 6 23 8 26C8 27 8 28 9 29C10 36 14 42 17 48C18 50 19 52 20 54C21 56 22 58 23 59C24 62 24 62 24 64C23 64 22 65 21 65C18 66 16 68 13 70C8 73 3 75-3 75C-7 73-10 72-14 70C-17 70-20 70-23 70C-45 69-64 56-81 43C-89 38-96 34-105 35C-115 39-118 50-122 59C-124 64-126 69-127 74C-128 76-129 79-129 81C-130 84-132 87-133 91C-138 108-145 126-151 143C-152 144-152 145-152 146C-153 149-154 151-156 154C-156 155-156 156-156 157C-162 170-162 170-165 172C-170 172-173 170-176 167C-177 165-177 163-176 161C-176 160-176 160-175 159C-175 158-174 157-174 156C-174 155-173 155-173 154C-160 129-152 102-143 75C-130 33-130 33-113 23C-106 20-97 20-90 22C-80 25-72 31-64 37C-39 55-39 55-27 54C-16 50-9 39-4 29C-4 28-3 28-3 27C1 21 2 17 1 11C1 11 1 11 1 8C1 5 0 3 0 0Z" fill="var(--p1,#37BDF7)" transform="translate(200,137)"/><path d="M0 0C0-0 0-0 2 0C8 0 13 1 18 2C18 3 18 3 18 3C18 3 17 3 16 3C12 3 8 3 5 3C3 3 2 3 1 3C0 4-2 4-3 4C-4 4-5 4-6 4C-11 4-13 6-16 10C-21 18-20 26-20 35C-20 38-20 41-20 44C-20 50-20 56-20 62C-20 69-20 76-20 83C-20 85-20 88-20 91C-20 93-20 94-20 96C-20 96-20 96-20 98C-20 102-20 104-23 107C-27 109-31 111-36 112C-40 113-42 115-45 118C-56 127-56 127-63 128C-67 127-69 125-72 122C-73 119-73 119-74 116C-74 116-74 116-75 115C-75 115-76 115-77 115C-83 115-86 115-91 112C-93 109-95 107-98 104C-98 104-98 104-101 105C-101 105-101 105-101 103C-101 97-102 93-105 88C-105 87-105 85-106 84C-107 80-107 80-108 78C-109 75-109 73-109 70C-109 69-109 68-109 67C-109 66-109 65-109 64C-90 59-72 59-53 58C-52 58-51 58-50 58C-48 58-45 58-42 58C-41 58-41 58-40 58C-36 58-33 58-30 59C-30 59-30 58-30 57C-29 57-28 57-28 57C-26 54-25 52-25 48C-25 48-25 47-25 46C-25 45-25 45-25 43C-24 41-24 39-24 37C-24 36-24 35-24 34C-22 10-22 10-13 3C-9 0-5 0 0 0Z" fill="var(--p2,#1F8FD0)" transform="translate(508.5625,128.8125)"/><path d="M0 0C1 0 1 0 2 0C2 0 2 0 3 1C4 4 5 6 6 8C7 9 7 10 8 11C9 13 10 15 11 17C12 18 12 19 13 20C15 23 17 25 20 27C23 30 22 32 22 36C19 38 16 40 13 41C12 42 11 42 10 43C5 46 1 48-4 51C-12 55-20 60-27 65C-36 71-36 71-39 71C-39 69-39 67-39 66C-39 65-39 64-39 63C-39 60-39 60-38 58C-39 58-40 58-42 58C-51 58-58 57-66 52C-69 51-71 50-73 50C-77 49-80 47-83 44C-85 43-85 43-88 41C-92 38-94 35-96 31C-96 30-97 30-97 29C-98 26-98 24-98 21C-96 19-93 17-90 15C-87 13-85 11-82 8C-75 3-64 6-56 7C-55 7-55 7-52 8C-43 9-33 11-24 13C-14 16-14 16-10 14C-8 11-8 11-6 8C-2 2-2 2 0 0Z" fill="var(--p2,#1F8FD0)" transform="translate(858,742)"/><path d="M0 0C0 1 0 1 0 2C3 5 5 5 8 5C9 6 10 6 11 6C12 6 14 7 16 7C19 7 21 8 24 8C43 11 43 11 50 17C54 21 60 23 65 25C70 28 73 30 77 35C81 39 81 39 84 41C86 44 86 47 85 50C85 55 83 57 80 60C77 62 73 64 70 66C69 66 69 67 68 67C66 68 64 68 61 68C61 68 60 68 59 68C58 68 57 68 56 68C55 68 54 68 53 68C51 68 49 68 47 68C44 68 40 68 37 68C35 68 33 68 31 68C30 68 29 68 28 68C24 68 20 68 16 67C16 66 16 66 16 65C15 65 14 65 14 64C7 62 1 59-3 53C-3 52-4 52-4 51C-6 49-7 46-9 44C-10 43-10 42-11 41C-14 36-16 32-16 25C-15 22-12 19-10 16C-7 12-5 8-3 4C-2 2-2 2 0 0Z" fill="var(--p2,#1F8FD0)" transform="translate(435,572)"/><path d="M0 0C2 3 3 5 3 9C3 10 3 11 3 12C0 14 0 14-2 13C-3 13-4 13-5 13C-11 12-17 11-23 11C-24 11-25 11-26 11C-33 11-39 13-45 18C-47 23-47 28-45 33C-38 53-21 68-2 76C4 78 10 79 16 78C18 77 20 76 22 75C27 74 27 74 29 76C31 78 31 81 31 84C31 85 31 86 31 86C31 88 31 89 31 90C31 93 31 95 31 97C31 98 31 99 31 101C31 102 31 103 31 104C31 108 31 108 29 109C28 111 28 111 25 110C21 110 17 108 14 107C7 105 0 104-7 104C-8 103-9 103-10 103C-14 103-17 103-20 105C-26 105-26 105-29 103C-30 102-32 101-33 100C-33 96-32 95-30 92C-25 89-22 87-16 87C-19 83-23 81-27 78C-42 67-58 53-61 34C-62 24-62 16-56 9C-43-2-16-11 0 0Z" fill="var(--p4,#D9A22E)" transform="translate(61.19921875,405.48046875)"/><path d="M0 0C1 0 2 0 3 0C11 0 19 1 27 3C27 3 27 3 29 4C50 9 69 20 84 36C84 37 84 37 84 37C78 38 75 36 71 34C66 31 62 30 56 30C53 29 50 28 48 26C46 26 45 26 44 26C37 24 32 20 26 16C16 10 16 10 10 10C8 12 8 12 7 14C7 15 7 16 8 16C8 18 8 19 8 20C7 20 6 19 5 18C-4 18-9 24-14 29C-18 33-21 36-23 41C-24 41-24 42-24 42C-25 42-26 42-26 42C-27 43-27 43-27 45C-28 47-29 49-31 52C-31 53-32 53-33 54C-33 55-34 56-34 57C-35 59-37 61-38 63C-38 64-39 64-40 65C-42 69-44 73-46 76C-78 127-78 127-89 130C-93 129-95 126-98 122C-97 118-95 116-92 113C-81 102-73 89-64 75C-63 74-62 72-61 70C-59 66-57 63-54 59C-46 46-38 34-28 22C-28 22-27 21-26 20C-24 17-22 15-18 12C-16 10-16 10-16 7C-15 3-15 3-13 2C-9 0-5 0 0 0Z" fill="var(--p1,#37BDF7)" transform="translate(313.375,758.625)"/><path d="M0 0C7 3 10 9 13 15C14 17 15 18 16 20C16 20 16 21 17 22C18 24 19 26 21 28C23 31 24 33 23 37C23 38 22 39 22 40C20 43 20 44 20 48C19 54 16 58 12 63C11 64 11 65 10 66C8 68 6 69 2 69C1 69 0 69-1 69C-1 69-1 69-3 69C-5 69-7 69-8 69C-11 68-14 69-16 69C-18 68-20 68-22 68C-22 68-23 68-24 68C-29 68-29 68-32 67C-33 65-33 63-33 61C-33 61-33 61-33 59C-33 58-33 57-34 56C-34 50-34 46-37 41C-38 36-38 31-35 27C-33 25-30 23-28 21C-25 18-23 14-21 11C-16 3-10-2 0 0Z" fill="var(--p3,#F1C14E)" transform="translate(553,568)"/><path d="M0 0C1 0 1 0 2 0C13 0 22 1 33 3C34 4 35 4 36 4C45 6 58 11 64 18C57 19 53 18 48 15C44 15 42 15 39 17C36 20 36 23 35 27C35 28 35 28 35 31C35 32 35 32 35 33C33 31 31 28 29 25C27 22 26 20 22 18C8 19-4 33-13 42C-14 44-15 45-16 46C-17 47-18 48-19 49C-22 53-24 56-27 60C-29 62-30 64-32 65C-33 65-34 65-34 65C-34 66-34 66-34 69C-33 76-33 82-33 89C-37 84-37 81-37 75C-37 73-38 72-38 70C-38 67-38 65-38 62C-38 59-38 57-38 54C-38 53-38 52-38 52C-38 47-39 44-41 39C-42 37-42 37-42 35C-42 29-45 24-48 19C-49 15-50 13-49 9C-49 10-48 10-48 10C-45 11-45 11-42 10C-42 10-42 10-39 8C-32 5-26 3-19 1C-19 1-18 1-17 1C-11 0-6 0 0 0Z" fill="var(--p1,#37BDF7)" transform="translate(773.25,829.75)"/><path d="M0 0C2 1 2 1 3 3C3 6 3 10 3 13C4 18 6 20 8 23C9 26 10 30 11 34C14 46 17 57 25 67C26 68 26 69 27 70C37 82 56 84 71 86C85 89 85 89 90 94C91 97 91 99 91 103C91 104 91 105 91 106C91 107 91 108 91 108C91 110 91 112 91 114C91 116 91 117 91 118C91 119 91 121 91 122C91 125 90 128 88 131C88 132 87 134 87 135C86 141 83 146 78 149C76 151 76 152 75 156C75 157 75 158 75 159C75 161 75 161 74 163C71 165 69 164 66 164C64 163 64 163 63 161C62 158 62 158 63 155C65 154 65 154 66 152C70 150 70 150 70 147C70 145 71 144 71 142C71 138 73 135 75 132C78 125 79 119 78 111C77 108 77 108 75 105C72 104 70 103 68 102C63 101 60 100 56 97C54 97 54 97 51 96C47 96 44 95 40 93C39 93 39 93 36 92C25 90 15 84 9 74C3 65-1 56-2 45C-2 43-2 41-3 39C-4 39-4 39-5 39C-5 38-5 37-5 36C-5 34-5 33-5 31C-5 31-5 30-5 29C-6 24-7 21-9 17C-9 13-9 13-9 10C-9 9-9 7-9 6C-9 3-9 3-8 1C-5-1-3 0 0 0Z" fill="var(--p4,#D9A22E)" transform="translate(801,284)"/><path d="M0 0C4 4 7 9 8 15C9 19 11 23 13 27C13 28 13 28 14 30C17 35 20 40 24 45C24 45 24 45 26 48C29 51 32 51 36 52C36 52 35 53 35 54C34 57 34 60 35 64C33 64 33 64 25 66C23 71 23 76 22 81C22 83 22 83 21 85C20 85 19 85 18 85C18 84 18 84 18 83C17 83 17 82 16 82C14 81 12 80 11 78C8 75 6 73 3 71C3 71 3 71 0 69C0 68 0 68 0 67C-1 67-1 67-2 66C-5 65-7 62-9 60C-19 51-19 51-24 51C-25 51-25 51-26 51C-29 51-29 51-31 51C-33 49-33 48-34 45C-33 38-30 32-27 26C-26 25-26 23-25 22C-21 15-18 9-12 4C-11 4-11 3-10 2C-7 0-4-1 0 0Z" fill="var(--p2,#1F8FD0)" transform="translate(341,188)"/><path d="M0 0C6 3 11 6 14 13C14 14 14 15 15 17C15 17 15 18 15 19C18 28 18 28 15 32C12 34 10 34 7 34C-2 34-8 37-14 43C-17 46-20 50-22 53C-29 65-29 65-35 67C-36 67-37 67-39 67C-41 65-40 62-40 59C-41 56-41 56-42 53C-44 49-44 45-44 40C-45 36-45 36-46 34C-48 29-48 24-48 19C-48 18-48 17-48 16C-48 9-48 9-46 6C-45 5-44 5-43 4C-42 4-41 3-40 2C-28-5-13-6 0 0Z" fill="var(--p4,#D9A22E)" transform="translate(659.685791015625,558.681396484375)"/><path d="M0 0C0 0 0 0 2 0C26 2 49 2 73 3C75 3 77 3 79 3C82 3 84 3 87 3C87 3 87 3 90 3C91 3 92 3 93 3C96 3 99 3 102 4C97 9 92 14 86 17C86 17 86 17 84 19C83 26 86 31 90 36C93 39 96 41 100 43C101 44 102 45 103 45C106 47 109 48 112 48C116 49 119 51 122 53C122 53 122 54 122 54C122 54 122 54 119 54C98 54 78 55 57 58C52 59 47 59 42 59C45 56 47 54 51 52C57 47 58 40 60 33C60 32 61 32 61 31C62 28 62 26 62 23C58 14 49 8 40 5C34 4 29 4 23 4C20 4 18 4 16 4C14 4 13 4 12 4C7 4 4 3 0 1C0 1 0 0 0 0Z" fill="var(--p1,#37BDF7)" transform="translate(677,744)"/><path d="M0 0C8 4 17 9 20 18C20 20 20 22 20 24C17 27 15 28 11 28C0 31-7 39-13 48C-14 50-14 50-15 51C-17 51-18 51-20 51C-21 51-22 51-23 51C-25 51-25 51-28 50C-30 48-30 48-32 45C-35 41-37 38-41 35C-44 31-47 28-48 23C-47 20-46 18-43 16C-42 16-42 15-41 15C-41 15-40 14-40 14C-34 10-29 7-23 4C-22 3-21 3-20 2C-14-1-8-2 0 0Z" fill="var(--p4,#D9A22E)" transform="translate(864.25,568.9609375)"/><path d="M0 0C4 0 9 0 13 0C14 0 14 0 17 0C18 0 19 0 21 0C22 1 23 1 24 1C27 1 30 2 33 4C35 4 35 4 37 4C38 4 39 4 40 4C41 4 41 4 42 4C43 4 44 4 45 4C48 4 51 4 54 3C54 4 54 4 54 5C54 5 54 5 55 7C55 8 55 8 55 10C56 12 57 14 58 16C59 18 59 20 59 22C60 24 60 24 61 26C62 29 62 32 62 35C62 36 62 38 62 39C62 42 62 42 61 44C58 46 55 45 51 45C51 45 51 45 49 45C48 46 46 46 45 46C42 46 40 46 37 46C36 46 34 46 33 46C33 46 33 46 31 46C25 46 23 44 19 40C17 38 17 38 16 35C15 34 15 33 14 33C14 32 13 31 13 30C12 29 11 27 10 26C8 23 7 20 5 16C5 16 5 16 3 13C2 9 1 5 0 0Z" fill="var(--p4,#D9A22E)" transform="translate(346,195)"/><path d="M0 0C0 0 0 0 3 1C7 3 10 3 14 4C17 4 19 5 21 7C21 8 21 8 21 9C22 9 22 9 23 10C31 14 37 25 41 33C41 34 41 34 41 35C42 35 42 35 43 35C43 37 43 40 43 42C43 42 43 42 43 46C43 49 43 49 42 51C39 52 38 52 35 52C35 52 35 52 33 52C30 52 30 52 27 51C22 48 16 49 10 48C1 48 1 48-3 45C-4 43-4 43-4 41C-5 41-5 41-6 41C-6 40-6 40-7 39C-7 37-8 35-9 32C-9 31-9 30-10 30C-10 29-10 28-11 27C-11 26-11 26-11 25C-12 23-12 23-13 21C-14 9-14 9-12 5C-8 0-6 0 0 0Z" fill="var(--p4,#D9A22E)" transform="translate(821,844)"/><path d="M0 0C8 14 13 30 18 45C19 46 19 48 20 49C20 51 21 54 22 56C25 65 27 69 35 74C37 76 37 76 38 79C42 86 46 91 52 96C55 98 57 100 59 103C60 104 61 105 63 106C67 109 70 113 70 118C70 121 70 121 69 123C66 125 64 124 61 124C59 122 57 121 55 119C54 118 53 117 52 116C51 115 51 115 50 114C49 113 47 111 45 110C37 103 30 95 24 86C23 85 21 83 20 82C10 70 6 56 1 42C0 39-1 37-2 34C-2 33-3 32-3 32C-4 28-6 24-8 20C-10 16-11 13-10 8C-10 8-10 7-10 6C-10 3-10 3-9 1C-6-1-3 0 0 0Z" fill="var(--p4,#D9A22E)" transform="translate(118,528)"/><path d="M0 0C2 0 3 0 5 0C23-1 23-1 30 5C32 7 33 10 35 12C35 13 35 13 36 14C37 15 37 16 38 18C39 19 39 20 40 21C43 26 43 29 43 34C43 35 43 37 43 38C43 41 43 41 42 43C39 45 37 45 34 44C31 43 31 43 29 42C28 41 27 41 26 40C22 38 19 36 16 34C12 31 9 30 5 29C1 30 0 32-3 35C-4 36-4 36-7 37C-10 36-10 36-12 35C-12 35-12 34-12 33C-13 33-13 33-14 33C-19 25-23 17-21 7C-17-1-9 0 0 0Z" fill="var(--p4,#D9A22E)" transform="translate(529.1279296875,783.64990234375)"/><path d="M0 0C0 0 1 0 1 0C1 7 1 12-2 19C-2 22-2 26-2 29C1 32 2 32 6 32C3 43-5 52-14 57C-27 64-40 61-53 58C-56 57-60 56-63 56C-65 55-68 55-70 54C-80 52-90 50-101 49C-102 49-103 49-104 49C-105 49-106 49-107 49C-107 50-106 51-106 51C-105 55-105 57-106 60C-107 60-108 61-109 62C-109 62-110 62-111 63C-111 66-111 66-111 69C-113 68-113 68-115 65C-115 62-116 60-116 57C-116 55-116 55-118 52C-120 48-119 44-119 39C-97 33-72 39-50 45C-40 47-30 49-20 44C-8 36-4 17-1 4C0 2 0 1 0 0Z" fill="var(--p1,#37BDF7)" transform="translate(983,840)"/><path d="M0 0C4 5 4 7 5 13C5 16 5 16 6 18C9 24 9 29 9 35C9 36 9 37 9 39C9 41 9 44 9 46C9 50 9 54 9 58C9 82 9 82 3 91C0 95 0 99 0 103C-8 100-12 96-16 89C-16 88-17 88-17 87C-17 86-18 86-18 85C-20 65-14 44-4 26C1 17 2 10 0 0Z" fill="var(--p1,#37BDF7)" transform="translate(816,885)"/><path d="M0 0C2 1 4 2 6 3C7 3 9 4 10 4C13 5 15 6 18 7C19 7 20 7 22 8C26 9 31 11 35 14C38 15 38 15 41 16C49 19 58 25 64 31C64 31 64 32 64 32C63 32 62 32 61 32C56 32 52 32 48 32C46 32 44 32 42 32C40 32 37 33 35 33C34 33 34 33 32 33C26 33 26 33 24 35C24 38 24 38 23 41C23 42 23 43 23 44C23 45 23 46 23 47C20 43 18 39 15 34C13 30 10 27 6 24C4 24 4 24 2 25C1 25 1 25-1 26C-4 27-7 29-10 31C-10 30-10 30-10 29C-10 27-10 24-10 21C-10 21-10 20-10 19C-10 15-10 11-11 7C-11 6-11 5-11 4C-8 0-5-1 0 0Z" fill="var(--p1,#37BDF7)" transform="translate(645,788)"/><path d="M0 0C1 1 2 2 2 3C7 7 12 7 18 7C25 7 30 8 35 12C35 12 35 13 35 13C25 13 16 14 6 14C6 24 6 34 6 44C10 43 13 42 17 41C39 37 56 41 74 53C76 55 78 56 80 58C80 58 80 59 80 59C79 59 79 59 78 59C77 59 76 59 76 59C75 59 75 59 73 60C71 60 71 60 69 62C68 63 68 65 67 66C66 65 65 63 64 62C61 58 59 56 54 56C51 55 47 56 44 56C43 56 42 56 40 56C34 56 30 56 25 59C22 59 19 60 16 60C14 60 13 60 11 60C10 60 10 60 9 60C7 60 7 60 4 62C4 61 4 61 4 60C4 53 4 47 4 40C4 38 4 35 4 33C4 29 4 26 4 22C4 21 3 20 3 19C3 13 3 9 0 4C0 3 0 1 0 0Z" fill="var(--p1,#37BDF7)" transform="translate(328,349)"/><path d="M0 0C1 0 1 0 3 0C4 32-7 61-24 87C-24 88-25 90-26 91C-29 95-32 100-35 104C-37 105-39 105-41 103C-43 100-43 98-43 95C-42 92-42 92-40 90C-40 89-39 88-39 87C-38 86-36 84-35 82C-31 76-27 69-24 62C-23 60-22 58-21 56C-20 55-20 53-19 52C-18 51-18 50-17 49C-16 46-15 44-15 41C-14 37-14 37-13 35C-11 33-11 31-11 28C-11 28-11 28-11 25C-11 23-11 21-11 20C-11 12-9 0 0 0Z" fill="var(--p3,#F1C14E)" transform="translate(1010.625,471.875)"/><path d="M0 0C-5 4-8 5-14 6C-16 7-16 7-18 8C-21 10-25 10-28 11C-29 11-29 12-30 12C-34 12-36 12-40 10C-41 10-43 9-44 9C-47 8-49 7-52 6C-54 5-56 5-58 5C-60 4-60 4-62 3C-65 2-67 2-70 2C-71 2-72 2-74 2C-75 2-76 2-78 2C-79 2-80 2-82 2C-85 2-87 2-90 2C-94 2-98 2-101 1C-104 1-107 1-110 1C-112 1-114 1-116 1C-123 1-130 2-136 8C-136 10-136 12-137 14C-137 15-137 16-137 17C-137 18-137 18-137 20C-140 17-142 14-144 11C-147 6-149 3-153 0C-153-1-152-1-152-2C-152-2-151-1-151-1C-148-1-145-1-142-1C-141-1-140-1-139-1C-134-2-129-2-124-3C-83-6-41-5 0 0Z" fill="var(--p1,#37BDF7)" transform="translate(461,315)"/><path d="M0 0C1 1 1 1 1 3C0 13-2 23-4 33C-4 34-4 35-4 36C-12 76-12 76-16 80C-21 80-21 80-24 79C-25 76-25 75-25 72C-25 71-25 71-25 70C-25 67-25 67-24 64C-22 61-22 57-22 53C-21 45-20 37-18 29C-18 26-17 24-17 22C-14 7-14 7-9 2C-6 0-4 0 0 0Z" fill="var(--p3,#F1C14E)" transform="translate(1005,792)"/><path d="M0 0C3 0 3 0 5 2C6 4 6 5 6 7C5 12 4 16 3 21C2 21 2 22 2 23C-1 32-5 41-8 49C-9 52-10 55-11 58C-12 60-13 61-13 63C-14 64-14 65-14 66C-19 79-19 79-23 81C-26 81-28 81-31 79C-32 75-32 73-31 69C-30 67-28 64-27 61C-25 57-23 54-22 49C-21 45-20 43-18 39C-15 35-14 30-13 25C-12 24-12 23-11 21C-11 20-10 19-10 17C-9 14-8 12-7 9C-7 8-6 7-6 6C-5 2-4 0 0 0Z" fill="var(--p3,#F1C14E)" transform="translate(57.9375,227.6875)"/><path d="M0 0C7 0 16 1 21 7C29 29 20 58 12 78C11 78 11 78 10 78C8 74 9 70 8 66C8 62 8 62 6 59C4 54 5 49 5 43C5 42 5 41 5 39C5 33 5 29 8 24C9 21 9 18 9 15C9 14 9 13 9 12C9 7 9 7 6 4C4 3 2 2 0 1C0 1 0 0 0 0Z" fill="var(--p1,#37BDF7)" transform="translate(247,77)"/><path d="M0 0C1 0 1 1 2 1C1 2 1 3 0 4C-8 16-14 29-20 43C-22 48-24 52-27 56C-31 63-31 70-31 77C-31 83-31 89-34 94C-37 96-41 96-45 96C-46 96-47 96-48 96C-49 96-49 96-50 96C-47 94-45 92-41 91C-37 90-37 90-36 89C-36 87-36 86-36 84C-36 83-36 82-36 81C-36 80-36 78-36 77C-36 76-36 75-36 74C-36 71-36 69-36 66C-36 62-36 58-36 54C-36 52-36 50-36 47C-36 47-36 47-36 44C-36 43-36 42-36 40C-36 39-36 38-36 38C-36 35-36 33-37 31C-37 31-37 31-35 31C-27 31-27 31-23 30C-19 25-16 19-15 13C-14 7-10 5-6 3C-2 1-2 1 0 0Z" fill="var(--p1,#37BDF7)" transform="translate(623,828)"/><path d="M0 0C0 1 0 1 0 2C-1 4-1 6-1 8C-1 9-1 10-1 10C-1 12-1 14-1 15C-1 21-3 25-7 29C-11 33-15 34-21 34C-23 34-23 34-25 36C-26 37-26 39-27 40C-29 37-30 34-31 30C-32 26-32 26-33 24C-34 21-34 20-34 17C-33 18-32 19-31 20C-31 20-30 19-30 19C-24 12-17 8-10 3C-10 3-10 3-8 2C-3-1-3-1 0 0Z" fill="var(--p1,#37BDF7)" transform="translate(606,795)"/><path d="M0 0C0 0 1 0 1 0C1 2 1 4 2 6C2 8 2 8 4 10C7 11 9 11 12 11C12 11 11 12 11 12C6 17 6 17 5 21C6 25 8 27 10 30C6 30 2 30-3 31C-4 31-5 31-6 31C-7 31-7 31-10 31C-10 31-10 31-13 31C-16 31-19 30-22 29C-22 26-22 24-22 21C-33 19-44 18-55 16C-55 16-55 15-55 15C-54 15-53 15-52 15C-48 15-44 15-40 15C-38 15-36 15-35 15C-23 15-13 14-4 5C-2 3-2 3 0 0Z" fill="var(--p1,#37BDF7)" transform="translate(519,625)"/><path d="M0 0C13 0 25 4 37 10C37 10 37 10 37 11C36 11 35 11 33 11C24 11 17 11 9 16C8 16 7 17 7 17C3 19 1 21-2 24C-4 27-5 27-8 28C-11 28-12 28-14 31C-16 34-18 37-19 40C-23 46-26 52-31 58C-32 58-33 58-34 58C-34 57-34 57-33 56C-25 44-18 30-12 17C-11 17-11 16-11 15C-10 14-9 12-9 11C-4 1-4 1 0 0Z" fill="var(--p1,#37BDF7)" transform="translate(612.98046875,545.37109375)"/><path d="M0 0C0-0 0-0 2 0C8 0 13 1 18 2C18 3 18 3 18 3C18 3 17 3 16 3C12 3 8 3 5 3C3 3 2 3 1 3C0 4-2 4-3 4C-4 4-5 4-6 4C-10 4-12 5-15 8C-20 16-20 23-20 31C-20 32-20 32-20 35C-20 39-20 43-20 47C-20 49-20 52-20 55C-21 61-21 68-21 74C-21 74-22 73-22 73C-23 72-23 72-24 71C-25 71-25 70-26 70C-28 68-30 67-33 68C-36 67-37 67-40 66C-45 63-51 64-57 64C-57 64-57 64-61 64C-64 64-67 64-71 64C-74 63-78 63-81 63C-88 63-95 63-102 63C-102 63-102 63-102 62C-85 60-69 59-53 58C-52 58-52 58-50 58C-47 58-45 58-42 58C-41 58-40 58-40 58C-36 58-33 58-30 59C-30 59-30 58-30 57C-29 57-28 57-28 57C-26 54-25 52-25 48C-25 48-25 47-25 46C-25 45-25 45-25 43C-24 41-24 39-24 37C-24 36-24 35-24 34C-22 10-22 10-13 3C-9 0-5 0 0 0Z" fill="var(--p1,#37BDF7)" transform="translate(508.5625,128.8125)"/><path d="M0 0C7 0 12 2 18 6C22 8 25 9 28 10C30 12 30 12 31 15C30 18 30 18 28 20C20 19 12 16 4 13C3 13 1 12 0 12C-4 10-8 9-13 8C-13 5-13 5-13 3C-9-1-5 0 0 0Z" fill="var(--p3,#F1C14E)" transform="translate(145.690673828125,535.41455078125)"/></symbol>
+</svg>
+
+<!-- ============================ NAV ============================ -->
+<header class="nav">
+  <div class="nav__in">
+    <a class="nav__logo" href="#top" aria-label="Life Encoded home">
+      <i aria-hidden="true"></i><b>Life Encoded</b>
+    </a>
+    <button class="nav__burger" id="burger" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav__links" id="navlinks">
+      <a href="#about">The week</a>
+      <a href="#program">Program</a>
+      <a href="#goals">Goals</a>
+      <a href="#who">Who we are</a>
+      <a href="#previous">2026</a>
+      <a class="is-cta" href="#sponsors">Sponsor us</a>
     </nav>
   </div>
 </header>
 
-<main>
-
-  <!-- HOME / HERO -->
-  <section id="home" class="hero">
-    <div class="hero-inner">
-      <div class="hero-logo">
-        <!-- Full-width DLAI picture/helix banner -->
-        <img src="./PDW-long-logo-white-bg.png" alt="PDW logo"/>
-      </div>
-
-      <!--<h1 class="hero-title" style="color:var(--dlai-light);">Protein Design Week</h1>-->
-      <div class="hero-subtitle">From algorithms to atoms: a week of AI‑powered protein design</div>
-      <div class="hero-gradient-bar"></div>
+<!-- ============================ HERO ============================ -->
+<section class="hero" id="top">
+  <div class="hero__art" aria-hidden="true">
+    <svg viewBox="0 0 1024 1024"><use href="#protein"/></svg>
+    <svg viewBox="0 0 1024 1024"><use href="#protein"/></svg>
+    <svg viewBox="0 0 1024 1024"><use href="#protein"/></svg>
+    <svg viewBox="0 0 1024 1024"><use href="#protein"/></svg>
+  </div>
+  <div class="hero__in">
+    <p class="hero__eyebrow">European AI × Bio Week</p>
+    <h1 class="poster" data-echo="life&#10;encoded"><span>life<br>encoded</span></h1>
+    <p class="hero__tag">Rewriting the limits of biology and intelligence across Europe.</p>
+    <div class="meta">
+      <span>3–7 March 2027</span>
+      <span>EPFL Campus, Lausanne</span>
     </div>
-  </section>
+    <div class="cta-row">
+      <a class="btn btn--fill btn--big" href="mailto:ruby.volhard@epfl.ch?subject=Life%20Encoded%202027%20—%20sponsorship%20dossier">Looking for sponsors</a>
+      <a class="btn btn--ghost" href="#program">See the week</a>
+    </div>
+  </div>
+</section>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="section-label">About</div>
-    <div class="two-col">
-      <div>
-        <h2>About the Protein Design Week</h2>
-        <p>
-          <span class="pill" style="color:var(--sv-text);"><a href="https://make.epfl.ch">MAKE Initiative</a> · <a href="https://designinglifewithai.ch">DLAI</a> · <a href="https://aesv-epfl.ch/sv-industry-2/">SV Industry</a></span>
-        </p>
-        <p>
-          <span style="color:var(--dlai-blue);">The <span class="highlight"  style="color:var(--dlai-blue);">Protein Design Week</span> is a student-led initiative that aims to explore the newest advancements in computational protein design, bringing together academia, industry, and hands-on engineering challenges. During the full week, we propose workshops to teach you the basics of protein design, helping you develop bioengineering skills based on the latest research on neural networks applied to protein folding prediction.</span>
-        </p>
-        <p>
-          <span style="color:var(--dlai-blue);">Alongside practical work, we propose a series of events related to protein design, including panels with relevant keynote speakers in the world of protein design, as well as meeting with startups and industry partners involved in protein enginering domain.</span>
-        </p>
-        <p>
-          <span class="pill" style="color:var(--sv-text);"><a href="#program">Checkout the Program!</a></span>
-        </p>
-      </div>
-      <div>
-        <h2>Hackathon</h2>
-        <p>
-           <span style="color:var(--dlai-blue);">During the weekend, industry partners and collaborating labs come together to guide the students in a <span class="highlight"><a href="#hackathon">Hackathon</a></span>, where the students are faced with several bioengineering challenges, and try to come up with innovative bioengineering solutions to fix the proposed issues.</span>
-        </p>
-        <p>
-          <span style="color:var(--dlai-blue);">The teams who participate in the hackathon will have access to state-of-the-art computational resources, as well as mentorship from experts in the field of protein design and bioengineering. Moreover, the winners of the hackaton will have the opportunity to continue perfecting their designs and even testing the solutions in the lab.</span>
-        </p>
-        <p>
-          <span class="pill"><a href="./previous-editions/PDW-2026">Discover last year's hackathon challenges!</a></span>
-        </p>
-      </div>
+<div class="frieze field-amber" aria-hidden="true"><div class="frieze__track" data-tiles="8"></div></div>
+
+<!-- ============================ WHAT IT IS ============================ -->
+<section class="band field-amber" id="about">
+  <div class="wrap">
+    <h2 class="poster" data-echo="what life&#10;encoded is"><span>what life<br>encoded is</span></h2>
+    <p class="lede">Life Encoded is a European AI–Bio Week: 7 days in Lausanne, on the EPFL campus, bringing together the researchers, builders and entrepreneurs working where machine learning meets bioengineering.</p>
+    <p class="lede" style="margin-top:1em">The week runs a <strong>48-hour hackathon</strong>, with multiple working tracks on the field's open problems, and an ecosystem summit with two round tables connecting labs, startups and industry.</p>
+    <p class="lede" style="margin-top:1em">Europe has the science and the talent for this field. What it lacks is a room where all of it shows up at once — Life Encoded is that room.</p>
+
+    <div class="figures">
+      <div class="figure"><b>7</b><span>days in Lausanne</span></div>
+      <div class="figure"><b>48h</b><span>hackathon</span></div>
+      <div class="figure"><b>2</b><span>round tables</span></div>
+      <div class="figure"><b>1</b><span>bioinnovation dinner</span></div>
     </div>
-  </section>
-  <section>
-    <div class="cta-wrapper">
-        <a class="cta-button" href="https://luma.com/u410ejww" style="color:var(--sv-text);">
-            Sign Me&nbsp;Up!
-        </a>
+  </div>
+</section>
+
+<div class="frieze frieze--rev field-powder" aria-hidden="true"><div class="frieze__track" data-tiles="8"></div></div>
+
+<!-- ============================ THE WEEK ============================ -->
+<section class="band field-powder" id="program">
+  <div class="wrap">
+    <h2 class="poster" data-echo="the week,&#10;day by day"><span>the week,<br>day by day</span></h2>
+
+    <div class="grid grid--3">
+      <article class="day">
+        <span class="day__when">Wednesday 3 March</span>
+        <h3 class="day__title">From paper to pipeline</h3>
+        <span class="day__who">50+ attendees expected</span>
+        <p>Where is ML × Bio research actually heading? Researchers working at the frontier on what's now possible, what still breaks, and the questions the science is raising faster than anyone can answer them.</p>
+      </article>
+
+      <article class="day">
+        <span class="day__when">Thursday 4 March</span>
+        <h3 class="day__title">Founder's roundtable</h3>
+        <span class="day__who">50+ attendees expected</span>
+        <p>How does AI meet bioengineering in the real world? At the innovation summit, founders building at that intersection talk about what it actually takes — what worked, what didn't, and what they'd tell someone starting now.</p>
+      </article>
+
+      <article class="day">
+        <span class="day__when">Friday 5 March</span>
+        <h3 class="day__title">Bioinnovation dinner</h3>
+        <span class="day__who">40 attendees expected</span>
+        <p>We host dinner to thank our sponsors and the AI × Bio community that makes Life Encoded possible. Inspiring conversation, connecting with talent, and discovering new opportunities in the field across Europe.</p>
+      </article>
     </div>
-  </section>
-    <!-- Here's a cool video of a protein -->
-  <section>
-        <div class="reveal" style="margin-top:3rem;">
-          <div style="
-            max-width: 900px;
-            margin: 0 auto;
-            display:flex;
-            justify-content:center;
-          ">
-            <video
-              class="section-media"
-              autoplay
-              muted
-              loop
-              playsinline
-              style="
-                max-width: 900px;
-                width: 100%;
-                margin: 0 auto;
-              "
-            >
-              <source src="protein-lavander-petrol.mp4" type="video/mp4" />
-            </video>
-          </div>
+
+    <div class="grid grid--2" style="margin-top:clamp(14px,1.9vw,22px)">
+      <article class="day day--hack">
+        <span class="day__when">Saturday 6 – Sunday 7 March</span>
+        <h3 class="day__title">Weekend hackathon</h3>
+        <span class="day__who">48 hours · multiple tracks</span>
+        <p>Mixed teams ship working prototypes against the hardest problems in the field, with mentors and judges drawn from our partner labs and sponsors.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="frieze field-violet" aria-hidden="true"><div class="frieze__track" data-tiles="8"></div></div>
+
+<!-- ============================ GOALS ============================ -->
+<section class="band field-violet" id="goals">
+  <div class="wrap">
+    <h2 class="poster" data-echo="our&#10;goals"><span>our<br>goals</span></h2>
+
+    <div class="grid grid--4">
+      <article class="card">
+        <h3>Connect</h3>
+        <p>Bring Europe's AI-bio community — researchers, engineers, founders and investors — into one place for the first time.</p>
+      </article>
+      <article class="card">
+        <h3>Build</h3>
+        <p>A 48-hour hackathon where mixed teams ship working prototypes against the hardest problems in the field.</p>
+      </article>
+      <article class="card">
+        <h3>Innovate</h3>
+        <p>Turn what gets built into what gets founded: teams meeting co-founders, founders meeting capital, and the next cohort seeing that a European bio-AI company is a thing you can start.</p>
+      </article>
+      <article class="card">
+        <h3>Inspire</h3>
+        <p>We are all a product of our own environment. This is why BEAM creates the space where inspiring like-minded innovators meet — to spark the boldest conversations that will shape the future.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="frieze frieze--rev field-orchid" aria-hidden="true"><div class="frieze__track" data-tiles="8"></div></div>
+
+<!-- ============================ PREVIOUS EDITION ============================ -->
+<section class="band field-orchid" id="previous">
+  <div class="wrap">
+    <h2 class="poster" data-echo="last year's&#10;edition"><span>last year's<br>edition</span></h2>
+    <p class="lede">Life Encoded grows out of the Protein Design Week, run on the EPFL campus in March 2026.</p>
+
+    <div class="figures">
+      <div class="figure"><b>54</b><span>hackers for the weekend hackathon</span></div>
+      <div class="figure"><b>10</b><span>coaches and mentors</span></div>
+      <div class="figure"><b>5</b><span>distinguished professors at the roundtables</span></div>
+      <div class="figure"><b>4</b><span>universities of origin</span></div>
+      <div class="figure"><b>6</b><span>faculties of origin</span></div>
+    </div>
+
+    <div class="cta-row">
+      <a class="btn btn--ghost btn--big" href="/previous-editions/PDW-2026">Check out the previous editions</a>
+      <a class="btn btn--fill" href="/previous-editions/PDW-2026">2026</a>
+    </div>
+  </div>
+</section>
+
+<div class="frieze field-black" aria-hidden="true"><div class="frieze__track" data-tiles="8"></div></div>
+
+<!-- ============================ WHO WE ARE ============================ -->
+<section class="band field-black" id="who">
+  <div class="wrap">
+    <h2 class="poster" data-echo="who&#10;we are"><span>who<br>we are</span></h2>
+    <p class="lede">Life Encoded is organised by three student associations working at the intersection of AI and biology.</p>
+
+    <div class="grid grid--3">
+      <article class="org">
+        <span class="org__name">DLAI</span>
+        <div class="org__nums">
+          <div><b>12</b><span>projects</span></div>
+          <div><b>40</b><span>students</span></div>
+          <div><b>8</b><span>partner labs</span></div>
         </div>
-  </section>
+        <p>Designing Life with AI is an engineering project where students design, model, and experimentally test novel proteins using computational tools and wet-lab methods.</p>
+      </article>
 
-  <!--Here we add the numbers! Like EPFL ROCKET TEAM lol yes I stole it from them-->
-  <section id="dlai-stats" class="stats" style="color:var(--sv-text);">
-   <div class="stat-card">
-    <div class="stat-number" data-target="40">40</div>
-    <div class="stat-label"><a href="#media">BioHackers</a></div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-number" data-target="15">15</div>
-    <div class="stat-label"><a href="#projects">Proposed projects</a></div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-number" data-target="16">16</div>
-    <div class="stat-label"><a href="#partners">Partner labs</a></div>
-  </div>
-  <div class="stat-card">
-    <div class="stat-number" data-target="9">8</div>
-    <div class="stat-label"><a href="#partners">Industry Partners</a></div>
-   </div>
-  </section>
-
-  <!--Program-->
- <section id="Previous">
-    <div class="section-label">PDW 2026</div>
-    <h2>Discover the previous editions of the PDW!</h2>
-    <div>
-    <div class="cta-wrapper">
-        <a class="cta-button" href="https://luma.com/u410ejww" style="color:var(--sv-text);">
-            PDW&nbsp; 2026
-        </a>
-    </div>
-    <!--div class="cta-wrapper">
-        <a class="cta-button" href="https://luma.com/u410ejww" style="color:var(--sv-text);">
-            PDW&nbsp; 2027
-        </a>
-    </div     this is for the next years editions-->
- </section>
-
- <!--Program-->
- <section id="Program">
-    <div class="section-label">Program</div>
-    <h2>What's on the agenda?</h2>
-    <div>
-      <p>
-         <span style="color:var(--dlai-blue);">The Protein Design Week features a series of workshops, keynote talks, and panel discussions focused on the latest advancements in computational protein design, with insights both from Academia and The Industry. Participants will have the opportunity to learn from experts in the field, engage in hands-on activities, and collaborate on innovative projects with our Hackathon program.</span>
-      </p>
-      <p>
-        <span style="color:var(--dlai-blue);">Here's an overview of the program. A highlight is the Lab visit to the HQ of <a href="https://www.adaptyvbio.com/">Adaptyv Bio</a> - leading startup in the field of experimental validation of AI-driven protein design - and our Discussion Panel on regulations and ethical concerns around AI-designed proteins, featuring prominent experts from academia and industry.</span>
-      </p>
-    </div>
-    <div class="hero-logo">
-       <img src="PDW-schedule-new.png" alt="PDW schedule - overview" class="hero-logo-img" style="justify-items:center;max-width: 900px;margin: 0 auto;display:flex;"/>
-    </div>
-    </div>
-    <p>
-       <span style="color:var(--dlai-blue);">Stay tuned for the detailed program time schedule, which will be announced soon!</span>
-    </p>
-    </div>
- </section>
-
-<!-- HACKATHON -->
-  <section id="hackathon">
-    <div class="section-label">Protein Design Challenge</div>
-    <h2>Hackathon</h2>
-    <p>
-      <span style="color:var(--dlai-blue);">During the weekend (6th-8th March 2026), participants will engage in a hands-on hackathon where they will tackle real-world protein design challenges proposed by our industry partners and collaborating labs. Selected teams of students will work together to develop innovative solutions using computational tools and AI techniques learned during the week.</span>
-    </p>
-    <p>
-      <span style="color:var(--dlai-blue);">More Info coming soon!</span>
-    </p>
-  </section>
-
- <!--Ai PANEL-->
- <section id="ai-panel">
-    <div class="section-label">Ai Panel</div>
-    <h2>Ai Protein Design - Innovation Unleashed, or BioSafety Nightmare?</h2>
-    <div>
-      <p>
-         <span style="color:var(--dlai-blue);">Join us for a bold conversation on the ethical frontiers of AI-powered bioengineering and open‑source models. We’re bringing together sharp minds from synthetic biology, AI, and policy to explore not only the risks and biosecurity pitfalls, but also the radical potential for innovation and impact. Adding a practical twist, the roundtable will feature startup founders and IP experts from EPFL, sharing how they navigate ownership, responsibility, and success in this new era of protein design.</span>
-      </p>
-      <p>
-        <span style="color:var(--dlai-blue);">This year, we're thrilled to host visionary leaders: 
-  <strong>Lucien Krapp</strong>, Co-Founder & CTO of <a href="https://www.lemna.bio/">LemnaBio</a>; 
-  <strong>Adam Swetloff</strong>, IP regulation expert from EPFL's TTO; 
-  and representing academia, 
-  <strong>Shuhao Zang</strong>, PhD student in Computational Bioengineering from <a href="https://www.epfl.ch/labs/barth-lab/">Patrik Barth's lab</a>.
-</span>
-
-    </div>
-    <div class="hero-logo">
-       <img src="Ai-Panel-Banner.png" alt="Ai-panel-banner" class="hero-logo-img" style="justify-items:center;max-width: 900px;margin: 0 auto;display:flex;"/>
-    </div>
-    </div>
-    <p>
-       <span style="color:var(--dlai-blue);">This year, the panel is hosted on Friday 6th of March in Hall BC 03.</span>
-    </p>
-    </div>
- </section>
-  <!-- MEDIA -->
-  <section id="media">
-    <div class="section-label">Media</div>
-    <h2>Stay connected</h2>
-    <p>
-      Follow our activities, events and project updates on social media and EPFL channels.
-    </p>
-
-    <div class="media-links">
-      <!-- Replace href with real URLs -->
-      <a class="media-pill" href="https://www.instagram.com/designinglifewithai/" target="_blank" rel="noopener">Instagram</a>
-      <a class="media-pill" href="https://www.epfl.ch/labs/lpbs/make-designing-life-with-ai/" target="_blank" rel="noopener">EPFL MAKE</a>
-      <a class="media-pill" href="mailto:dlai@epfl.ch">Email DLAI</a>
-      <a class="media-pill" href="https://github.com/your_dlai" target="_blank" rel="noopener">GitHub</a>
-    </div>
-  </section>
-
-   <!--Team-->
- <section id="team">
-    <div class="section-label">Team</div>
-    <h2>Meet the Team</h2>
-    <div>
-      <p>
-         <span style="color:var(--dlai-blue);">The Protein Design Week is organized by a dedicated team of students, engineers and academics from EPFL. Our team is committed to advancing the field of computational protein design through education, collaboration, and innovation. We are passionate about protein design and synthetic biology, and have the goal to popularise these amazing disciplines for biohackers coming from all backgrounds.</span>
-      </p>
-      <p>
-        <span style="color:var(--dlai-blue);"> We all come from the Life Science Engineering (SV) faculty at EPFL. We are proud to be part of the <a href="https://make.epfl.ch"><strong>MAKE initiative</strong></a>, which supports open science and innovation in synthetic biology and bioengineering.</span>
-      </p>
-    </div>
-    <div class="hero-logo">
-       <img src="team-picture.png" alt="Team" class="hero-logo-img" style="justify-items:center;max-width: 900px;margin: 0 auto;display:flex;"/>
-    </div>
-    </div>
-    <p>
-       <span style="color:var(--dlai-blue);">Follow us on social media to stay updated on team member profiles and activities!</span>
-    </p>
-    </div>
- </section>
-
-  <!-- Partners section -->
-  <section id="partners">
-      <div class="section-label">The ones who make it possible</div>
-      <h2>Our Partners</h2>
-      <p>
-        <span style="color:var(--dlai-blue);">We are grateful for the support of our partners, whose contributions have been instrumental in making the Protein Design Week a reality. Their expertise, resources, and commitment to advancing the field of protein design have been invaluable to our success.</span>
-      </p>
-    </div>
-    <div class="hero-logo hero-logo-duo">
-      <a href="https://www.adaptyvbio.com/"><img src="Adaptyv-logo.png" alt="Adaptyv"/></a>
-      <a href="https://www.epfl.ch"><img src="Logo_EPFL_2019.svg.png" alt="EPFL" class="hero-logo hero-logo-duo" /></a>
-    </div>
-    <div class="hero-logo hero-logo-duo">
-      <a href="https://www.huggingface.co/"><img src="HF-logo.svg" alt="Huggin Face"/></a>  
-      <a href="https://www.isrec.ch/"><img src="ISREC.png" alt="ISREC"class="hero-logo hero-logo-duo" /></a>
-    </div>
-    <div class="hero-logo hero-logo-duo">
-      <a href="https://www.cradle.bio/"><img src="cradle.png" alt="cradle"/></a>
-      <a href="https://www.lemna.bio/"><img src="lemnabio.png" alt="lemna"/></a>
-    </div>
-    <div class="hero-logo hero-logo-duo">
-      <a href="https://www.eusynbios.org"><img src="eusynbios.png" alt="EUSYNBIO"/></a>
-      <a href="https://www.fundraiso.ch/en/organisations/fondazione-gustav-ruth-jacob"><img src="Fondazione-Gustav.png" alt="Fondazione Gustav Ruth Jacob"/></a>
-    </div>
-  </section>
-
-
-  <!-- Here's a cool video of a protein -->
-   <section>
-        <div class="reveal" style="margin-top:3rem;">
-          <div style="
-            max-width: 900px;
-            margin: 0 auto;
-            display:flex;
-            justify-content:center;
-          ">
-            <video
-              class="section-media"
-              autoplay
-              muted
-              loop
-              playsinline
-              style="
-                max-width: 900px;
-                width: 100%;
-                margin: 0 auto;
-              "
-            >
-              <source src="protein-olive-purple.mp4" type="video/mp4" />
-            </video>
-          </div>
+      <article class="org">
+        <span class="org__name">SV Industry</span>
+        <div class="org__nums">
+          <div><b>7</b><span>events / year</span></div>
+          <div><b>50–100</b><span>participants / event</span></div>
         </div>
-  </section>
+        <p>The mission of SV Industry is to bridge the gap between Life Sciences Engineering students and industry actors. We organise conferences, workshops and roundtables throughout the year.</p>
+      </article>
 
-  <!-- DLAIxSV industry final, and partners-->
-  <section>
-    <div class="hero-logo hero-logo-duo">
+      <article class="org">
+        <span class="org__name">BEAM</span>
+        <div class="org__nums">
+          <div><b>6</b><span>universities</span></div>
+          <div><b>4</b><span>countries</span></div>
+          <div><b>40+</b><span>student partners</span></div>
+        </div>
+        <p>BioEngineering and Machine Learning Europe is a non-profit association connecting Europe's emerging talent in AI applied to biology. Founded in 2026 across EPFL, TUM and Sorbonne Université, BEAM runs from 6 technical institutions in 4 countries. Life Encoded is its first European week.</p>
+      </article>
+    </div>
+  </div>
+</section>
 
-        <!-- Left: SV Industry logo -->
-        <a href="https://aesv-epfl.ch/sv-industry-2/"><img src="logo_sv_industry-1024x1024.png" alt="SV Industry" class="hero-logo-img" /></a>
-        <!-- X in the middle -->
-        <span class="hero-logo-x">×</span>
-        <!-- Right: DLAI / Protein Design Week logo -->
-        <a href="designinglifewithai.ch"><img src="Illustration_sans_titre.png" alt="DLAI – Designing Life with AI" class="hero-logo-img" /></a>
+<div class="frieze frieze--rev field-teal" aria-hidden="true"><div class="frieze__track" data-tiles="8"></div></div>
+
+<!-- ============================ SPONSORS ============================ -->
+<section class="band field-teal" id="sponsors">
+  <div class="wrap">
+    <p class="kicker">Partner with us</p>
+    <h2 class="poster" data-echo="sponsor&#10;life encoded"><span>sponsor<br>life encoded</span></h2>
+    <p class="lede">One week, the whole European AI × Bio room: top engineering students, the labs training them, and the founders hiring them.</p>
+
+    <div class="figures">
+      <div class="figure"><b>80</b><span>hackers expected</span></div>
+      <div class="figure"><b>100</b><span>students attending panels</span></div>
+      <div class="figure"><b>7</b><span>sponsors on last year's edition</span></div>
+    </div>
+
+    <div class="grid grid--3">
+      <article class="card">
+        <h3>Network and reach out to talent</h3>
+        <p>Interact directly with top engineering students from world-renowned institutions and connect with emerging talents.</p>
+      </article>
+      <article class="card">
+        <h3>Propose company-relevant challenges</h3>
+        <p>Enable student teams to work on AI challenges applied to biology directly relevant to your business needs.</p>
+      </article>
+      <article class="card">
+        <h3>Position yourself as an innovator</h3>
+        <p>Showcase your role as a thought leader in AI-powered biotechnology.</p>
+      </article>
+    </div>
+
+    <div class="tiers" aria-label="Sponsorship tiers">
+      <span class="tier">Bronze</span>
+      <span class="tier">Silver</span>
+      <span class="tier">Gold</span>
+      <span class="tier">Computing resources</span>
+      <span class="tier">Food &amp; catering</span>
+    </div>
+    <p class="lede" style="margin-top:1.2em">Packages, benefits and pricing are in the sponsorship dossier. Ruby Volhard, our Head of Sponsorships, will send it over and tailor a package to what you need.</p>
+
+    <div class="cta-row">
+      <a class="btn btn--fill btn--big" href="mailto:ruby.volhard@epfl.ch?subject=Life%20Encoded%202027%20—%20sponsorship%20dossier&amp;body=Hi%20Ruby%2C%0A%0AWe%27d%20like%20to%20receive%20the%20Life%20Encoded%202027%20sponsorship%20dossier.%0A%0ACompany%3A%0AContact%3A%0A%0AThanks%21">Request the sponsorship dossier</a>
+    </div>
+  </div>
+</section>
+
+<div class="frieze field-black" aria-hidden="true"><div class="frieze__track" data-tiles="8"></div></div>
+
+<!-- ============================ CLOSING ============================ -->
+<section class="band field-black" id="contact">
+  <div class="wrap">
+    <p class="quote">Let's expand what the next generation of European bio-engineers can build. Together.</p>
+    <p class="lede" style="margin-top:1.4em">Contact us to schedule a meeting or tailor a sponsorship package to meet your needs.</p>
+
+    <div class="cta-row">
+      <a class="btn btn--fill btn--big" href="mailto:ruby.volhard@epfl.ch?subject=Life%20Encoded%202027%20—%20sponsorship">Looking for sponsors — talk to Ruby</a>
+    </div>
+
+    <div class="contacts">
+      <div>
+        <h3>Sponsorships</h3>
+        <ul>
+          <li><a href="mailto:ruby.volhard@epfl.ch">ruby.volhard@epfl.ch</a></li>
+          <li>Ruby Volhard · Head of Sponsorships</li>
+        </ul>
       </div>
+      <div>
+        <h3>Organisers</h3>
+        <ul>
+          <li><a href="mailto:svindustry@epfl.ch">svindustry@epfl.ch</a></li>
+          <li><a href="mailto:dlai@epfl.ch">dlai@epfl.ch</a></li>
+          <li><a href="mailto:beameu.bio@gmail.com">beameu.bio@gmail.com</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Websites</h3>
+        <ul>
+          <li><a href="https://aesv-epfl.ch">aesv-epfl.ch</a></li>
+          <li><a href="https://designinglifewithai.ch">designinglifewithai.ch</a></li>
+          <li><a href="https://beam-eu.bio">beam-eu.bio</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Address</h3>
+        <ul>
+          <li>EPFL Bâtiment SV</li>
+          <li>Station 19</li>
+          <li>1015 Lausanne</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
-  </section>
+<div class="frieze frieze--rev field-black" aria-hidden="true"><div class="frieze__track" data-tiles="8"></div></div>
 
-</main>
-
-<a href="https://luma.com/u410ejww" class="join-us-btn">Sign Me&nbsp;Up!</a>
-
-<footer>
-  <div>
-    © DLAI – Designing Life with AI 2026 · All Rights Reserved  · EPFL MAKE student association · Ecublens, Switzerland.
+<footer class="foot">
+  <div class="foot__in">
+    <span>© Life Encoded 2027 · DLAI · SV Industry · BEAM</span>
+    <span>EPFL Bâtiment SV, Station 19, 1015 Lausanne</span>
   </div>
 </footer>
-  
- <!-- This is the java script to make the numbers look cool-->
 
- <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const counters = document.querySelectorAll(".stat-number");
-    const duration = 1200; // ms
+<a class="fab" href="mailto:ruby.volhard@epfl.ch?subject=Life%20Encoded%202027%20—%20sponsorship%20dossier">Looking for sponsors</a>
 
-    function animateCounter(el) {
-      const target = parseInt(el.getAttribute("data-target"), 10);
-      const startTime = performance.now();
+<script>
+/* fill each frieze with protein plates, doubled so the pan loops seamlessly */
+document.querySelectorAll('.frieze__track').forEach(track => {
+  const n = +track.dataset.tiles || 8;
+  track.innerHTML =
+    '<svg class="frieze__unit" viewBox="0 0 1024 1024"><use href="#protein"/></svg>'.repeat(n * 2);
+});
 
-      function update(now) {
-        const progress = Math.min((now - startTime) / duration, 1);
-        const value = Math.floor(progress * target);
-        el.textContent = value + (target >= 10 ? "+" : ""); // optional +
-        if (progress < 1) requestAnimationFrame(update);
-      }
-      requestAnimationFrame(update);
-    }
+/* pause the bands that are off-screen */
+{
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => { e.target.style.animationPlayState = e.isIntersecting ? 'running' : 'paused'; });
+  }, { rootMargin: '150px 0px' });
+  document.querySelectorAll('.frieze__track').forEach(t => io.observe(t));
+}
 
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const el = entry.target;
-            if (!el.dataset.animated) {
-              animateCounter(el);
-              el.dataset.animated = "true";
-            }
-          }
-        });
-      },
-      { threshold: 0.4 }
-    );
-
-    counters.forEach(c => observer.observe(c));
-  });
- </script>
+/* nav */
+const burger = document.getElementById('burger');
+const navlinks = document.getElementById('navlinks');
+burger.addEventListener('click', () => {
+  const open = navlinks.classList.toggle('is-open');
+  burger.setAttribute('aria-expanded', String(open));
+});
+navlinks.addEventListener('click', e => {
+  if (e.target.tagName === 'A'){
+    navlinks.classList.remove('is-open');
+    burger.setAttribute('aria-expanded', 'false');
+  }
+});
+</script>
 
 </body>
 </html>
